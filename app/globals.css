@@ -1,26 +1,56 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: 'Alpha Lyrae';
+  src: url('/fonts/AlphaLyrae-Medium.woff2') format('woff2'),
+       url('/fonts/AlphaLyrae-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  font-feature-settings: "calt" 1;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    font-family: 'Alpha Lyrae', var(--font-jetbrains), monospace;
+    font-feature-settings: normal;
+  }
+  
+  .font-logo {
+    font-family: var(--font-jetbrains) !important;
+    font-weight: 700;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0;
+  }
+
+  .font-logo {
+    font-family: var(--font-jetbrains) !important;
+    font-weight: 700;
+  }
+
+  .pixel-char {
+    display: inline-block;
+    transition: all 0.3s ease;
+    font-feature-settings: normal;
+  }
+
+  .pixel-char.glitch {
+    font-feature-settings: "ss03" 1;
+  }
 }

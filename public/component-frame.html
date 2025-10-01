@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component Preview</title>
+    <link rel="stylesheet" href="/components/components-css.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module">
+        // Component will be rendered by parent window
+        window.addEventListener('message', (event) => {
+            if (event.data?.type === 'render-component') {
+                const componentId = event.data.componentId;
+                // Signal that iframe is ready
+                window.parent.postMessage({ type: 'iframe-ready', componentId }, '*');
+            }
+        });
+    </script>
+</body>
+</html>

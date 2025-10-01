@@ -1,0 +1,36 @@
+/* Override global styles for component preview */
+* {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Ensure animations work */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration, 40s) linear infinite !important;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration, 30s) linear infinite !important;
+}
