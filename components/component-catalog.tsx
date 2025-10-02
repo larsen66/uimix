@@ -1,62 +1,114 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Search, ArrowUpDown, Code, X, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 import PixelText from "./pixel-text";
+import SectionNavigation from "./section-navigation";
 
-function ComponentCard({ component, index, onClick }: { component: Component; index: number; onClick: () => void }) {
+function ComponentCard({ component, index, onClick, isDarkMode }: { component: Component; index: number; onClick: () => void; isDarkMode: boolean }) {
   const [isHovered, setIsHovered] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = async () => {
+    setIsHovered(true);
+    const video = videoRef.current;
+    if (video) {
+      try {
+        // Wait for video to be ready
+        if (video.readyState >= 2) {
+          await video.play();
+        } else {
+          // Wait for video to load enough data
+          video.addEventListener('loadeddata', async () => {
+            try {
+              await video.play();
+            } catch (err) {
+              // Silently fail if autoplay is blocked
+              console.debug('Video play failed:', err);
+            }
+          }, { once: true });
+        }
+      } catch (err) {
+        // Silently fail if autoplay is blocked
+        console.debug('Video play failed:', err);
+      }
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    const video = videoRef.current;
+    if (video) {
+      video.pause();
+      video.currentTime = 0;
+    }
+  };
 
   return (
     <div
       key={component.id}
       onClick={onClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="group relative bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-gray-300 transition-all duration-300 hover:shadow-2xl hover:shadow-gray-200/50 hover:scale-[1.02] hover:-translate-y-1 animate-fade-in-up cursor-pointer"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={cn(
+        "group relative rounded-2xl overflow-hidden border transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 animate-fade-in-up cursor-pointer",
+        isDarkMode 
+          ? "bg-gray-800 border-gray-700 hover:border-gray-600 hover:shadow-2xl hover:shadow-gray-900/50" 
+          : "bg-white border-gray-200 hover:border-gray-300 hover:shadow-2xl hover:shadow-gray-200/50"
+      )}
       style={{
         animationDelay: `${index * 100}ms`,
       }}
     >
       {/* Preview */}
-      <div className={cn("aspect-video relative overflow-hidden", !component.previewImage && component.preview)}>
-        {/* Image - always show */}
+      <div className={cn("aspect-video relative overflow-hidden bg-gray-900", !component.previewImage && component.preview)}>
+        {/* Video - always rendered but hidden when not hovered */}
+        {component.previewVideo && component.previewVideo.includes('.mp4') && (
+          <video
+            ref={videoRef}
+            src={component.previewVideo}
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className={cn(
+              "absolute inset-0 w-full h-full object-cover transition-opacity duration-500 z-10",
+              isHovered ? "opacity-100" : "opacity-0"
+            )}
+            onError={(e) => {
+              console.debug('Video load error:', e);
+            }}
+          />
+        )}
+        {/* Image - always show as background */}
         {component.previewImage && (
           <Image
             src={component.previewImage}
             alt={component.title}
             fill
-            className={cn(
-              "object-cover transition-opacity duration-300",
-              isHovered && component.previewVideo && component.previewVideo.includes('.mp4') ? "opacity-0" : "opacity-100"
-            )}
+            className="object-cover absolute inset-0 z-0"
             unoptimized
           />
         )}
-        {/* Video - show on hover (only if it's actually a video file) */}
-        {component.previewVideo && component.previewVideo.includes('.mp4') && isHovered && (
-          <video
-            src={component.previewVideo}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        )}
         {component.isPro && (
-          <span className="absolute top-3 right-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-3 py-1 rounded-full font-medium shadow-lg z-10">
+          <span className="absolute top-3 right-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs px-3 py-1 rounded-full font-medium shadow-lg z-20">
             Pro
           </span>
         )}
       </div>
       {/* Title */}
-      <div className="p-4 bg-white">
-        <h3 className="font-medium text-gray-900">
+      <div className={cn(
+        "p-4 transition-colors duration-300",
+        isDarkMode ? "bg-gray-800" : "bg-white"
+      )}>
+        <h3 className={cn(
+          "font-medium transition-colors duration-300",
+          isDarkMode ? "text-gray-100" : "text-gray-900"
+        )}>
           <PixelText onHover>{component.title}</PixelText>
         </h3>
       </div>
@@ -75,14 +127,26 @@ interface Component {
 }
 
 const components: Component[] = [
+  // Hero Components
   {
-    id: "cta-horizontal-marquee",
-    title: "CTA with Horizontal Marquee",
-    preview: "bg-gradient-to-br from-purple-600 to-blue-600",
-    previewImage: "https://cdn.21st.dev/lyanchouss/cta-with-text-marquee/cta-with-horizontal-marquee/preview.1759339049805.png",
-    previewVideo: "https://cdn.21st.dev/lyanchouss/cta-with-text-marquee/cta-with-horizontal-marquee/video.1759339049805.mp4",
-    category: "cta",
+    id: "hero-minimalism",
+    title: "Hero Minimalism",
+    preview: "bg-gradient-to-br from-slate-950 to-slate-800",
+    previewImage: "https://cdn.21st.dev/lyanchouss/hero-minimalism/default/preview.1757129422522.png",
+    previewVideo: "https://cdn.21st.dev/user_2xFgBhIEcC8WVjxizPEzB14AOkb/hero-minimalism/default/video.1757129621642.mp4",
+    category: "hero",
   },
+  // Login & Signup Components
+  {
+    id: "login-card",
+    title: "Login Card",
+    preview: "bg-gradient-to-br from-zinc-950 to-zinc-800",
+    previewImage: "https://cdn.21st.dev/lyanchouss/login-signup/forgot-password/preview.1757131471818.png",
+    previewVideo: "https://cdn.21st.dev/lyanchouss/login-signup/forgot-password/video.1757131471819.mp4",
+    category: "login-signup",
+  },
+  // CTA Components with Text Marquee
+
   {
     id: "cta-vertical-marquee",
     title: "CTA with Vertical Marquee",
@@ -99,58 +163,138 @@ const components: Component[] = [
     previewVideo: "https://cdn.21st.dev/lyanchouss/cta-with-text-marquee/cta-with-vertical-marquee-left/video.1759339049805.mp4",
     category: "cta",
   },
+  // Hero Components with Image Marquee (grouped together)
+  {
+    id: "cta-horizontal-marquee",
+    title: "CTA with Horizontal Marquee",
+    preview: "bg-gradient-to-br from-purple-600 to-blue-600",
+    previewImage: "https://cdn.21st.dev/lyanchouss/cta-with-text-marquee/cta-with-horizontal-marquee/preview.1759339049805.png",
+    previewVideo: "https://cdn.21st.dev/lyanchouss/cta-with-text-marquee/cta-with-horizontal-marquee/video.1759339049805.mp4",
+    category: "cta",
+  },
+  {
+    id: "hero-with-marquee-large",
+    title: "CTA with Marquee Large",
+    preview: "bg-gradient-to-br from-slate-900 to-slate-700",
+    previewImage: "https://cdn.21st.dev/lyanchouss/cta-with-marquee/cta-with-marque-large/preview.1759331424507.png",
+    previewVideo: "https://cdn.21st.dev/lyanchouss/cta-with-marquee/cta-with-marque-large/video.1759331424507.mp4",
+    category: "cta",
+  },
+  {
+    id: "hero-with-marquee",
+    title: "CTA with Marquee",
+    preview: "bg-gradient-to-br from-slate-800 to-slate-600",
+    previewImage: "https://cdn.21st.dev/lyanchouss/cta-with-marquee/default/preview.1759331424506.png",
+    previewVideo: "https://cdn.21st.dev/lyanchouss/cta-with-marquee/default/video.1759331424506.mp4",
+    category: "cta",
+  },
+  {
+    id: "hero-with-marquee-reverse",
+    title: "CTA with Marquee Reverse",
+    preview: "bg-gradient-to-br from-zinc-900 to-zinc-700",
+    previewImage: "https://cdn.21st.dev/lyanchouss/cta-with-marquee/cta-with-marque-reverse/preview.1759331424506.png",
+    previewVideo: "https://cdn.21st.dev/lyanchouss/cta-with-marquee/cta-with-marque-reverse/video.1759331424506.mp4",
+    category: "cta",
+  },
+  {
+    id: "hero-with-video",
+    title: "CTA with Video Background",
+    preview: "bg-gradient-to-br from-neutral-900 to-neutral-700",
+    previewImage: "https://cdn.21st.dev/lyanchouss/cta-with-marquee/cta-with-video/preview.1759331424507.png",
+    previewVideo: "https://cdn.21st.dev/lyanchouss/cta-with-marquee/cta-with-video/video.1759331424507.mp4",
+    category: "cta",
+  },
+  // Pricing Components
+  {
+    id: "pricing-cards",
+    title: "Pricing Cards",
+    preview: "bg-gradient-to-br from-zinc-950 to-zinc-800",
+    previewImage: "https://cdn.21st.dev/lyanchouss/pricing-cards/default/preview.1757402696088.png",
+    previewVideo: "https://cdn.21st.dev/lyanchouss/pricing-cards/default/video.1757402696088.mp4",
+    category: "pricing",
+  },
+  // Processing Components
+  {
+    id: "processing-card",
+    title: "Processing Card",
+    preview: "bg-gradient-to-br from-[#000000] to-[#010133]",
+    previewImage: "https://cdn.21st.dev/lyanchouss/processing-card/default/preview.1758602377997.png",
+    previewVideo: "https://cdn.21st.dev/lyanchouss/processing-card/default/video.1758602377997.mp4",
+    category: "processing",
+  },
+  // Card Components
+  {
+    id: "fallback-card-demo",
+    title: "Fallback Card",
+    preview: "bg-gradient-to-br from-[#000000] to-[#0d1a36]",
+    previewImage: "https://cdn.21st.dev/lyanchouss/fallback-card/default/preview.1758602065436.png",
+    previewVideo: "https://cdn.21st.dev/lyanchouss/fallback-card/default/video.1758602065436.mp4",
+    category: "cards",
+  },
+  // Background Components
+  {
+    id: "background-noise",
+    title: "Background with Noise",
+    preview: "bg-gradient-to-br from-slate-950 to-orange-900",
+    previewImage: "https://cdn.21st.dev/larsen66/background-snippets-noise-effect11/default/preview.1756797499983.png",
+    previewVideo: "https://cdn.21st.dev/larsen66/background-snippets-noise-effect11/default/video.1756797499983.mp4",
+    category: "backgrounds",
+  },
+  {
+    id: "squares-background",
+    title: "Squares Grid Background",
+    preview: "bg-gradient-to-br from-neutral-950 to-blue-900",
+    previewImage: "https://cdn.21st.dev/larsen66/noise-dark-blue-gradient-with-squares/default/preview.1756799900781.png",
+    previewVideo: "https://cdn.21st.dev/larsen66/noise-dark-blue-gradient-with-squares/default/video.1756799900781.mp4",
+    category: "backgrounds",
+  },
+  {
+    id: "background-gradient-grid",
+    title: "Gradient Grid Background",
+    preview: "bg-gradient-to-br from-neutral-900 to-cyan-600",
+    previewImage: "https://cdn.21st.dev/larsen66/background-gradient-snippet/default/preview.1756797835869.png",
+    previewVideo: "https://cdn.21st.dev/larsen66/background-gradient-snippet/default/video.1756797835869.mp4",
+    category: "backgrounds",
+  },
+  {
+    id: "blueprint-gradient-mesh",
+    title: "Blueprint Gradient Mesh",
+    preview: "bg-gradient-to-br from-[#0d2b4d] to-[#1a4d7a]",
+    previewImage: "https://cdn.21st.dev/larsen66/blueprint-gradient-mesh/default/preview.1756803128499.png",
+    previewVideo: "https://cdn.21st.dev/larsen66/blueprint-gradient-mesh/default/video.1756803128499.mp4",
+    category: "backgrounds",
+  },
+  // Features Components
+  {
+    id: "bento-features",
+    title: "Bento Features Section",
+    preview: "bg-gradient-to-br from-[#000000] to-[#010133]",
+    previewImage: "https://cdn.21st.dev/larsen66/bento-features/default/preview.1759166271914.png",
+    previewVideo: "https://cdn.21st.dev/larsen66/bento-features/default/video.1759166271914.mp4",
+    category: "features",
+  },
 ];
 
-export default function ComponentCatalog() {
+interface ComponentCatalogProps {
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  selectedSource: "all" | "free" | "pro";
+  isHeaderVisible: boolean;
+  isDarkMode: boolean;
+  setIsDarkMode: (value: boolean) => void;
+  onSearchClick: () => void;
+}
+
+export default function ComponentCatalog({
+  searchQuery,
+  setSearchQuery,
+  selectedSource,
+  isHeaderVisible,
+  isDarkMode,
+  setIsDarkMode,
+  onSearchClick,
+}: ComponentCatalogProps) {
   const router = useRouter();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
-  const [selectedSource, setSelectedSource] = useState<"all" | "free" | "pro">("all");
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-  const [isDarkMode, setIsDarkMode] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') === 'dark';
-    }
-    return false;
-  });
-  const lastScrollY = useRef(0);
-  const scrollTimer = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-  }, [isDarkMode]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      if (currentScrollY < 50) {
-        setIsHeaderVisible(true);
-      } else if (currentScrollY > lastScrollY.current) {
-        setIsHeaderVisible(false);
-      } else {
-        setIsHeaderVisible(true);
-      }
-      
-      lastScrollY.current = currentScrollY;
-
-      if (scrollTimer.current) {
-        clearTimeout(scrollTimer.current);
-      }
-      
-      scrollTimer.current = setTimeout(() => {
-        setIsHeaderVisible(true);
-      }, 2000);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (scrollTimer.current) {
-        clearTimeout(scrollTimer.current);
-      }
-    };
-  }, []);
 
   const filteredComponents = components
     .filter((comp) => {
@@ -160,43 +304,141 @@ export default function ComponentCatalog() {
         (selectedSource === "pro" && comp.isPro) ||
         (selectedSource === "free" && !comp.isPro);
       return matchesSearch && matchesSource;
-    })
-    .sort((a, b) => {
-      if (sortOrder === "asc") {
-        return a.title.localeCompare(b.title);
-      }
-      return b.title.localeCompare(a.title);
     });
 
+  const heroComponents = filteredComponents.filter((comp) => comp.category === "hero");
+  const loginSignupComponents = filteredComponents.filter((comp) => comp.category === "login-signup");
   const ctaComponents = filteredComponents.filter((comp) => comp.category === "cta");
-  const otherComponents = filteredComponents.filter((comp) => comp.category !== "cta");
+  const pricingComponents = filteredComponents.filter((comp) => comp.category === "pricing");
+  const processingComponents = filteredComponents.filter((comp) => comp.category === "processing");
+  const cardComponents = filteredComponents.filter((comp) => comp.category === "cards");
+  const backgroundComponents = filteredComponents.filter((comp) => comp.category === "backgrounds");
+  const featuresComponents = filteredComponents.filter((comp) => comp.category === "features");
+  const otherComponents = filteredComponents.filter((comp) => comp.category !== "cta" && comp.category !== "hero" && comp.category !== "login-signup" && comp.category !== "pricing" && comp.category !== "processing" && comp.category !== "cards" && comp.category !== "backgrounds" && comp.category !== "features");
 
-  const handleClearFilters = () => {
-    setSearchQuery("");
-    setSelectedSource("all");
-    setSortOrder("asc");
-  };
+  // Prepare sections for navigation
+  const sections = [
+    heroComponents.length > 0 && { id: "hero-section", label: "Hero Sections", count: heroComponents.length },
+    loginSignupComponents.length > 0 && { id: "login-signup-section", label: "Login & Signup", count: loginSignupComponents.length },
+    ctaComponents.length > 0 && { id: "cta-section", label: "Call to Action", count: ctaComponents.length },
+    pricingComponents.length > 0 && { id: "pricing-section", label: "Pricing", count: pricingComponents.length },
+    processingComponents.length > 0 && { id: "processing-section", label: "Processing", count: processingComponents.length },
+    cardComponents.length > 0 && { id: "cards-section", label: "Cards", count: cardComponents.length },
+    backgroundComponents.length > 0 && { id: "backgrounds-section", label: "Backgrounds", count: backgroundComponents.length },
+    featuresComponents.length > 0 && { id: "features-section", label: "Features", count: featuresComponents.length },
+  ].filter(Boolean) as { id: string; label: string; count: number }[];
 
   return (
     <div className={cn(
-      "min-h-screen relative transition-colors duration-300",
+      "min-h-screen w-full relative transition-colors duration-300",
       isDarkMode ? "bg-gray-900 text-gray-100" : "bg-gray-50 text-gray-900"
     )}>
+      {/* Dashed Grid Background */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, ${isDarkMode ? '#374151' : '#e7e5e4'} 1px, transparent 1px),
+            linear-gradient(to bottom, ${isDarkMode ? '#374151' : '#e7e5e4'} 1px, transparent 1px)
+          `,
+          backgroundSize: "20px 20px",
+          backgroundPosition: "0 0, 0 0",
+          maskImage: `
+            repeating-linear-gradient(
+              to right,
+              black 0px,
+              black 3px,
+              transparent 3px,
+              transparent 8px
+            ),
+            repeating-linear-gradient(
+              to bottom,
+              black 0px,
+              black 3px,
+              transparent 3px,
+              transparent 8px
+            )
+          `,
+          WebkitMaskImage: `
+            repeating-linear-gradient(
+              to right,
+              black 0px,
+              black 3px,
+              transparent 3px,
+              transparent 8px
+            ),
+            repeating-linear-gradient(
+              to bottom,
+              black 0px,
+              black 3px,
+              transparent 3px,
+              transparent 8px
+            )
+          `,
+          maskComposite: "intersect",
+          WebkitMaskComposite: "source-in",
+        }}
+      />
+
+      {/* Corner Vignette Blur - Top Left */}
+      <div className={cn(
+        "pointer-events-none fixed top-0 left-0 w-96 h-96 z-10 transition-colors duration-300",
+        isDarkMode
+          ? "bg-gradient-to-br from-gray-900 via-gray-900/25 to-transparent"
+          : "bg-gradient-to-br from-gray-50 via-gray-50/25 to-transparent"
+      )} />
+
+      {/* Corner Vignette Blur - Top Right */}
+      <div className={cn(
+        "pointer-events-none fixed top-0 right-0 w-96 h-96 z-10 transition-colors duration-300",
+        isDarkMode
+          ? "bg-gradient-to-bl from-gray-900 via-gray-900/25 to-transparent"
+          : "bg-gradient-to-bl from-gray-50 via-gray-50/25 to-transparent"
+      )} />
+
+      {/* Corner Vignette Blur - Bottom Left */}
+      <div className={cn(
+        "pointer-events-none fixed bottom-0 left-0 w-96 h-96 z-10 transition-colors duration-300",
+        isDarkMode
+          ? "bg-gradient-to-tr from-gray-900 via-gray-900/25 to-transparent"
+          : "bg-gradient-to-tr from-gray-50 via-gray-50/25 to-transparent"
+      )} />
+
+      {/* Corner Vignette Blur - Bottom Right */}
+      <div className={cn(
+        "pointer-events-none fixed bottom-0 right-0 w-96 h-96 z-10 transition-colors duration-300",
+        isDarkMode
+          ? "bg-gradient-to-tl from-gray-900 via-gray-900/25 to-transparent"
+          : "bg-gradient-to-tl from-gray-50 via-gray-50/25 to-transparent"
+      )} />
+
+      {/* Section Navigation */}
+      <SectionNavigation 
+        sections={sections} 
+        isDarkMode={isDarkMode} 
+        isHeaderVisible={isHeaderVisible}
+        onSearchClick={onSearchClick}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
+      
       {/* Top Blur Vignette */}
       <div className={cn(
         "pointer-events-none fixed top-0 left-0 right-0 h-32 z-30 transition-colors duration-300",
         isDarkMode
-          ? "bg-gradient-to-b from-gray-900 via-gray-900/60 to-transparent"
-          : "bg-gradient-to-b from-gray-50 via-gray-50/60 to-transparent"
+          ? "bg-gradient-to-b from-gray-900 via-gray-900/39 to-transparent"
+          : "bg-gradient-to-b from-gray-50 via-gray-50/39 to-transparent"
       )} />
       
       {/* Bottom Blur Vignette */}
-      <div className={cn(
-        "pointer-events-none fixed bottom-0 left-0 right-0 h-64 z-30 transition-colors duration-300",
-        isDarkMode
-          ? "bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"
-          : "bg-gradient-to-t from-gray-50 via-gray-50/60 to-transparent"
-      )} />
+      <div 
+        className={cn(
+          "pointer-events-none fixed bottom-0 left-0 right-0 h-64 z-30 transition-colors duration-300",
+          isDarkMode
+            ? "bg-gradient-to-t from-gray-900 via-gray-900/39 to-transparent"
+            : "bg-gradient-to-t from-gray-50 via-gray-50/39 to-transparent"
+        )}
+      />
       {/* Header */}
       <header className={cn(
         "px-6 py-4 sticky top-0 z-40 transition-transform duration-300",
@@ -277,19 +519,93 @@ export default function ComponentCatalog() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 py-12">
+      <main className="max-w-7xl mx-auto px-6 py-12 relative z-20 ml-32">
+        
+        {/* Hero Components Section */}
+        {heroComponents.length > 0 && (
+          <div id="hero-section" className="mb-16 scroll-mt-24">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold mb-2 flex items-center gap-3">
+                <PixelText interval={5000}>Hero Sections</PixelText>
+                <span className={cn(
+                  "text-xs font-sans font-normal px-2 py-1 rounded transition-colors duration-300",
+                  isDarkMode ? "text-gray-400 bg-gray-800" : "text-gray-500 bg-gray-100"
+                )}>
+                  {heroComponents.length}
+                </span>
+              </h2>
+              <p className={cn(
+                "cursor-pointer transition-colors duration-300",
+                isDarkMode ? "text-gray-400" : "text-gray-500"
+              )}>
+                <PixelText onHover>Stunning hero sections to captivate your visitors</PixelText>
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {heroComponents.map((component, index) => (
+                <ComponentCard 
+                  key={component.id}
+                  component={component}
+                  index={index}
+                  onClick={() => router.push(`/component/${component.id}`)}
+                  isDarkMode={isDarkMode}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        
+        {/* Login & Signup Components Section */}
+        {loginSignupComponents.length > 0 && (
+          <div id="login-signup-section" className="mb-16 scroll-mt-24">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold mb-2 flex items-center gap-3">
+                <PixelText interval={5000}>Login & Signup</PixelText>
+                <span className={cn(
+                  "text-xs font-sans font-normal px-2 py-1 rounded transition-colors duration-300",
+                  isDarkMode ? "text-gray-400 bg-gray-800" : "text-gray-500 bg-gray-100"
+                )}>
+                  {loginSignupComponents.length}
+                </span>
+              </h2>
+              <p className={cn(
+                "cursor-pointer transition-colors duration-300",
+                isDarkMode ? "text-gray-400" : "text-gray-500"
+              )}>
+                <PixelText onHover>Beautiful authentication forms with modern design</PixelText>
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {loginSignupComponents.map((component, index) => (
+                <ComponentCard 
+                  key={component.id}
+                  component={component}
+                  index={index}
+                  onClick={() => router.push(`/component/${component.id}`)}
+                  isDarkMode={isDarkMode}
+                />
+              ))}
+            </div>
+          </div>
+        )}
         
         {/* CTA Components Section */}
         {ctaComponents.length > 0 && (
-          <div className="mb-16">
+          <div id="cta-section" className="mb-16 scroll-mt-24">
             <div className="mb-8">
               <h2 className="text-2xl font-bold mb-2 flex items-center gap-3">
                 <PixelText interval={5000}>Call to Action</PixelText>
-                <span className="text-xs font-sans font-normal text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                <span className={cn(
+                  "text-xs font-sans font-normal px-2 py-1 rounded transition-colors duration-300",
+                  isDarkMode ? "text-gray-400 bg-gray-800" : "text-gray-500 bg-gray-100"
+                )}>
                   {ctaComponents.length}
                 </span>
               </h2>
-              <p className="text-gray-500 cursor-pointer">
+              <p className={cn(
+                "cursor-pointer transition-colors duration-300",
+                isDarkMode ? "text-gray-400" : "text-gray-500"
+              )}>
                 <PixelText onHover>Conversion-focused CTA components with engaging animations</PixelText>
               </p>
             </div>
@@ -300,6 +616,177 @@ export default function ComponentCatalog() {
                   component={component}
                   index={index}
                   onClick={() => router.push(`/component/${component.id}`)}
+                  isDarkMode={isDarkMode}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Pricing Components Section */}
+        {pricingComponents.length > 0 && (
+          <div id="pricing-section" className="mb-16 scroll-mt-24">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold mb-2 flex items-center gap-3">
+                <PixelText interval={5000}>Pricing</PixelText>
+                <span className={cn(
+                  "text-xs font-sans font-normal px-2 py-1 rounded transition-colors duration-300",
+                  isDarkMode ? "text-gray-400 bg-gray-800" : "text-gray-500 bg-gray-100"
+                )}>
+                  {pricingComponents.length}
+                </span>
+              </h2>
+              <p className={cn(
+                "cursor-pointer transition-colors duration-300",
+                isDarkMode ? "text-gray-400" : "text-gray-500"
+              )}>
+                <PixelText onHover>Beautiful pricing sections with modern card designs</PixelText>
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {pricingComponents.map((component, index) => (
+                <ComponentCard 
+                  key={component.id}
+                  component={component}
+                  index={index}
+                  onClick={() => router.push(`/component/${component.id}`)}
+                  isDarkMode={isDarkMode}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Processing Components Section */}
+        {processingComponents.length > 0 && (
+          <div id="processing-section" className="mb-16 scroll-mt-24">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold mb-2 flex items-center gap-3">
+                <PixelText interval={5000}>Processing & Loaders</PixelText>
+                <span className={cn(
+                  "text-xs font-sans font-normal px-2 py-1 rounded transition-colors duration-300",
+                  isDarkMode ? "text-gray-400 bg-gray-800" : "text-gray-500 bg-gray-100"
+                )}>
+                  {processingComponents.length}
+                </span>
+              </h2>
+              <p className={cn(
+                "cursor-pointer transition-colors duration-300",
+                isDarkMode ? "text-gray-400" : "text-gray-500"
+              )}>
+                <PixelText onHover>Processing states, loaders, and progress indicators</PixelText>
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {processingComponents.map((component, index) => (
+                <ComponentCard 
+                  key={component.id}
+                  component={component}
+                  index={index}
+                  onClick={() => router.push(`/component/${component.id}`)}
+                  isDarkMode={isDarkMode}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Card Components Section */}
+        {cardComponents.length > 0 && (
+          <div id="cards-section" className="mb-16 scroll-mt-24">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold mb-2 flex items-center gap-3">
+                <PixelText interval={5000}>Cards</PixelText>
+                <span className={cn(
+                  "text-xs font-sans font-normal px-2 py-1 rounded transition-colors duration-300",
+                  isDarkMode ? "text-gray-400 bg-gray-800" : "text-gray-500 bg-gray-100"
+                )}>
+                  {cardComponents.length}
+                </span>
+              </h2>
+              <p className={cn(
+                "cursor-pointer transition-colors duration-300",
+                isDarkMode ? "text-gray-400" : "text-gray-500"
+              )}>
+                <PixelText onHover>Beautiful card components with stunning effects</PixelText>
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {cardComponents.map((component, index) => (
+                <ComponentCard 
+                  key={component.id}
+                  component={component}
+                  index={index}
+                  onClick={() => router.push(`/component/${component.id}`)}
+                  isDarkMode={isDarkMode}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Background Components Section */}
+        {backgroundComponents.length > 0 && (
+          <div id="backgrounds-section" className="mb-16 scroll-mt-24">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold mb-2 flex items-center gap-3">
+                <PixelText interval={5000}>Backgrounds</PixelText>
+                <span className={cn(
+                  "text-xs font-sans font-normal px-2 py-1 rounded transition-colors duration-300",
+                  isDarkMode ? "text-gray-400 bg-gray-800" : "text-gray-500 bg-gray-100"
+                )}>
+                  {backgroundComponents.length}
+                </span>
+              </h2>
+              <p className={cn(
+                "cursor-pointer transition-colors duration-300",
+                isDarkMode ? "text-gray-400" : "text-gray-500"
+              )}>
+                <PixelText onHover>Stunning background effects with gradients and noise</PixelText>
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {backgroundComponents.map((component, index) => (
+                <ComponentCard 
+                  key={component.id}
+                  component={component}
+                  index={index}
+                  onClick={() => router.push(`/component/${component.id}`)}
+                  isDarkMode={isDarkMode}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Features Components Section */}
+        {featuresComponents.length > 0 && (
+          <div id="features-section" className="mb-16 scroll-mt-24">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold mb-2 flex items-center gap-3">
+                <PixelText interval={5000}>Features</PixelText>
+                <span className={cn(
+                  "text-xs font-sans font-normal px-2 py-1 rounded transition-colors duration-300",
+                  isDarkMode ? "text-gray-400 bg-gray-800" : "text-gray-500 bg-gray-100"
+                )}>
+                  {featuresComponents.length}
+                </span>
+              </h2>
+              <p className={cn(
+                "cursor-pointer transition-colors duration-300",
+                isDarkMode ? "text-gray-400" : "text-gray-500"
+              )}>
+                <PixelText onHover>Showcase your product features with bento-style layouts</PixelText>
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featuresComponents.map((component, index) => (
+                <ComponentCard 
+                  key={component.id}
+                  component={component}
+                  index={index}
+                  onClick={() => router.push(`/component/${component.id}`)}
+                  isDarkMode={isDarkMode}
                 />
               ))}
             </div>
@@ -316,6 +803,7 @@ export default function ComponentCatalog() {
                   component={component}
                   index={index}
                   onClick={() => router.push(`/component/${component.id}`)}
+                  isDarkMode={isDarkMode}
                 />
               ))}
             </div>
@@ -323,58 +811,6 @@ export default function ComponentCatalog() {
 
           </div>
         )}
-
-        {/* Search and Filters Bar */}
-        <div className={cn(
-          "fixed bottom-8 left-1/2 -translate-x-1/2 z-50 transition-transform duration-300",
-          isHeaderVisible ? "translate-y-0" : "translate-y-[200%]"
-        )}>
-          <div className="bg-white/90 border border-gray-300 rounded-xl shadow-2xl shadow-gray-400/20 px-4 py-3 flex items-center gap-3 backdrop-blur-xl">
-            {/* Search */}
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-100/80 rounded-lg min-w-[200px]">
-              <Search className="w-4 h-4 text-gray-500" />
-              <input
-                type="text"
-                placeholder="Search"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="bg-transparent border-none outline-none text-sm w-full text-gray-900 placeholder:text-gray-500"
-              />
-            </div>
-
-            {/* Sort */}
-            <button
-              onClick={() => setSortOrder(sortOrder === "asc" ? "desc" : "asc")}
-              className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-700 hover:text-gray-900"
-            >
-              <ArrowUpDown className="w-4 h-4" />
-              <span className="text-sm font-medium">Sort</span>
-            </button>
-
-            {/* Source */}
-            <div className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 rounded-lg transition-colors text-gray-700 hover:text-gray-900">
-              <Code className="w-4 h-4" />
-              <select
-                value={selectedSource}
-                onChange={(e) => setSelectedSource(e.target.value as "all" | "free" | "pro")}
-                className="bg-transparent border-none outline-none text-sm font-medium cursor-pointer text-gray-900"
-              >
-                <option value="all">Source</option>
-                <option value="free">Free</option>
-                <option value="pro">Pro</option>
-              </select>
-            </div>
-
-            {/* Clear Filters */}
-            <button
-              onClick={handleClearFilters}
-              className="flex items-center gap-2 px-4 py-2 text-gray-500 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
-            >
-              <X className="w-4 h-4" />
-              <span className="text-sm font-medium">Clear Filters</span>
-            </button>
-          </div>
-        </div>
       </main>
     </div>
   );

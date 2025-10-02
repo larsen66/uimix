@@ -25,10 +25,14 @@ export default function ComponentPreview({ componentId, isDarkMode = false }: Co
     <iframe
       ref={iframeRef}
       src={`/component-preview/${componentId}?theme=${isDarkMode ? 'dark' : 'light'}`}
-      className="w-full h-full border-0"
+      className="w-full h-full border-0 bg-transparent"
       title="Component Preview"
       sandbox="allow-scripts allow-same-origin"
-      style={{ display: 'block' }}
+      style={{ 
+        display: 'block',
+        minHeight: '100%',
+        minWidth: '100%'
+      }}
     />
   );
 }

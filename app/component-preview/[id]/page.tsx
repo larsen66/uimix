@@ -1,14 +1,43 @@
 'use client';
 
 import { useEffect, use } from "react";
-import CTAWithHorizontalMarquee from "@/components/cta-with-horizontal-marquee";
-import CTAWithVerticalMarquee from "@/components/cta-with-vertical-marquee";
-import CTAWithVerticalMarqueeLeft from "@/components/cta-with-vertical-marquee-left";
+import {
+  CTAWithHorizontalMarquee,
+  CTAWithVerticalMarquee,
+  CTAWithVerticalMarqueeLeft,
+  HeroWithMarqueeLarge,
+  HeroWithMarquee,
+  HeroWithMarqueeMixedFont,
+  HeroWithMarqueeReverse,
+  HeroWithVideo
+} from "@/components/catalog/cta";
+import { HeroMinimalism } from "@/components/catalog/hero";
+import { LoginCard } from "@/components/catalog/login-signup";
+import { PricingCards } from "@/components/catalog/pricing";
+import { ProcessingDemo } from "@/components/catalog/processing";
+import { FallbackCardDemo } from "@/components/catalog/cards";
+import { BackgroundNoise, SquaresBackground, BackgroundGradientGrid, BlueprintGradientMesh } from "@/components/catalog/backgrounds";
+import { BentoFeatures } from "@/components/catalog/features";
 
 const componentMap: Record<string, React.ComponentType> = {
+  "hero-minimalism": HeroMinimalism,
+  "login-card": LoginCard,
   "cta-horizontal-marquee": CTAWithHorizontalMarquee,
   "cta-vertical-marquee": CTAWithVerticalMarquee,
   "cta-vertical-marquee-left": CTAWithVerticalMarqueeLeft,
+  "hero-with-marquee-large": HeroWithMarqueeLarge,
+  "hero-with-marquee": HeroWithMarquee,
+  "hero-with-marquee-mixed-font": HeroWithMarqueeMixedFont,
+  "hero-with-marquee-reverse": HeroWithMarqueeReverse,
+  "hero-with-video": HeroWithVideo,
+  "pricing-cards": PricingCards,
+  "processing-card": ProcessingDemo,
+  "fallback-card-demo": FallbackCardDemo,
+  "background-noise": BackgroundNoise,
+  "squares-background": SquaresBackground,
+  "background-gradient-grid": BackgroundGradientGrid,
+  "blueprint-gradient-mesh": BlueprintGradientMesh,
+  "bento-features": BentoFeatures,
 };
 
 export default function ComponentPreviewPage({ 

@@ -3,9 +3,23 @@ import { readFile } from 'fs/promises';
 import { join } from 'path';
 
 const componentFiles: Record<string, string> = {
-  'cta-horizontal-marquee': 'cta-with-horizontal-marquee.tsx',
-  'cta-vertical-marquee': 'cta-with-vertical-marquee.tsx',
-  'cta-vertical-marquee-left': 'cta-with-vertical-marquee-left.tsx',
+  'hero-minimalism': 'catalog/hero/hero-minimalism.tsx',
+  'login-card': 'catalog/login-signup/login-card.tsx',
+  'cta-horizontal-marquee': 'catalog/cta/cta-with-horizontal-marquee.tsx',
+  'cta-vertical-marquee': 'catalog/cta/cta-with-vertical-marquee.tsx',
+  'cta-vertical-marquee-left': 'catalog/cta/cta-with-vertical-marquee-left.tsx',
+  'hero-with-marquee-large': 'catalog/cta/hero-with-marquee-large.tsx',
+  'hero-with-marquee': 'catalog/cta/hero-with-marquee.tsx',
+  'hero-with-marquee-mixed-font': 'catalog/cta/hero-with-marquee-mixed-font.tsx',
+  'hero-with-marquee-reverse': 'catalog/cta/hero-with-marquee-reverse.tsx',
+  'hero-with-video': 'catalog/cta/hero-with-video.tsx',
+  'pricing-cards': 'catalog/pricing/pricing-cards.tsx',
+  'processing-card': 'catalog/processing/processing-demo.tsx',
+  'fallback-card-demo': 'catalog/cards/fallback-card-demo.tsx',
+  'background-noise': 'catalog/backgrounds/background-noise.tsx',
+  'squares-background': 'catalog/backgrounds/squares-background.tsx',
+  'background-gradient-grid': 'catalog/backgrounds/background-gradient-grid.tsx',
+  'blueprint-gradient-mesh': 'catalog/backgrounds/blueprint-gradient-mesh.tsx',
 };
 
 export async function GET(request: NextRequest) {
