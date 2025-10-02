@@ -26,8 +26,35 @@ const silkscreen = Silkscreen({
 });
 
 export const metadata: Metadata = {
-  title: "MIX-UI - Component Library",
-  description: "Beautiful UI components collection for modern web applications",
+  title: "uimix - Modern React Component Library",
+  description: "A modern, beautiful, and highly customizable React component library built with Next.js 15, React 19, and Tailwind CSS 4. 20+ premium components for your next project.",
+  keywords: ["react", "nextjs", "tailwindcss", "components", "ui", "design-system", "framer-motion", "typescript"],
+  authors: [{ name: "uimix team", url: "https://github.com/larsen66/uimix" }],
+  creator: "uimix team",
+  publisher: "uimix team",
+  metadataBase: new URL("https://github.com/larsen66/uimix"),
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://github.com/larsen66/uimix",
+    title: "uimix - Modern React Component Library",
+    description: "A modern, beautiful, and highly customizable React component library built with Next.js 15, React 19, and Tailwind CSS 4.",
+    siteName: "uimix",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "uimix - Modern React Component Library",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "uimix - Modern React Component Library",
+    description: "A modern, beautiful, and highly customizable React component library built with Next.js 15, React 19, and Tailwind CSS 4.",
+    images: ["/logo.png"],
+  },
   icons: {
     icon: [
       {

@@ -1,7 +1,14 @@
 # uimix.dev
-<img src="./public/logo.png" alt="MIX-UI Logo" width="120" />
+
+<img src="./public/logo.png" alt="uimix Logo" width="120" />
+
+[![GitHub Stars](https://img.shields.io/github/stars/larsen66/uimix?style=social)](https://github.com/larsen66/uimix/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/larsen66/uimix)](https://github.com/larsen66/uimix/issues)
+[![GitHub License](https://img.shields.io/github/license/larsen66/uimix)](https://github.com/larsen66/uimix/blob/main/LICENSE)
 
 A modern, beautiful, and highly customizable React component library built with Next.js 15, React 19, and Tailwind CSS 4.
+
+🔗 **[View on GitHub](https://github.com/larsen66/uimix)** | **[Report Bug](https://github.com/larsen66/uimix/issues)** | **[Request Feature](https://github.com/larsen66/uimix/issues)**
 
 ## ✨ Features
 
@@ -20,8 +27,8 @@ A modern, beautiful, and highly customizable React component library built with 
 
 ```bash
 # Clone the repository
-git clone <repository-url>
-cd mixui
+git clone https://github.com/larsen66/uimix.git
+cd uimix
 
 # Install dependencies
 npm install
@@ -198,7 +205,7 @@ All components are built with Tailwind CSS and can be easily customized:
 ## 📁 Project Structure
 
 ```
-mixui/
+uimix/
 ├── app/                          # Next.js app directory
 │   ├── component/[id]/          # Dynamic component pages
 │   ├── component-preview/[id]/  # Component preview pages
@@ -373,8 +380,14 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📞 Support
 
-For support, please open an issue in the GitHub repository.
+For support, please open an issue in the [GitHub repository](https://github.com/larsen66/uimix/issues).
+
+## 🔗 Links
+
+- **GitHub Repository**: [https://github.com/larsen66/uimix](https://github.com/larsen66/uimix)
+- **Issues & Bug Reports**: [https://github.com/larsen66/uimix/issues](https://github.com/larsen66/uimix/issues)
+- **Pull Requests**: [https://github.com/larsen66/uimix/pulls](https://github.com/larsen66/uimix/pulls)
 
 ---
 
-Made with ❤️ by uimix team
+Made with ❤️ by [uimix team](https://github.com/larsen66/uimix)

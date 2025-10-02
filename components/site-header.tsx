@@ -68,7 +68,7 @@ export default function SiteHeader({ isHeaderVisible, isDarkMode, setIsDarkMode 
           <div className="flex items-center gap-2">
             <Image 
               src={isDarkMode ? "/logo-dark.png" : "/logo.png"}
-              alt="MIX-UI Logo" 
+              alt="uimix Logo" 
               width={32} 
               height={32} 
               className="rounded-lg object-contain"

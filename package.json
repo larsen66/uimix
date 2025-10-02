@@ -1,7 +1,28 @@
 {
-  "name": "mixui",
+  "name": "uimix",
   "version": "0.1.0",
   "private": true,
+  "description": "A modern, beautiful, and highly customizable React component library built with Next.js 15, React 19, and Tailwind CSS 4",
+  "author": "uimix team",
+  "license": "MIT",
+  "homepage": "https://github.com/larsen66/uimix#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larsen66/uimix.git"
+  },
+  "bugs": {
+    "url": "https://github.com/larsen66/uimix/issues"
+  },
+  "keywords": [
+    "react",
+    "nextjs",
+    "tailwindcss",
+    "components",
+    "ui",
+    "design-system",
+    "framer-motion",
+    "typescript"
+  ],
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
