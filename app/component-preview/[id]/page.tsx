@@ -18,7 +18,7 @@ import { ProcessingDemo } from "@/components/catalog/processing";
 import { FallbackCardDemo } from "@/components/catalog/cards";
 import { BackgroundNoise, SquaresBackground, BackgroundGradientGrid, BlueprintGradientMesh } from "@/components/catalog/backgrounds";
 import { FAQMonochrome, FAQWithSpiral } from "@/components/catalog/faq";
-import { BentoFeatures, BentoMonochrome } from "@/components/catalog/features";
+import { BentoFeatures, BentoMonochrome, BentoMonochrome1 } from "@/components/catalog/features";
 
 const componentMap: Record<string, React.ComponentType> = {
   "hero-minimalism": HeroMinimalism,
@@ -40,6 +40,7 @@ const componentMap: Record<string, React.ComponentType> = {
   "blueprint-gradient-mesh": BlueprintGradientMesh,
   "bento-features": BentoFeatures,
   "bento-monochrome": BentoMonochrome,
+  "bento-monochrome-1": BentoMonochrome1,
   "faq-with-spiral": FAQWithSpiral,
   "faq-monochrome": FAQMonochrome,
 };

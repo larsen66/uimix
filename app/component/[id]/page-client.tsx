@@ -339,6 +339,23 @@ export default function Page() {
     dependencies: ["react", "lucide-react"],
     installCommand: "",
   },
+  "bento-monochrome-1": {
+    id: "bento-monochrome-1",
+    title: "Bento Monochrome Workflow",
+    description: "A sophisticated workflow visualization component with animated icons and dark mode support. Features 5 workflow stages (Discovery, Design, Build, Validation, Evolution) with unique animated icons. Includes metrics display, theme toggle, and responsive grid layout. Perfect for showcasing product development processes with monochrome aesthetic.",
+    category: "Features",
+    preview: "bg-gradient-to-br from-slate-100 to-neutral-200",
+    previewImage: "https://cdn.21st.dev/larsen66/bento-monochrome-1/default/preview.1759206307543.png",
+    previewVideo: "https://cdn.21st.dev/larsen66/bento-monochrome-1/default/video.1759206307543.mp4",
+    code: `// See the component file for full implementation
+import BentoMonochrome1 from '@/components/catalog/features/bento-monochrome-1';
+
+export default function Page() {
+  return <BentoMonochrome1 />;
+}`,
+    dependencies: ["react"],
+    installCommand: "",
+  },
   "faq-with-spiral": {
     id: "faq-with-spiral",
     title: "FAQ with Spiral",

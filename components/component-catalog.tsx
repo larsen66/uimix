@@ -281,6 +281,14 @@ const components: Component[] = [
     previewVideo: "https://cdn.21st.dev/larsen66/bento-monochrome/default/video.1759204336628.mp4",
     category: "features",
   },
+  {
+    id: "bento-monochrome-1",
+    title: "Bento Monochrome Workflow",
+    preview: "bg-gradient-to-br from-slate-100 to-neutral-200",
+    previewImage: "https://cdn.21st.dev/larsen66/bento-monochrome-1/default/preview.1759206307543.png",
+    previewVideo: "https://cdn.21st.dev/larsen66/bento-monochrome-1/default/video.1759206307543.mp4",
+    category: "features",
+  },
   // FAQ Components
   {
     id: "faq-with-spiral",

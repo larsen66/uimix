@@ -22,6 +22,7 @@ const componentFiles: Record<string, string> = {
   'blueprint-gradient-mesh': 'catalog/backgrounds/blueprint-gradient-mesh.tsx',
   'bento-features': 'catalog/features/bento-features.tsx',
   'bento-monochrome': 'catalog/features/bento-monochrome.tsx',
+  'bento-monochrome-1': 'catalog/features/bento-monochrome-1.tsx',
   'faq-with-spiral': 'catalog/faq/faq-with-spiral.tsx',
   'faq-monochrome': 'catalog/faq/faq-monochrome.tsx',
 };
