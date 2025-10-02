@@ -273,6 +273,31 @@ const components: Component[] = [
     previewVideo: "https://cdn.21st.dev/larsen66/bento-features/default/video.1759166271914.mp4",
     category: "features",
   },
+  {
+    id: "bento-monochrome",
+    title: "Bento Monochrome",
+    preview: "bg-gradient-to-br from-white to-neutral-100",
+    previewImage: "https://cdn.21st.dev/larsen66/bento-monochrome/default/preview.1759204336628.png",
+    previewVideo: "https://cdn.21st.dev/larsen66/bento-monochrome/default/video.1759204336628.mp4",
+    category: "features",
+  },
+  // FAQ Components
+  {
+    id: "faq-with-spiral",
+    title: "FAQ with Spiral",
+    preview: "bg-gradient-to-br from-black to-zinc-900",
+    previewImage: "https://cdn.21st.dev/larsen66/faq-section/default/preview.1759163808269.png",
+    previewVideo: "https://cdn.21st.dev/larsen66/faq-section/default/video.1759163808269.mp4",
+    category: "faq",
+  },
+  {
+    id: "faq-monochrome",
+    title: "FAQ Monochrome",
+    preview: "bg-gradient-to-br from-neutral-950 to-neutral-800",
+    previewImage: "https://cdn.21st.dev/larsen66/faq-monocrhome/default/preview.1759204235333.png",
+    previewVideo: "https://cdn.21st.dev/larsen66/faq-monocrhome/default/video.1759204235333.mp4",
+    category: "faq",
+  },
 ];
 
 interface ComponentCatalogProps {
@@ -314,7 +339,8 @@ export default function ComponentCatalog({
   const cardComponents = filteredComponents.filter((comp) => comp.category === "cards");
   const backgroundComponents = filteredComponents.filter((comp) => comp.category === "backgrounds");
   const featuresComponents = filteredComponents.filter((comp) => comp.category === "features");
-  const otherComponents = filteredComponents.filter((comp) => comp.category !== "cta" && comp.category !== "hero" && comp.category !== "login-signup" && comp.category !== "pricing" && comp.category !== "processing" && comp.category !== "cards" && comp.category !== "backgrounds" && comp.category !== "features");
+  const faqComponents = filteredComponents.filter((comp) => comp.category === "faq");
+  const otherComponents = filteredComponents.filter((comp) => comp.category !== "cta" && comp.category !== "hero" && comp.category !== "login-signup" && comp.category !== "pricing" && comp.category !== "processing" && comp.category !== "cards" && comp.category !== "backgrounds" && comp.category !== "features" && comp.category !== "faq");
 
   // Prepare sections for navigation
   const sections = [
@@ -326,6 +352,7 @@ export default function ComponentCatalog({
     cardComponents.length > 0 && { id: "cards-section", label: "Cards", count: cardComponents.length },
     backgroundComponents.length > 0 && { id: "backgrounds-section", label: "Backgrounds", count: backgroundComponents.length },
     featuresComponents.length > 0 && { id: "features-section", label: "Features", count: featuresComponents.length },
+    faqComponents.length > 0 && { id: "faq-section", label: "FAQ", count: faqComponents.length },
   ].filter(Boolean) as { id: string; label: string; count: number }[];
 
   return (
@@ -781,6 +808,40 @@ export default function ComponentCatalog({
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featuresComponents.map((component, index) => (
+                <ComponentCard 
+                  key={component.id}
+                  component={component}
+                  index={index}
+                  onClick={() => router.push(`/component/${component.id}`)}
+                  isDarkMode={isDarkMode}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* FAQ Components Section */}
+        {faqComponents.length > 0 && (
+          <div id="faq-section" className="mb-16 scroll-mt-24">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold mb-2 flex items-center gap-3">
+                <PixelText interval={5000}>FAQ</PixelText>
+                <span className={cn(
+                  "text-xs font-sans font-normal px-2 py-1 rounded transition-colors duration-300",
+                  isDarkMode ? "text-gray-400 bg-gray-800" : "text-gray-500 bg-gray-100"
+                )}>
+                  {faqComponents.length}
+                </span>
+              </h2>
+              <p className={cn(
+                "cursor-pointer transition-colors duration-300",
+                isDarkMode ? "text-gray-400" : "text-gray-500"
+              )}>
+                <PixelText onHover>Beautiful FAQ sections with interactive animations</PixelText>
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {faqComponents.map((component, index) => (
                 <ComponentCard 
                   key={component.id}
                   component={component}

@@ -322,6 +322,57 @@ export default function Page() {
     dependencies: ["react"],
     installCommand: "",
   },
+  "bento-monochrome": {
+    id: "bento-monochrome",
+    title: "Bento Monochrome",
+    description: "A minimalist monochrome bento grid layout with subtle animations and dark mode support. Features clean design with gradient backgrounds, animated icons, and responsive modular spans. Perfect for showcasing features with quiet precision and elegant visual hierarchy. Includes theme toggle and smooth fade-in animations.",
+    category: "Features",
+    preview: "bg-gradient-to-br from-white to-neutral-100",
+    previewImage: "https://cdn.21st.dev/larsen66/bento-monochrome/default/preview.1759204336628.png",
+    previewVideo: "https://cdn.21st.dev/larsen66/bento-monochrome/default/video.1759204336628.mp4",
+    code: `// See the component file for full implementation
+import BentoMonochrome from '@/components/catalog/features/bento-monochrome';
+
+export default function Page() {
+  return <BentoMonochrome />;
+}`,
+    dependencies: ["react", "lucide-react"],
+    installCommand: "",
+  },
+  "faq-with-spiral": {
+    id: "faq-with-spiral",
+    title: "FAQ with Spiral",
+    description: "Beautiful FAQ section with animated spiral background using golden ratio mathematics. Features search functionality, expandable questions, smooth animations, and customizable spiral controls. Clean minimalistic black-and-white design.",
+    category: "FAQ",
+    preview: "bg-gradient-to-br from-black to-zinc-900",
+    previewImage: "https://cdn.21st.dev/larsen66/faq-section/default/preview.1759163808269.png",
+    previewVideo: "https://cdn.21st.dev/larsen66/faq-section/default/video.1759163808269.mp4",
+    code: `// See the component file for full implementation
+import FAQWithSpiral from '@/components/catalog/faq/faq-with-spiral';
+
+export default function Page() {
+  return <FAQWithSpiral />;
+}`,
+    dependencies: ["react"],
+    installCommand: "",
+  },
+  "faq-monochrome": {
+    id: "faq-monochrome",
+    title: "FAQ Monochrome",
+    description: "Sophisticated monochrome FAQ section with advanced animations and theme toggle. Features expandable questions with smooth transitions, animated intro badge with rotating beam effect, mouse-tracking card glow, and elegant dark/light mode switch. Includes accessibility features with ARIA labels and keyboard navigation. Perfect for modern SaaS and tech product pages.",
+    category: "FAQ",
+    preview: "bg-gradient-to-br from-neutral-950 to-neutral-800",
+    previewImage: "https://cdn.21st.dev/larsen66/faq-monocrhome/default/preview.1759204235333.png",
+    previewVideo: "https://cdn.21st.dev/larsen66/faq-monocrhome/default/video.1759204235333.mp4",
+    code: `// See the component file for full implementation
+import FAQMonochrome from '@/components/catalog/faq/faq-monochrome';
+
+export default function Page() {
+  return <FAQMonochrome />;
+}`,
+    dependencies: ["react"],
+    installCommand: "",
+  },
 };
 
 export default function ComponentPageClient({ id }: { id: string }) {

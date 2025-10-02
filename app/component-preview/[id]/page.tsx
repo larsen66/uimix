@@ -17,7 +17,8 @@ import { PricingCards } from "@/components/catalog/pricing";
 import { ProcessingDemo } from "@/components/catalog/processing";
 import { FallbackCardDemo } from "@/components/catalog/cards";
 import { BackgroundNoise, SquaresBackground, BackgroundGradientGrid, BlueprintGradientMesh } from "@/components/catalog/backgrounds";
-import { BentoFeatures } from "@/components/catalog/features";
+import { FAQMonochrome, FAQWithSpiral } from "@/components/catalog/faq";
+import { BentoFeatures, BentoMonochrome } from "@/components/catalog/features";
 
 const componentMap: Record<string, React.ComponentType> = {
   "hero-minimalism": HeroMinimalism,
@@ -38,6 +39,9 @@ const componentMap: Record<string, React.ComponentType> = {
   "background-gradient-grid": BackgroundGradientGrid,
   "blueprint-gradient-mesh": BlueprintGradientMesh,
   "bento-features": BentoFeatures,
+  "bento-monochrome": BentoMonochrome,
+  "faq-with-spiral": FAQWithSpiral,
+  "faq-monochrome": FAQMonochrome,
 };
 
 export default function ComponentPreviewPage({ 

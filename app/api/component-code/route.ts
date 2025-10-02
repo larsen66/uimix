@@ -20,6 +20,10 @@ const componentFiles: Record<string, string> = {
   'squares-background': 'catalog/backgrounds/squares-background.tsx',
   'background-gradient-grid': 'catalog/backgrounds/background-gradient-grid.tsx',
   'blueprint-gradient-mesh': 'catalog/backgrounds/blueprint-gradient-mesh.tsx',
+  'bento-features': 'catalog/features/bento-features.tsx',
+  'bento-monochrome': 'catalog/features/bento-monochrome.tsx',
+  'faq-with-spiral': 'catalog/faq/faq-with-spiral.tsx',
+  'faq-monochrome': 'catalog/faq/faq-monochrome.tsx',
 };
 
 export async function GET(request: NextRequest) {
