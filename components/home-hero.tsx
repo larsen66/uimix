@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { ArrowRight, Sparkles, Zap, Palette } from "lucide-react";
+import { ArrowRight, Zap, Palette } from "lucide-react";
 import { HyperText } from "./ui/hyper-text";
 
 interface HomeHeroProps {
@@ -9,7 +9,6 @@ interface HomeHeroProps {
 }
 
 export default function HomeHero({ isDarkMode }: HomeHeroProps) {
-  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
   const [isVisible, setIsVisible] = useState(false);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,17 +34,6 @@ export default function HomeHero({ isDarkMode }: HomeHeroProps) {
     return () => clearInterval(interval);
   }, [words.length]);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX / window.innerWidth) * 100,
-        y: (e.clientY / window.innerHeight) * 100,
-      });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {

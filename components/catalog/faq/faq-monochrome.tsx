@@ -67,7 +67,7 @@ const palettes = {
 };
 
 export default function FAQMonochrome() {
-  const getRootTheme = () => {
+  const getRootTheme = (): "dark" | "light" => {
     if (typeof document === "undefined") return "dark";
     if (document.documentElement.classList.contains("dark")) return "dark";
     if (document.documentElement.classList.contains("light")) return "light";
@@ -77,7 +77,7 @@ export default function FAQMonochrome() {
     return "light";
   };
 
-  const [theme, setTheme] = useState(getRootTheme);
+  const [theme, setTheme] = useState<"dark" | "light">(getRootTheme);
   const [introReady, setIntroReady] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [hasEntered, setHasEntered] = useState(false);
@@ -259,7 +259,7 @@ export default function FAQMonochrome() {
     setTheme(next);
     try {
       window.localStorage?.setItem("bento-theme", next);
-    } catch (_err) {
+    } catch {
       /* ignore */
     }
   };

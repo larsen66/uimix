@@ -292,7 +292,7 @@ export default function FAQWithSpiral() {
                 { label: "Pastel", value: "pastel" },
                 { label: "Grayscale", value: "grayscale" },
               ]}
-              onChange={(v)=> setCfg({...cfg, gradient: v as any})}
+              onChange={(v)=> setCfg({...cfg, gradient: v as typeof cfg.gradient})}
             />
 
             <div className="flex gap-2">

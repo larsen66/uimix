@@ -140,7 +140,7 @@ function FeaturesSectionMinimal() {
     setTheme(next);
     try {
       window.localStorage?.setItem("bento-theme", next);
-    } catch (_err) {
+    } catch {
       /* ignore */
     }
   };

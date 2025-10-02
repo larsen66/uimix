@@ -101,7 +101,7 @@ const MovingGrid: React.FC<GridProps> = ({
   className = "",
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const raf = useRef<number>();
+  const raf = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -185,7 +185,7 @@ const SquaresInteractive: React.FC<HoverProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hoveredRef = useRef<{ x: number; y: number } | null>(null);
-  const raf = useRef<number>();
+  const raf = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -298,10 +298,9 @@ export default function BlueprintGradientMesh({
   hoverFillColor = "rgba(33, 82, 131, 0.18)",
   hoverStrokeColor = "rgba(172, 193, 255, 0.70)",
   hoverGlowColor = "rgba(122, 162, 255, 0.30)",
-  className = "",
 }: CombinedProps) {
   const gridOffsetRef = useRef<Offset>({ x: 0, y: 0 });
-  const raf = useRef<number>();
+  const raf = useRef<number | undefined>(undefined);
 
   // Общий анимационный offset (для сетки и hover)
   useEffect(() => {

@@ -173,12 +173,13 @@ const LetterGlitch: React.FC<{
         animate()
       }, 100)
     }
-    window.addEventListener('resize', handleResize)
-    return () => {
-      if (animationRef.current) cancelAnimationFrame(animationRef.current)
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [glitchSpeed, smooth])
+      window.addEventListener('resize', handleResize)
+      return () => {
+        if (animationRef.current) cancelAnimationFrame(animationRef.current)
+        window.removeEventListener('resize', handleResize)
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [glitchSpeed, smooth])
 
   return (
     <div className={cn('relative w-full h-full bg-black overflow-hidden', className)}>

@@ -94,7 +94,7 @@ const MovingGrid: React.FC<GridProps> = ({
   className = "",
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const raf = useRef<number>();
+  const raf = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -175,7 +175,7 @@ const SquaresInteractive: React.FC<HoverProps> = ({
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const hoveredRef = useRef<{ x: number; y: number } | null>(null);
-  const raf = useRef<number>();
+  const raf = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -296,7 +296,7 @@ export default function SquaresBackground({
   className = "",
 }: CombinedProps) {
   const gridOffsetRef = useRef<Offset>({ x: 0, y: 0 });
-  const raf = useRef<number>();
+  const raf = useRef<number | undefined>(undefined);
 
   // Single animation loop for the offset shared by both canvases
   useEffect(() => {

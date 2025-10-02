@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 
 const STYLE_ID = "hero1-animations";
 
-const getRootTheme = () => {
+const getRootTheme = (): "dark" | "light" => {
   if (typeof document === "undefined") {
     if (typeof window !== "undefined" && window.matchMedia) {
       return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -22,8 +22,8 @@ const getRootTheme = () => {
   return "light";
 };
 
-const useThemeSync = () => {
-  const [theme, setTheme] = useState(() => getRootTheme());
+const useThemeSync = (): readonly ["dark" | "light", React.Dispatch<React.SetStateAction<"dark" | "light">>] => {
+  const [theme, setTheme] = useState<"dark" | "light">(() => getRootTheme());
 
   useEffect(() => {
     if (typeof document === "undefined") return;
@@ -245,7 +245,7 @@ function HeroMonochromeLaunch() {
     if (typeof window !== "undefined") {
       try {
         window.localStorage?.setItem("hero-theme", next);
-      } catch (_err) {
+      } catch {
         /* ignore */
       }
     }

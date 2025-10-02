@@ -102,7 +102,7 @@ const palettes = {
   },
 };
 
-const getRootTheme = () => {
+const getRootTheme = (): "dark" | "light" => {
   if (typeof document === "undefined") {
     if (typeof window !== "undefined" && window.matchMedia) {
       return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -121,7 +121,7 @@ const getRootTheme = () => {
 };
 
 function Bento3Section() {
-  const [theme, setTheme] = useState(() => getRootTheme());
+  const [theme, setTheme] = useState<"dark" | "light">(() => getRootTheme());
   const [introReady, setIntroReady] = useState(false);
   const [visible, setVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -447,7 +447,7 @@ function Bento3Section() {
     root.classList.toggle("dark", next === "dark");
     try {
       window.localStorage?.setItem("bento-theme", next);
-    } catch (_err) {
+    } catch {
       /* ignore */
     }
     setTheme(next);
