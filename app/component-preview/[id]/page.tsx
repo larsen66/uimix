@@ -11,7 +11,7 @@ import {
   HeroWithMarqueeReverse,
   HeroWithVideo
 } from "@/components/catalog/cta";
-import { HeroMinimalism } from "@/components/catalog/hero";
+import { HeroMinimalism, HeroMonochromeLaunch, HeroOrbitDeck } from "@/components/catalog/hero";
 import { LoginCard } from "@/components/catalog/login-signup";
 import { PricingCards } from "@/components/catalog/pricing";
 import { ProcessingDemo } from "@/components/catalog/processing";
@@ -22,6 +22,8 @@ import { BentoFeatures, BentoMonochrome, BentoMonochrome1 } from "@/components/c
 
 const componentMap: Record<string, React.ComponentType> = {
   "hero-minimalism": HeroMinimalism,
+  "hero-monochrome-launch": HeroMonochromeLaunch,
+  "hero-orbit-deck": HeroOrbitDeck,
   "login-card": LoginCard,
   "cta-horizontal-marquee": CTAWithHorizontalMarquee,
   "cta-vertical-marquee": CTAWithVerticalMarquee,

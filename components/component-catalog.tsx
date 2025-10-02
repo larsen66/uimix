@@ -2,10 +2,8 @@
 
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Moon, Sun } from "lucide-react";
 import PixelText from "./pixel-text";
 import SectionNavigation from "./section-navigation";
 
@@ -134,6 +132,20 @@ const components: Component[] = [
     preview: "bg-gradient-to-br from-slate-950 to-slate-800",
     previewImage: "https://cdn.21st.dev/lyanchouss/hero-minimalism/default/preview.1757129422522.png",
     previewVideo: "https://cdn.21st.dev/user_2xFgBhIEcC8WVjxizPEzB14AOkb/hero-minimalism/default/video.1757129621642.mp4",
+    category: "hero",
+  },
+  {
+    id: "hero-monochrome-launch",
+    title: "Hero Monochrome Launch",
+    preview: "bg-gradient-to-br from-slate-950 to-slate-900",
+    previewImage: "https://cdn.21st.dev/larsen66/hero-monochrome/default/preview.1759207325294.png",
+    category: "hero",
+  },
+  {
+    id: "hero-orbit-deck",
+    title: "Hero Orbit Deck",
+    preview: "bg-gradient-to-br from-neutral-950 to-neutral-900",
+    previewImage: "https://cdn.21st.dev/larsen66/hero-modern/default/preview.1759208430565.png",
     category: "hero",
   },
   // Login & Signup Components
@@ -312,9 +324,9 @@ interface ComponentCatalogProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   selectedSource: "all" | "free" | "pro";
-  isHeaderVisible: boolean;
+  isNavVisible: boolean;
+  isInHeroSection: boolean;
   isDarkMode: boolean;
-  setIsDarkMode: (value: boolean) => void;
   onSearchClick: () => void;
 }
 
@@ -322,9 +334,9 @@ export default function ComponentCatalog({
   searchQuery,
   setSearchQuery,
   selectedSource,
-  isHeaderVisible,
+  isNavVisible,
+  isInHeroSection,
   isDarkMode,
-  setIsDarkMode,
   onSearchClick,
 }: ComponentCatalogProps) {
   const router = useRouter();
@@ -419,39 +431,40 @@ export default function ComponentCatalog({
       <div className={cn(
         "pointer-events-none fixed top-0 left-0 w-96 h-96 z-10 transition-colors duration-300",
         isDarkMode
-          ? "bg-gradient-to-br from-gray-900 via-gray-900/25 to-transparent"
-          : "bg-gradient-to-br from-gray-50 via-gray-50/25 to-transparent"
+          ? "bg-gradient-to-br from-gray-900 via-gray-900/21 to-transparent"
+          : "bg-gradient-to-br from-gray-50 via-gray-50/21 to-transparent"
       )} />
 
       {/* Corner Vignette Blur - Top Right */}
       <div className={cn(
         "pointer-events-none fixed top-0 right-0 w-96 h-96 z-10 transition-colors duration-300",
         isDarkMode
-          ? "bg-gradient-to-bl from-gray-900 via-gray-900/25 to-transparent"
-          : "bg-gradient-to-bl from-gray-50 via-gray-50/25 to-transparent"
+          ? "bg-gradient-to-bl from-gray-900 via-gray-900/21 to-transparent"
+          : "bg-gradient-to-bl from-gray-50 via-gray-50/21 to-transparent"
       )} />
 
       {/* Corner Vignette Blur - Bottom Left */}
       <div className={cn(
         "pointer-events-none fixed bottom-0 left-0 w-96 h-96 z-10 transition-colors duration-300",
         isDarkMode
-          ? "bg-gradient-to-tr from-gray-900 via-gray-900/25 to-transparent"
-          : "bg-gradient-to-tr from-gray-50 via-gray-50/25 to-transparent"
+          ? "bg-gradient-to-tr from-gray-900 via-gray-900/21 to-transparent"
+          : "bg-gradient-to-tr from-gray-50 via-gray-50/21 to-transparent"
       )} />
 
       {/* Corner Vignette Blur - Bottom Right */}
       <div className={cn(
         "pointer-events-none fixed bottom-0 right-0 w-96 h-96 z-10 transition-colors duration-300",
         isDarkMode
-          ? "bg-gradient-to-tl from-gray-900 via-gray-900/25 to-transparent"
-          : "bg-gradient-to-tl from-gray-50 via-gray-50/25 to-transparent"
+          ? "bg-gradient-to-tl from-gray-900 via-gray-900/21 to-transparent"
+          : "bg-gradient-to-tl from-gray-50 via-gray-50/21 to-transparent"
       )} />
 
       {/* Section Navigation */}
       <SectionNavigation 
         sections={sections} 
         isDarkMode={isDarkMode} 
-        isHeaderVisible={isHeaderVisible}
+        isHeaderVisible={isNavVisible}
+        isInHeroSection={isInHeroSection}
         onSearchClick={onSearchClick}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -461,8 +474,8 @@ export default function ComponentCatalog({
       <div className={cn(
         "pointer-events-none fixed top-0 left-0 right-0 h-32 z-30 transition-colors duration-300",
         isDarkMode
-          ? "bg-gradient-to-b from-gray-900 via-gray-900/39 to-transparent"
-          : "bg-gradient-to-b from-gray-50 via-gray-50/39 to-transparent"
+          ? "bg-gradient-to-b from-gray-900 via-gray-900/33 to-transparent"
+          : "bg-gradient-to-b from-gray-50 via-gray-50/33 to-transparent"
       )} />
       
       {/* Bottom Blur Vignette */}
@@ -470,89 +483,10 @@ export default function ComponentCatalog({
         className={cn(
           "pointer-events-none fixed bottom-0 left-0 right-0 h-64 z-30 transition-colors duration-300",
           isDarkMode
-            ? "bg-gradient-to-t from-gray-900 via-gray-900/39 to-transparent"
-            : "bg-gradient-to-t from-gray-50 via-gray-50/39 to-transparent"
+            ? "bg-gradient-to-t from-gray-900 via-gray-900/33 to-transparent"
+            : "bg-gradient-to-t from-gray-50 via-gray-50/33 to-transparent"
         )}
       />
-      {/* Header */}
-      <header className={cn(
-        "px-6 py-4 sticky top-0 z-40 transition-transform duration-300",
-        isHeaderVisible ? "translate-y-0" : "-translate-y-full"
-      )}>
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Left Side - Floating */}
-          <div className={cn(
-            "backdrop-blur-sm border rounded-xl px-4 py-2 shadow-sm transition-colors duration-300",
-            isDarkMode ? "bg-gray-800/80 border-gray-700" : "bg-white/80 border-gray-200"
-          )}>
-            <div className="flex items-center gap-2">
-              <Image 
-                src={isDarkMode ? "/logo-dark.png" : "/logo.png"}
-                alt="MIX-UI Logo" 
-                width={32} 
-                height={32} 
-                className="rounded-lg object-contain"
-              />
-              <span className={cn(
-                "font-logo text-sm transition-colors duration-300",
-                isDarkMode ? "text-gray-100" : "text-gray-900"
-              )}>uimix</span>
-            </div>
-          </div>
-
-          {/* Right Side - Floating */}
-          <div className={cn(
-            "backdrop-blur-sm border rounded-xl shadow-sm transition-colors duration-300",
-            isDarkMode ? "bg-gray-800/80 border-gray-700" : "bg-white/80 border-gray-200"
-          )}>
-            <nav className="flex items-center gap-2 px-2 py-2">
-              <button
-                onClick={() => setIsDarkMode(!isDarkMode)}
-                className={cn(
-                  "w-8 h-8 rounded-lg transition-colors flex items-center justify-center",
-                  isDarkMode ? "hover:bg-gray-700 text-gray-200" : "hover:bg-gray-100 text-gray-900"
-                )}
-                title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-              >
-                {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-              </button>
-              <Link href="#" className={cn(
-                "text-sm transition-colors px-4 py-1 rounded-full",
-                isDarkMode 
-                  ? "text-gray-400 hover:text-gray-100 hover:bg-gray-700"
-                  : "text-gray-600 hover:text-gray-900 hover:bg-gray-100"
-              )}>
-                <PixelText onHover>Pricing</PixelText>
-              </Link>
-              <Link href="#" className={cn(
-                "text-sm font-medium px-4 py-1 rounded-full transition-colors",
-                isDarkMode
-                  ? "text-gray-100 bg-gray-700"
-                  : "text-gray-900 bg-gray-100"
-              )}>
-                <PixelText onHover>Components</PixelText>
-              </Link>
-              <button className={cn(
-                "w-8 h-8 rounded-full transition-colors flex items-center justify-center",
-                isDarkMode ? "hover:bg-gray-700 text-gray-200" : "hover:bg-gray-100 text-gray-900"
-              )}>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-              </button>
-              <button className={cn(
-                "w-8 h-8 rounded-full transition-colors flex items-center justify-center",
-                isDarkMode ? "hover:bg-gray-700 text-gray-200" : "hover:bg-gray-100 text-gray-900"
-              )}>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                </svg>
-              </button>
-            </nav>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-12 relative z-20 ml-32">
         

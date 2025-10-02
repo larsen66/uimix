@@ -14,12 +14,13 @@ interface SectionNavigationProps {
   sections: SectionItem[];
   isDarkMode: boolean;
   isHeaderVisible: boolean;
+  isInHeroSection: boolean;
   onSearchClick: () => void;
   searchQuery: string;
   setSearchQuery: (query: string) => void;
 }
 
-export default function SectionNavigation({ sections, isDarkMode, isHeaderVisible, onSearchClick, searchQuery, setSearchQuery }: SectionNavigationProps) {
+export default function SectionNavigation({ sections, isDarkMode, isHeaderVisible, isInHeroSection, onSearchClick, searchQuery, setSearchQuery }: SectionNavigationProps) {
   const [activeSection, setActiveSection] = useState<string>("");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isSearchHovered, setIsSearchHovered] = useState(false);
@@ -94,6 +95,9 @@ export default function SectionNavigation({ sections, isDarkMode, isHeaderVisibl
 
   if (sections.length === 0) return null;
 
+  // Auto-expand navigation in hero section
+  const isExpanded = isInHeroSection || isNavHovered;
+
   return (
     <nav
       className={cn(
@@ -106,13 +110,13 @@ export default function SectionNavigation({ sections, isDarkMode, isHeaderVisibl
       <div
         className={cn(
           "backdrop-blur-md border rounded-2xl shadow-lg transition-all duration-300",
-          isNavHovered ? "p-4" : "p-3",
+          isExpanded ? "p-4" : "p-3",
           isDarkMode ? "bg-gray-800/70 border-gray-700" : "bg-white/70 border-gray-200"
         )}
       >
         <div className={cn(
           "flex flex-col gap-2",
-          isNavHovered ? "items-stretch" : "items-center"
+          isExpanded ? "items-stretch" : "items-center"
         )}>
           {/* Section Items */}
           {sections.map((section, index) => {
@@ -127,8 +131,8 @@ export default function SectionNavigation({ sections, isDarkMode, isHeaderVisibl
                 onMouseLeave={() => setHoveredIndex(null)}
                 className={cn(
                   "flex items-center transition-all duration-300 rounded-lg overflow-hidden",
-                  isNavHovered ? "px-3 py-2 w-full gap-3" : "justify-center w-auto p-1",
-                  isNavHovered && (isDarkMode
+                  isExpanded ? "px-3 py-2 w-full gap-3" : "justify-center w-auto p-1",
+                  isExpanded && (isDarkMode
                     ? isHovered ? "bg-gray-700" : ""
                     : isHovered ? "bg-gray-100" : "")
                 )}
@@ -147,11 +151,11 @@ export default function SectionNavigation({ sections, isDarkMode, isHeaderVisibl
                   )}
                 />
 
-                {/* Label - shown when nav is hovered */}
+                {/* Label - shown when nav is expanded */}
                 <div
                   className={cn(
                     "flex items-center justify-between gap-4 transition-all duration-300 overflow-hidden whitespace-nowrap",
-                    isNavHovered ? "opacity-100 w-auto" : "opacity-0 w-0"
+                    isExpanded ? "opacity-100 w-auto" : "opacity-0 w-0"
                   )}
                 >
                   <span
@@ -183,7 +187,7 @@ export default function SectionNavigation({ sections, isDarkMode, isHeaderVisibl
           <div 
             className={cn(
               "h-[1px] transition-all duration-300",
-              isNavHovered ? "w-full" : "w-4",
+              isExpanded ? "w-full" : "w-4",
               isDarkMode ? "bg-gray-600" : "bg-gray-300"
             )}
           />
@@ -196,8 +200,8 @@ export default function SectionNavigation({ sections, isDarkMode, isHeaderVisibl
               onMouseLeave={() => setIsSearchHovered(false)}
               className={cn(
                 "flex items-center transition-all duration-300 rounded-lg overflow-hidden",
-                isNavHovered ? "px-3 py-2 w-full gap-3" : "justify-center w-auto p-1",
-                isNavHovered && (isDarkMode
+                isExpanded ? "px-3 py-2 w-full gap-3" : "justify-center w-auto p-1",
+                isExpanded && (isDarkMode
                   ? isSearchHovered ? "bg-gray-700" : ""
                   : isSearchHovered ? "bg-gray-100" : "")
               )}
@@ -207,17 +211,17 @@ export default function SectionNavigation({ sections, isDarkMode, isHeaderVisibl
                 <Search 
                   className={cn(
                     "transition-all duration-300",
-                    isNavHovered ? "w-4 h-4" : "w-3.5 h-3.5",
+                    isExpanded ? "w-4 h-4" : "w-3.5 h-3.5",
                     isDarkMode ? "text-gray-100" : "text-gray-900"
                   )} 
                 />
               </div>
 
-              {/* Search Label - shown when nav is hovered */}
+              {/* Search Label - shown when nav is expanded */}
               <span
                 className={cn(
                   "text-sm font-medium transition-all duration-300 overflow-hidden whitespace-nowrap",
-                  isNavHovered ? "opacity-100 w-auto" : "opacity-0 w-0",
+                  isExpanded ? "opacity-100 w-auto" : "opacity-0 w-0",
                   isDarkMode ? "text-gray-100" : "text-gray-900"
                 )}
               >

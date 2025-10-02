@@ -42,6 +42,36 @@ export default function Page() {
 }`,
     dependencies: ["react"],
   },
+  "hero-monochrome-launch": {
+    id: "hero-monochrome-launch",
+    title: "Hero Monochrome Launch",
+    description: "A sophisticated monochrome hero section with theme synchronization, animated SVG glyphs, and spotlight effects. Features elegant animations, responsive design, and seamless dark/light mode transitions.",
+    category: "Hero",
+    preview: "bg-gradient-to-br from-slate-950 to-slate-900",
+    previewImage: "https://cdn.21st.dev/larsen66/hero-monochrome/default/preview.1759207325294.png",
+    code: `// See the component file for full implementation
+import HeroMonochromeLaunch from '@/components/catalog/hero/hero-monochrome-launch';
+
+export default function Page() {
+  return <HeroMonochromeLaunch />;
+}`,
+    dependencies: ["react"],
+  },
+  "hero-orbit-deck": {
+    id: "hero-orbit-deck",
+    title: "Hero Orbit Deck",
+    description: "An advanced command deck hero with interactive mode switching, orbital animations, and launch protocols. Features dynamic theme sync, spotlight effects, and a sophisticated multi-panel layout for design systems.",
+    category: "Hero",
+    preview: "bg-gradient-to-br from-neutral-950 to-neutral-900",
+    previewImage: "https://cdn.21st.dev/larsen66/hero-modern/default/preview.1759208430565.png",
+    code: `// See the component file for full implementation
+import HeroOrbitDeck from '@/components/catalog/hero/hero-orbit-deck';
+
+export default function Page() {
+  return <HeroOrbitDeck />;
+}`,
+    dependencies: ["react"],
+  },
   "login-card": {
     id: "login-card",
     title: "Login Card",

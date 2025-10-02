@@ -4,6 +4,8 @@ import { join } from 'path';
 
 const componentFiles: Record<string, string> = {
   'hero-minimalism': 'catalog/hero/hero-minimalism.tsx',
+  'hero-monochrome-launch': 'catalog/hero/hero-monochrome-launch.tsx',
+  'hero-orbit-deck': 'catalog/hero/hero-orbit-deck.tsx',
   'login-card': 'catalog/login-signup/login-card.tsx',
   'cta-horizontal-marquee': 'catalog/cta/cta-with-horizontal-marquee.tsx',
   'cta-vertical-marquee': 'catalog/cta/cta-with-vertical-marquee.tsx',
