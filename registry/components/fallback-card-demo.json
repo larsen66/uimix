@@ -1,0 +1,14 @@
+{
+  "name": "fallback-card-demo",
+  "type": "registry:example",
+  "description": "Demo showcasing the fallback card component with dark theme and animations",
+  "dependencies": ["framer-motion", "lucide-react"],
+  "registryDependencies": ["fallback-card", "card", "button"],
+  "files": [
+    {
+      "path": "components/catalog/cards/fallback-card-demo.tsx",
+      "type": "registry:example"
+    }
+  ]
+}
+

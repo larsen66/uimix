@@ -1,0 +1,34 @@
+{
+  "name": "fallback-card",
+  "type": "registry:ui",
+  "description": "A fallback card component with glitch effects and customizable themes",
+  "dependencies": ["framer-motion", "lucide-react"],
+  "registryDependencies": ["card"],
+  "files": [
+    {
+      "path": "components/ui/fallback-card.tsx",
+      "type": "registry:ui"
+    }
+  ],
+  "tailwind": {
+    "config": {
+      "theme": {
+        "extend": {
+          "animation": {
+            "glitch": "glitch 0.3s infinite"
+          },
+          "keyframes": {
+            "glitch": {
+              "0%, 100%": { "transform": "translate(0)" },
+              "20%": { "transform": "translate(-2px, 2px)" },
+              "40%": { "transform": "translate(-2px, -2px)" },
+              "60%": { "transform": "translate(2px, 2px)" },
+              "80%": { "transform": "translate(2px, -2px)" }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

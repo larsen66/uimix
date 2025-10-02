@@ -1,0 +1,65 @@
+{
+  "name": "uimix",
+  "type": "registry:ui",
+  "registries": {
+    "default": {
+      "style": "new-york",
+      "tailwind": {
+        "config": "tailwind.config.ts",
+        "css": "app/globals.css",
+        "baseColor": "neutral",
+        "cssVariables": true
+      }
+    }
+  },
+  "components": [
+    {
+      "name": "fallback-card",
+      "type": "registry:ui",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "card"
+      ],
+      "files": ["components/ui/fallback-card.tsx"]
+    },
+    {
+      "name": "fallback-card-demo",
+      "type": "registry:example",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "fallback-card",
+        "card",
+        "button"
+      ],
+      "files": ["components/catalog/cards/fallback-card-demo.tsx"]
+    },
+    {
+      "name": "processing-card",
+      "type": "registry:ui",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": ["components/ui/processing-card.tsx"]
+    },
+    {
+      "name": "hyper-text",
+      "type": "registry:ui",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "files": ["components/ui/hyper-text.tsx"]
+    },
+    {
+      "name": "noise",
+      "type": "registry:ui",
+      "files": ["components/ui/noise.tsx"]
+    }
+  ]
+}
+
