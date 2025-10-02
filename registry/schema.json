@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the component"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["registry:ui", "registry:component", "registry:example", "registry:block"],
+      "description": "Type of the registry item"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the component"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "NPM dependencies required"
+    },
+    "devDependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "NPM dev dependencies required"
+    },
+    "registryDependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Other components from the registry this depends on"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "File paths to be copied"
+    },
+    "tailwind": {
+      "type": "object",
+      "description": "Tailwind CSS configuration additions"
+    },
+    "cssVars": {
+      "type": "object",
+      "description": "CSS variables to be added"
+    }
+  },
+  "required": ["name", "type", "files"]
+}
+
