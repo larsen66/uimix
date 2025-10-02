@@ -1,5 +1,4 @@
-# 🎨 MIX-UI
-
+# uimix.dev
 <img src="./public/logo.png" alt="MIX-UI Logo" width="120" />
 
 A modern, beautiful, and highly customizable React component library built with Next.js 15, React 19, and Tailwind CSS 4.
