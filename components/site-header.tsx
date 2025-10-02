@@ -113,7 +113,7 @@ export default function SiteHeader({ isHeaderVisible, isDarkMode, setIsDarkMode 
               />
             </Link>
             <a 
-              href="https://github.com/yourusername/yourrepo" 
+              href="https://github.com/larsen66/uimix" 
               target="_blank"
               rel="noopener noreferrer"
               className={cn(

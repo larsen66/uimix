@@ -787,7 +787,7 @@ export default function HomeHero({ isDarkMode }: HomeHeroProps) {
             </span>
           </a>
           <a
-            href="https://github.com"
+            href="https://github.com/larsen66/uimix"
             target="_blank"
             rel="noopener noreferrer"
             className={`px-6 py-2.5 rounded-lg text-sm font-medium border transition-colors duration-200 inline-flex items-center gap-2 ${
