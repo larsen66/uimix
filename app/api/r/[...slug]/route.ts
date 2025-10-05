@@ -2,9 +2,32 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 
+interface RegistryFile {
+  path: string;
+  type: string;
+  content?: string;
+}
+
+interface RegistryItem {
+  name: string;
+  type: string;
+  title: string;
+  description: string;
+  registryDependencies: string[];
+  dependencies: string[];
+  files: RegistryFile[];
+}
+
+interface Registry {
+  $schema: string;
+  name: string;
+  homepage: string;
+  items: RegistryItem[];
+}
+
 // Load the registry index
 const registryPath = path.join(process.cwd(), 'public/r/index.json');
-const registry = JSON.parse(fs.readFileSync(registryPath, 'utf-8'));
+const registry: Registry = JSON.parse(fs.readFileSync(registryPath, 'utf-8'));
 
 export async function GET(
   request: Request,
@@ -23,7 +46,7 @@ export async function GET(
     const componentName = fileName.replace('.json', '');
     
     // Find the component in registry
-    const component = registry.items.find((item: any) => item.name === componentName);
+    const component = registry.items.find((item: RegistryItem) => item.name === componentName);
     
     if (!component) {
       return NextResponse.json(
@@ -34,7 +57,7 @@ export async function GET(
 
     // Read the actual file contents
     const filesWithContent = await Promise.all(
-      component.files.map(async (file: any) => {
+      component.files.map(async (file: RegistryFile) => {
         const filePath = path.join(process.cwd(), file.path);
         try {
           const content = fs.readFileSync(filePath, 'utf-8');

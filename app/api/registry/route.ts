@@ -10,7 +10,7 @@ export async function GET() {
       homepage: "https://uimix.dev",
       items: registry,
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Failed to load registry' },
       { status: 500 }
