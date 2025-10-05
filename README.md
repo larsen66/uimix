@@ -15,11 +15,11 @@ Install any component from the **uimix** registry using shadcn CLI:
 # ⚠️ ВАЖНО: Запускайте команду из директории вашего проекта!
 cd your-project
 
-# Install a specific component (укажите --registry явно)
-npx shadcn@latest add hero-minimalism --registry https://uimix.dev/api/registry
+# Install a specific component
+npx shadcn@latest add hero-minimalism
 
 # Install multiple components at once
-npx shadcn@latest add hero-minimalism pricing-cards --registry https://uimix.dev/api/registry
+npx shadcn@latest add hero-minimalism pricing-cards login-card
 ```
 
 📖 **Подробная инструкция**: См. [INSTALL.md](./INSTALL.md)

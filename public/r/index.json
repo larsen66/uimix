@@ -1,0 +1,204 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "uimix",
+  "homepage": "https://uimix.dev",
+  "items": [
+    {
+      "name": "hero-minimalism",
+      "type": "registry:ui",
+      "title": "Hero Minimalism",
+      "description": "A minimalist hero section with clean design",
+      "registryDependencies": ["button"],
+      "dependencies": ["framer-motion", "lucide-react"],
+      "files": [
+        {
+          "path": "components/catalog/hero/hero-minimalism.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "hero-monochrome-launch",
+      "type": "registry:ui",
+      "title": "Hero Monochrome Launch",
+      "description": "A monochrome hero section for product launches",
+      "registryDependencies": ["button"],
+      "dependencies": ["framer-motion", "lucide-react"],
+      "files": [
+        {
+          "path": "components/catalog/hero/hero-monochrome-launch.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "hero-orbit-deck",
+      "type": "registry:ui",
+      "title": "Hero Orbit Deck",
+      "description": "Hero section with orbital animations",
+      "registryDependencies": ["button"],
+      "dependencies": ["framer-motion", "lucide-react"],
+      "files": [
+        {
+          "path": "components/catalog/hero/hero-orbit-deck.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "cta-horizontal-marquee",
+      "type": "registry:ui",
+      "title": "CTA Horizontal Marquee",
+      "description": "Call-to-action with horizontal scrolling marquee",
+      "registryDependencies": ["button"],
+      "dependencies": ["framer-motion", "lucide-react"],
+      "files": [
+        {
+          "path": "components/catalog/cta/cta-with-horizontal-marquee.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "cta-vertical-marquee",
+      "type": "registry:ui",
+      "title": "CTA Vertical Marquee",
+      "description": "Call-to-action with vertical scrolling marquee",
+      "registryDependencies": ["button"],
+      "dependencies": ["framer-motion", "lucide-react"],
+      "files": [
+        {
+          "path": "components/catalog/cta/cta-with-vertical-marquee.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "bento-features",
+      "type": "registry:ui",
+      "title": "Bento Features",
+      "description": "Feature showcase in bento grid layout",
+      "registryDependencies": ["card"],
+      "dependencies": ["framer-motion", "lucide-react"],
+      "files": [
+        {
+          "path": "components/catalog/features/bento-features.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "faq-monochrome",
+      "type": "registry:ui",
+      "title": "FAQ Monochrome",
+      "description": "Minimalist FAQ section in monochrome style",
+      "registryDependencies": [],
+      "dependencies": ["framer-motion", "lucide-react"],
+      "files": [
+        {
+          "path": "components/catalog/faq/faq-monochrome.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "login-card",
+      "type": "registry:ui",
+      "title": "Login Card",
+      "description": "Beautiful login card component",
+      "registryDependencies": ["card", "button", "input", "label", "checkbox"],
+      "dependencies": ["lucide-react"],
+      "files": [
+        {
+          "path": "components/catalog/login-signup/login-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pricing-cards",
+      "type": "registry:ui",
+      "title": "Pricing Cards",
+      "description": "Pricing cards layout for subscription plans",
+      "registryDependencies": ["card", "button"],
+      "dependencies": ["framer-motion", "lucide-react"],
+      "files": [
+        {
+          "path": "components/catalog/pricing/pricing-cards.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Button component with variants",
+      "registryDependencies": [],
+      "dependencies": ["@radix-ui/react-slot", "class-variance-authority"],
+      "files": [
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Card component for content containers",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "components/ui/card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Input field component",
+      "registryDependencies": [],
+      "dependencies": [],
+      "files": [
+        {
+          "path": "components/ui/input.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Label component for form fields",
+      "registryDependencies": [],
+      "dependencies": ["@radix-ui/react-label"],
+      "files": [
+        {
+          "path": "components/ui/label.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Checkbox component",
+      "registryDependencies": [],
+      "dependencies": ["@radix-ui/react-checkbox", "lucide-react"],
+      "files": [
+        {
+          "path": "components/ui/checkbox.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
+

@@ -27,7 +27,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "add": "node scripts/add-component.js"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.3.3",
