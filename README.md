@@ -1,393 +1,195 @@
-# uimix.dev
-
-<img src="./public/logo.png" alt="uimix Logo" width="120" />
-
-[![GitHub Stars](https://img.shields.io/github/stars/larsen66/uimix?style=social)](https://github.com/larsen66/uimix/stargazers)
-[![GitHub Issues](https://img.shields.io/github/issues/larsen66/uimix)](https://github.com/larsen66/uimix/issues)
-[![GitHub License](https://img.shields.io/github/license/larsen66/uimix)](https://github.com/larsen66/uimix/blob/main/LICENSE)
+ls
+# UIMix - Modern React Component Library
 
 A modern, beautiful, and highly customizable React component library built with Next.js 15, React 19, and Tailwind CSS 4.
 
-🔗 **[View on GitHub](https://github.com/larsen66/uimix)** | **[Report Bug](https://github.com/larsen66/uimix/issues)** | **[Request Feature](https://github.com/larsen66/uimix/issues)**
+🌐 **Website**: [uimix.dev](https://uimix.dev)
 
-## ✨ Features
+## Quick Start
 
-- 🎨 **20+ Premium Components** - Hero sections, CTAs, login forms, pricing tables, and more
-- 🌓 **Dark/Light Mode** - Full theme support with smooth transitions
-- 🎬 **Animated Previews** - Interactive video previews on hover
-- 📱 **Fully Responsive** - Works seamlessly on all devices
-- 🎯 **TypeScript** - Full type safety and IntelliSense support
-- ⚡ **Performance First** - Built with Next.js 15 and React 19
-- 🎭 **Framer Motion** - Smooth, professional animations
-- 🔍 **Search & Filter** - Easy component discovery
-- 💎 **Custom Font** - Unique Alpha Lyrae typography
-- 🎪 **Copy-Paste Ready** - Get started in seconds
+### Installation via shadcn CLI
 
-## 📦 Installation
+Install any component from the **uimix** registry using shadcn CLI:
 
 ```bash
-# Clone the repository
-git clone https://github.com/larsen66/uimix.git
-cd uimix
+# ⚠️ ВАЖНО: Запускайте команду из директории вашего проекта!
+cd your-project
 
-# Install dependencies
-npm install
-# or
-pnpm install
-# or
-yarn install
+# Install a specific component (укажите --registry явно)
+npx shadcn@latest add hero-minimalism --registry https://uimix.dev/api/registry
+
+# Install multiple components at once
+npx shadcn@latest add hero-minimalism pricing-cards --registry https://uimix.dev/api/registry
 ```
 
-## 🚀 Quick Start
+📖 **Подробная инструкция**: См. [INSTALL.md](./INSTALL.md)
+
+### Configuration (Опционально)
+
+Чтобы не указывать `--registry` каждый раз, создайте файл `.shadcnrc` в корне проекта:
+
+```json
+{
+  "registry": "https://uimix.dev/api/registry"
+}
+```
+
+После этого можно использовать просто:
+```bash
+npx shadcn@latest add hero-minimalism
+```
+
+## Available Components
+
+### 🎯 Hero Components
+- `hero-minimalism` - Minimalist hero section
+- `hero-monochrome-launch` - Monochrome launch hero
+- `hero-orbit-deck` - Orbit deck hero with animations
+
+### 📣 CTA Components
+- `cta-horizontal-marquee` - CTA with horizontal marquee
+- `cta-vertical-marquee` - CTA with vertical marquee
+- `cta-vertical-marquee-left` - CTA with left-aligned vertical marquee
+- `hero-marquee-large` - Large hero with marquee
+- `hero-marquee-mixed-font` - Hero with mixed font marquee
+- `hero-marquee-reverse` - Hero with reverse marquee
+- `hero-marquee` - Standard hero with marquee
+- `hero-video` - Hero with video background
+
+### ✨ Features Components
+- `bento-features` - Bento grid features layout
+- `bento-monochrome-1` - Monochrome bento grid variant 1
+- `bento-monochrome` - Monochrome bento grid
+
+### ❓ FAQ Components
+- `faq-monochrome` - Monochrome FAQ section
+- `faq-spiral` - FAQ with spiral design
+
+### 🔐 Login/Signup Components
+- `login-card` - Login card component
+
+### 💰 Pricing Components
+- `pricing-cards` - Pricing cards layout
+
+### ⚙️ Processing Components
+- `processing-demo` - Processing card demo
+
+### 🎨 Background Components
+- `background-gradient-grid` - Gradient grid background
+- `background-noise` - Noise texture background
+- `blueprint-gradient-mesh` - Blueprint gradient mesh
+- `squares-background` - Squares pattern background
+
+### 🧱 UI Components
+- `button` - Button component
+- `card` - Card component
+- `input` - Input field
+- `label` - Label component
+- `checkbox` - Checkbox component
+- `switch` - Switch component
+- `separator` - Separator component
+- `noise` - Noise effect component
+- `processing-card` - Processing card component
+- `fallback-card` - Fallback card component
+- `hyper-text` - Hyper text effect component
+
+## Features
+
+✅ **Modern Stack**: Built with Next.js 15, React 19, and Tailwind CSS 4  
+✅ **Type-Safe**: Full TypeScript support  
+✅ **Animations**: Beautiful animations with Framer Motion  
+✅ **Accessible**: Built on Radix UI primitives  
+✅ **Customizable**: Easy to customize with Tailwind CSS  
+✅ **Copy-Paste**: Install via shadcn CLI or copy-paste directly  
+✅ **Dark Mode**: Full dark mode support  
+
+## Usage Example
 
 ```bash
+# 1. Initialize shadcn in your project (if not already done)
+npx shadcn@latest init
+
+# 2. Install a component from uimix registry
+npx shadcn@latest add hero-minimalism
+
+# 3. Use in your code
+import { HeroMinimalism } from "@/components/catalog/hero/hero-minimalism"
+
+export default function Home() {
+  return <HeroMinimalism />
+}
+```
+
+## Development
+
+### Prerequisites
+
+- Node.js 18+ 
+- pnpm, npm, or yarn
+
+### Setup
+
+```bash
+# Install dependencies
+npm install
+
 # Run development server
 npm run dev
 
 # Build for production
 npm run build
-
-# Start production server
-npm start
-
-# Lint code
-npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the component catalog.
+### Project Structure
 
-## 📚 Component Categories
-
-### 🦸 Hero Sections
-Beautiful, attention-grabbing hero sections to captivate your visitors.
-
-```tsx
-import { HeroMinimalism } from '@/components/catalog/hero';
-
-<HeroMinimalism />
+```
+mixui/
+├── app/                    # Next.js app directory
+├── components/
+│   ├── catalog/           # Main component catalog
+│   │   ├── hero/         # Hero components
+│   │   ├── cta/          # CTA components
+│   │   ├── features/     # Feature components
+│   │   ├── faq/          # FAQ components
+│   │   ├── pricing/      # Pricing components
+│   │   └── backgrounds/  # Background components
+│   └── ui/               # Base UI components
+├── registry/             # Component registry configuration
+└── public/registry/      # Public registry JSON
 ```
 
-### 📣 Call to Action
-Conversion-focused CTA components with engaging animations and marquee effects.
+## Registry API
 
-- CTA with Vertical Marquee
-- CTA with Horizontal Marquee
-- CTA with Video Background
-- CTA with Large Marquee
+The uimix registry exposes the following endpoints:
 
-```tsx
-import { CtaVerticalMarquee } from '@/components/catalog/cta';
+- **GET** `/api/registry` - Get all components
+- **GET** `/api/registry/[name]` - Get specific component with source code
 
-<CtaVerticalMarquee />
-```
+## Contributing
 
-### 🔐 Login & Signup
-Beautiful authentication forms with modern design and smooth interactions.
+See [REGISTRY.md](./REGISTRY.md) for detailed information about adding new components to the registry.
 
-```tsx
-import { LoginCard } from '@/components/catalog/login-signup';
+## Tech Stack
 
-<LoginCard />
-```
-
-### 💰 Pricing
-Modern pricing sections with card layouts and hover effects.
-
-```tsx
-import { PricingCards } from '@/components/catalog/pricing';
-
-<PricingCards />
-```
-
-### ⚙️ Processing & Loaders
-Processing states, loaders, and progress indicators.
-
-```tsx
-import { ProcessingCard } from '@/components/catalog/processing';
-
-<ProcessingCard />
-```
-
-### 🎴 Cards
-Beautiful card components with stunning effects.
-
-```tsx
-import { FallbackCard } from '@/components/catalog/cards';
-
-<FallbackCard />
-```
-
-### 🌌 Backgrounds
-Stunning background effects with gradients, noise, and meshes.
-
-- Background with Noise
-- Squares Grid Background
-- Gradient Grid Background
-- Blueprint Gradient Mesh
-
-```tsx
-import { BackgroundNoise } from '@/components/catalog/backgrounds';
-
-<BackgroundNoise />
-```
-
-### ⭐ Features
-Showcase your product features with bento-style layouts.
-
-```tsx
-import { BentoFeatures } from '@/components/catalog/features';
-
-<BentoFeatures />
-```
-
-### ❓ FAQ
-Beautiful FAQ sections with interactive animations.
-
-```tsx
-import { FaqWithSpiral } from '@/components/catalog/faq';
-
-<FaqWithSpiral />
-```
-
-## 🎯 Usage
-
-### Import Components
-
-All components are exported from the catalog:
-
-```tsx
-import { 
-  HeroMinimalism,
-  CtaVerticalMarquee,
-  LoginCard,
-  PricingCards,
-  BackgroundNoise
-} from '@/components/catalog';
-```
-
-### Use in Your App
-
-```tsx
-import { HeroMinimalism } from '@/components/catalog/hero';
-
-export default function Home() {
-  return (
-    <main>
-      <HeroMinimalism />
-    </main>
-  );
-}
-```
-
-### Customize Components
-
-All components are built with Tailwind CSS and can be easily customized:
-
-```tsx
-<HeroMinimalism 
-  className="bg-gradient-to-br from-purple-900 to-blue-900"
-  title="Your Custom Title"
-  description="Your custom description"
-/>
-```
-
-## 🛠️ Tech Stack
-
-- **Framework**: [Next.js 15](https://nextjs.org/) with App Router
-- **React**: [React 19](https://react.dev/)
+- **Framework**: [Next.js 15](https://nextjs.org/)
+- **UI Library**: [React 19](https://react.dev/)
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
-- **Animation**: [Framer Motion](https://www.framer.com/motion/)
-- **UI Components**: [Radix UI](https://www.radix-ui.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **UI Primitives**: [Radix UI](https://www.radix-ui.com/)
 - **Icons**: [Lucide React](https://lucide.dev/)
-- **Typography**: Custom Alpha Lyrae font
-- **Code Highlighting**: [React Syntax Highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter)
+- **Type Safety**: [TypeScript](https://www.typescriptlang.org/)
 
-## 📁 Project Structure
+## License
 
-```
-uimix/
-├── app/                          # Next.js app directory
-│   ├── component/[id]/          # Dynamic component pages
-│   ├── component-preview/[id]/  # Component preview pages
-│   ├── api/                     # API routes
-│   ├── globals.css              # Global styles
-│   └── layout.tsx               # Root layout
-├── components/                   # React components
-│   ├── catalog/                 # Component catalog
-│   │   ├── backgrounds/
-│   │   ├── cards/
-│   │   ├── cta/
-│   │   ├── faq/
-│   │   ├── features/
-│   │   ├── hero/
-│   │   ├── login-signup/
-│   │   ├── pricing/
-│   │   └── processing/
-│   ├── ui/                      # Base UI components
-│   ├── component-catalog.tsx    # Main catalog component
-│   └── component-preview.tsx    # Preview component
-├── lib/                         # Utilities
-├── public/                      # Static assets
-│   ├── fonts/                   # Custom fonts
-│   └── components/              # Component assets
-├── alpha-lyrae/                 # Font source files
-└── package.json
-```
+MIT © UIMix Team
 
-## 🎨 Customization
+## Links
 
-### Theme
-
-The library supports dark and light modes out of the box. Toggle between themes:
-
-```tsx
-import { ThemeProvider } from '@/components/theme-provider';
-
-<ThemeProvider defaultTheme="dark">
-  <YourApp />
-</ThemeProvider>
-```
-
-### Tailwind Configuration
-
-Customize the theme in `tailwind.config.ts`:
-
-```typescript
-export default {
-  theme: {
-    extend: {
-      colors: {
-        // Your custom colors
-      },
-      fontFamily: {
-        logo: ['AlphaLyrae', 'sans-serif'],
-      },
-    },
-  },
-};
-```
-
-### Component Utilities
-
-Use the `cn()` utility for conditional classes:
-
-```tsx
-import { cn } from '@/lib/utils';
-
-<div className={cn(
-  "base-class",
-  isActive && "active-class",
-  isDarkMode ? "dark-class" : "light-class"
-)} />
-```
-
-## 🔧 Development
-
-### Adding New Components
-
-1. Create your component in the appropriate category folder:
-
-```tsx
-// components/catalog/hero/hero-gradient.tsx
-export function HeroGradient() {
-  return (
-    <section className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-600">
-      {/* Your component */}
-    </section>
-  );
-}
-```
-
-2. Export it from the index file:
-
-```tsx
-// components/catalog/hero/index.ts
-export * from './hero-gradient';
-```
-
-3. Add it to the catalog:
-
-```tsx
-// components/component-catalog.tsx
-const components = [
-  {
-    id: "hero-gradient",
-    title: "Hero Gradient",
-    preview: "bg-gradient-to-br from-purple-600 to-blue-600",
-    previewImage: "/path/to/preview.png",
-    previewVideo: "/path/to/video.mp4",
-    category: "hero",
-  },
-  // ... other components
-];
-```
-
-### Creating Component Previews
-
-1. Take a screenshot of your component
-2. (Optional) Record a video preview
-3. Place files in `/public/components/`
-4. Update the component catalog with paths
-
-## 📖 API Reference
-
-### Component Catalog
-
-```tsx
-interface Component {
-  id: string;              // Unique identifier
-  title: string;           // Display name
-  preview: string;         // CSS classes for preview background
-  previewImage?: string;   // Path to preview image
-  previewVideo?: string;   // Path to preview video
-  category: string;        // Component category
-  isPro?: boolean;         // Pro/premium flag
-}
-```
-
-### Component Page
-
-Each component has a dedicated page at `/component/[id]` with:
-
-- Interactive preview
-- Full-screen mode
-- Source code viewer
-- Copy-to-clipboard functionality
-- Installation instructions
-- Dependencies list
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- Built with [Next.js](https://nextjs.org/)
-- Styled with [Tailwind CSS](https://tailwindcss.com/)
-- Animated with [Framer Motion](https://www.framer.com/motion/)
-- Icons from [Lucide](https://lucide.dev/)
-- UI primitives from [Radix UI](https://www.radix-ui.com/)
-
-## 📞 Support
-
-For support, please open an issue in the [GitHub repository](https://github.com/larsen66/uimix/issues).
-
-## 🔗 Links
-
-- **GitHub Repository**: [https://github.com/larsen66/uimix](https://github.com/larsen66/uimix)
-- **Issues & Bug Reports**: [https://github.com/larsen66/uimix/issues](https://github.com/larsen66/uimix/issues)
-- **Pull Requests**: [https://github.com/larsen66/uimix/pulls](https://github.com/larsen66/uimix/pulls)
+- 🌐 Website: [uimix.dev](https://uimix.dev)
+- 📦 Registry: `https://uimix.dev/api/registry`
+- 🐛 Issues: [GitHub Issues](https://github.com/larsen66/uimix/issues)
+- 📖 Documentation: [REGISTRY.md](./REGISTRY.md)
 
 ---
 
-Made with ❤️ by [uimix team](https://github.com/larsen66/uimix)
+Built with ❤️ by the UIMix team

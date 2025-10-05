@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 
 const STYLE_ID = "hero1-animations";
 
@@ -370,10 +371,12 @@ function HeroMonochromeLaunch() {
             <div className={`absolute inset-0 -z-10 rounded-3xl ${palette.border} ${palette.highlight}`} />
             <figure className="relative flex w-full flex-col">
               <div className="relative aspect-[4/5] w-full overflow-hidden">
-                <img
+                <Image
                   src={showcaseImage.src}
                   alt={showcaseImage.alt}
-                  className="h-full w-full object-cover grayscale transition duration-700 ease-out hover:scale-[1.02]"
+                  fill
+                  className="object-cover grayscale transition duration-700 ease-out hover:scale-[1.02]"
+                  unoptimized
                 />
                 <span
                   className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/30 mix-blend-soft-light dark:from-white/10"

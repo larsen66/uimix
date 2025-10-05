@@ -5,7 +5,7 @@
   "description": "A modern, beautiful, and highly customizable React component library built with Next.js 15, React 19, and Tailwind CSS 4",
   "author": "uimix team",
   "license": "MIT",
-  "homepage": "https://github.com/larsen66/uimix#readme",
+  "homepage": "https://uimix.dev",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/larsen66/uimix.git"

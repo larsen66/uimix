@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 
 const STYLE_ID = "hero3-animations";
 
@@ -447,11 +448,12 @@ function HeroOrbitDeck() {
 
           <figure className="order-1 overflow-hidden rounded-[32px] border transition xl:order-2" style={{ position: "relative" }}>
             <div className="relative w-full pb-[120%] sm:pb-[90%] lg:pb-[72%]">
-              <img
+              <Image
                 src={showcaseImage.src}
                 alt={showcaseImage.alt}
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover grayscale transition duration-700 ease-out hover:scale-[1.03]"
+                fill
+                className="object-cover grayscale transition duration-700 ease-out hover:scale-[1.03]"
+                unoptimized
               />
               <span className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/50 mix-blend-soft-light dark:from-white/10" />
               <div className="pointer-events-none absolute inset-0 border border-white/10 mix-blend-overlay dark:border-white/20" />
