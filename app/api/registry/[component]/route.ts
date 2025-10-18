@@ -4,17 +4,17 @@ import { join } from 'path';
 
 export async function GET(
   request: Request,
-  { params }: { params: { component: string } }
+  context: { params: Promise<{ component: string }> }
 ) {
   try {
-    const componentName = params.component;
-    const registryPath = join(process.cwd(), 'registry', 'components', `${componentName}.json`);
+    const { component: componentName } = await context.params;
+    const registryPath = join(process.cwd(), 'public', 'r', `${componentName}.json`);
     
     const componentData = readFileSync(registryPath, 'utf-8');
     const component = JSON.parse(componentData);
     
     return NextResponse.json(component);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: 'Component not found' },
       { status: 404 }
