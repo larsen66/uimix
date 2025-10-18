@@ -1,234 +1,50 @@
 ---
 title: Installation
-description: How to install and use uimix components in your project
+description: Install uimix components in your project
 ---
 
 import { Callout } from 'fumadocs-ui/components/callout';
 
-# Installation
-
-uimix components can be installed in multiple ways. Choose the method that works best for your workflow.
-
-## Quick Start with shadcn CLI
-
-The fastest way to get started is using the shadcn CLI:
-
-```bash
-npx shadcn@latest add https://uimix.dev/api/registry/cta-vertical-marquee
-```
-
-This automatically:
-- ✅ Installs dependencies
-- ✅ Adds component files
-- ✅ Updates Tailwind config
-- ✅ Sets up utilities
-
-<Callout type="info">
-  The shadcn CLI is the recommended installation method for the best experience.
-</Callout>
-
 ## Prerequisites
 
-Before installing components, ensure you have:
+- Next.js or React project with Tailwind CSS
+- Node.js 18 or higher
 
-- Node.js 18+ installed
-- A Next.js or React project
-- Tailwind CSS configured
+## Setup
 
-## Manual Setup
+### 1. Configure Registry
 
-If you prefer manual installation or don't use the CLI:
-
-### 1. Install Dependencies
-
-```bash
-npm install class-variance-authority clsx tailwind-merge
-```
-
-These packages are used for:
-- `class-variance-authority` - Type-safe variant handling
-- `clsx` - Conditional classnames
-- `tailwind-merge` - Merging Tailwind classes intelligently
-
-### 2. Create Utilities File
-
-Create `lib/utils.ts` in your project:
-
-```typescript
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
-```
-
-This utility function combines classnames and handles Tailwind class conflicts.
-
-### 3. Configure Tailwind CSS
-
-Update your `tailwind.config.js` (or `.ts`) to include the necessary animations:
-
-```javascript
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
-  theme: {
-    extend: {
-      keyframes: {
-        "marquee-vertical": {
-          "0%": { transform: "translateY(0)" },
-          "100%": { transform: "translateY(-100%)" }
-        },
-        "fade-in-up": {
-          "0%": { 
-            opacity: "0",
-            transform: "translateY(20px)"
-          },
-          "100%": { 
-            opacity: "1",
-            transform: "translateY(0)"
-          }
-        }
-      },
-      animation: {
-        "marquee-vertical": "marquee-vertical var(--duration, 30s) linear infinite",
-        "fade-in-up": "fade-in-up 0.6s ease-out forwards"
-      }
-    }
-  },
-  plugins: [],
-}
-```
-
-### 4. Add CSS Variables
-
-Add theme variables to your `globals.css` or main CSS file:
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  :root {
-    --background: 0 0% 96%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 94.7%;
-    --card-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 93.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 82%;
-    --accent-foreground: 0 0% 9%;
-    --border: 0 0% 80%;
-    --ring: 0 0% 63.9%;
-  }
-
-  .dark {
-    --background: 0 0% 7.04%;
-    --foreground: 0 0% 92%;
-    --card: 0 0% 9.8%;
-    --card-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 12.9%;
-    --secondary-foreground: 0 0% 92%;
-    --muted: 0 0% 12.9%;
-    --muted-foreground: 0 0% 70%;
-    --accent: 0 0% 40.9%;
-    --accent-foreground: 0 0% 90%;
-    --border: 0 0% 40%;
-    --ring: 0 0% 54.9%;
-  }
-}
-```
-
-### 5. Copy Component Code
-
-Copy the component code from the [registry](/docs/registry) or component pages directly into your project.
-
-## TypeScript Configuration
-
-Ensure your `tsconfig.json` includes path aliases:
+Add uimix registry to your `components.json`:
 
 ```json
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./*"]
-    }
+  "registries": {
+    "@uimix": "https://uimix.dev/r/{name}.json"
   }
 }
 ```
 
-This allows imports like `@/lib/utils` and `@/components/...`.
+<Callout type="info">
+If you don't have a `components.json` file, run `npx shadcn@latest init` first.
+</Callout>
 
-## Usage
+### 2. Install Components
 
-After installation, import and use components:
+```bash
+npx shadcn@latest add @uimix/cta-vertical-marquee
+```
+
+The CLI automatically installs dependencies and adds component files to your project.
+
+### 3. Use Components
 
 ```tsx
 import CtaVerticalMarquee from '@/components/cta/cta-vertical-marquee'
 
 export default function Page() {
-  return (
-    <main>
-      <CtaVerticalMarquee />
-    </main>
-  )
+  return <CtaVerticalMarquee />
 }
 ```
 
-## Customization
-
-Components are designed to be customized:
-
-1. **Modify Props** - Most components accept props for configuration
-2. **Edit Source** - After installation, edit component source directly
-3. **Override Styles** - Use Tailwind classes or CSS to override styles
-4. **Extend Functionality** - Add new features as needed
-
-<Callout type="warn">
-  Once installed, components become part of your codebase. You own and maintain them.
-</Callout>
-
-## Next Steps
-
-- Browse [Components](/docs/components) to see what's available
-- Check the [Registry](/docs/registry) for CLI installation commands
-- Read component-specific docs for usage examples
-
-## Troubleshooting
-
-### Import errors
-
-If you see import errors, verify:
-- Path aliases are configured in `tsconfig.json`
-- The `utils.ts` file exists at `lib/utils.ts`
-- Dependencies are installed
-
-### Styling issues
-
-If components don't look right:
-- Check CSS variables are defined
-- Verify Tailwind config includes animations
-- Ensure Tailwind processes component files
-
-### TypeScript errors
-
-For TypeScript issues:
-- Install type definitions: `npm install -D @types/react @types/node`
-- Check `tsconfig.json` includes component directories
-- Restart your TypeScript server
-
-Need more help? Check component-specific documentation or open an issue on GitHub.
+That's it. The component is now part of your codebase and ready to customize.
 

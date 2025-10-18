@@ -20,6 +20,42 @@
           "type": "registry:component"
         }
       ]
+    },
+    {
+      "name": "cta-with-vertical-marquee-left",
+      "type": "registry:block",
+      "title": "CTA with Vertical Marquee (Left Layout)",
+      "description": "CTA section with the vertical marquee on the left and content on the right",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/cta-with-vertical-marquee-left/cta-with-vertical-marquee-left.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "cta-with-horizontal-marquee",
+      "type": "registry:block",
+      "title": "CTA with Horizontal Marquee",
+      "description": "CTA section with a horizontal marquee below the content",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/cta-with-horizontal-marquee/cta-with-horizontal-marquee.tsx",
+          "type": "registry:component"
+        }
+      ]
     }
   ]
 }

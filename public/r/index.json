@@ -4,6 +4,8 @@
   "type": "registry:index",
   "url": "https://uimix.dev/r",
   "items": [
-    "cta-vertical-marquee"
+    "cta-vertical-marquee",
+    "cta-with-vertical-marquee-left",
+    "cta-with-horizontal-marquee"
   ]
 }

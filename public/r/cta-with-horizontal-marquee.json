@@ -1,0 +1,44 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cta-with-horizontal-marquee",
+  "type": "registry:block",
+  "title": "CTA with Horizontal Marquee",
+  "description": "CTA section with a horizontal marquee below the content",
+  "dependencies": [
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/default/cta-with-horizontal-marquee/cta-with-horizontal-marquee.tsx",
+      "content": """use client";\n\nimport { cn } from \"@/lib/utils\";\nimport { ReactNode, useEffect, useRef } from \"react\";\n\ninterface HorizontalMarqueeProps {\n  children: ReactNode;\n  pauseOnHover?: boolean;\n  reverse?: boolean;\n  className?: string;\n  speed?: number;\n}\n\nfunction HorizontalMarquee({\n  children,\n  pauseOnHover = false,\n  reverse = false,\n  className,\n  speed = 40,\n}: HorizontalMarqueeProps) {\n  return (\n    <div\n      className={cn(\n        \"group flex overflow-hidden\",\n        className\n      )}\n      style={\n        {\n          \"--duration\": `${speed}s`,\n        } as React.CSSProperties\n      }\n    >\n      <div\n        className={cn(\n          \"flex shrink-0 animate-marquee\",\n          reverse && \"[animation-direction:reverse]\",\n          pauseOnHover && \"group-hover:[animation-play-state:paused]\"\n        )}\n      >\n        {children}\n      </div>\n      <div\n        className={cn(\n          \"flex shrink-0 animate-marquee\",\n          reverse && \"[animation-direction:reverse]\",\n          pauseOnHover && \"group-hover:[animation-play-state:paused]\"\n        )}\n        aria-hidden=\"true\"\n      >\n        {children}\n      </div>\n    </div>\n  );\n}\n\nconst marqueeItems = [\n  \"Content Agencies\",\n  \"Founders & Execs\",\n  \"Social Media Managers\",\n  \"Content Marketers\",\n  \"Growth Teams\",\n];\n\nexport default function CTAWithHorizontalMarquee() {\n  const marqueeRef = useRef<HTMLDivElement>(null);\n\n  useEffect(() => {\n    const marqueeContainer = marqueeRef.current;\n    if (!marqueeContainer) return;\n\n    const updateOpacity = () => {\n      const items = marqueeContainer.querySelectorAll('.marquee-item-horizontal');\n      const containerRect = marqueeContainer.getBoundingClientRect();\n      const centerX = containerRect.left + containerRect.width / 2;\n\n      items.forEach((item) => {\n        const itemRect = item.getBoundingClientRect();\n        const itemCenterX = itemRect.left + itemRect.width / 2;\n        const distance = Math.abs(centerX - itemCenterX);\n        const maxDistance = containerRect.width / 2;\n        const normalizedDistance = Math.min(distance / maxDistance, 1);\n        const opacity = 1 - normalizedDistance * 0.75;\n        (item as HTMLElement).style.opacity = opacity.toString();\n      });\n    };\n\n    const animationFrame = () => {\n      updateOpacity();\n      requestAnimationFrame(animationFrame);\n    };\n\n    const frame = requestAnimationFrame(animationFrame);\n\n    return () => cancelAnimationFrame(frame);\n  }, []);\n\n  return (\n    <div className=\"min-h-screen bg-background text-foreground flex items-center justify-center px-6 py-12 overflow-hidden\">\n      <div className=\"w-full animate-fade-in-up\">\n        <div className=\"flex flex-col gap-12 lg:gap-16\">\n          {/* Top Content */}\n          <div className=\"space-y-8 max-w-3xl mx-auto text-center px-6\">\n            <h1 className=\"text-5xl md:text-6xl lg:text-7xl font-medium leading-tight tracking-tight text-foreground animate-fade-in-up [animation-delay:200ms]\">\n              Get Started in Minutes\n            </h1>\n            <p className=\"text-lg md:text-xl text-muted-foreground leading-relaxed animate-fade-in-up [animation-delay:400ms]\">\n              Start getting more distribution and ROI out of your content. Try\n              Assembly for free for 14 days.\n            </p>\n            <div className=\"flex flex-wrap gap-4 justify-center animate-fade-in-up [animation-delay:600ms]\">\n              <button className=\"group relative px-6 py-3 bg-foreground text-background rounded-md font-medium overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg\">\n                <span className=\"relative z-10\">START FREE TRIAL</span>\n                <div className=\"absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700\"></div>\n              </button>\n              <button className=\"group relative px-6 py-3 bg-secondary text-secondary-foreground rounded-md font-medium overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg border border-border\">\n                <span className=\"relative z-10\">BOOK A 15 MINUTE DEMO</span>\n                <div className=\"absolute inset-0 bg-gradient-to-r from-transparent via-foreground/10 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700\"></div>\n              </button>\n            </div>\n          </div>\n\n          {/* Bottom Marquee */}\n          <div ref={marqueeRef} className=\"relative w-full animate-fade-in-up [animation-delay:800ms]\">\n            <div className=\"relative\">\n              <HorizontalMarquee speed={30}>\n                {marqueeItems.map((item, idx) => (\n                  <div\n                    key={idx}\n                    className=\"text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light tracking-tight px-12 marquee-item-horizontal whitespace-nowrap\"\n                  >\n                    {item}\n                  </div>\n                ))}\n              </HorizontalMarquee>\n              \n              {/* Left vignette */}\n              <div className=\"pointer-events-none absolute top-0 left-0 bottom-0 w-64 bg-gradient-to-r from-background via-background/50 to-transparent z-10\"></div>\n              \n              {/* Right vignette */}\n              <div className=\"pointer-events-none absolute top-0 right-0 bottom-0 w-64 bg-gradient-to-l from-background via-background/50 to-transparent z-10\"></div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  );\n}\n",
+      "type": "registry:component"
+    }
+  ],
+  "tailwind": {
+    "config": {
+      "theme": {
+        "extend": {
+          "keyframes": {
+            "marquee": {
+              "0%": { "transform": "translateX(0)" },
+              "100%": { "transform": "translateX(-100%)" }
+            },
+            "fade-in-up": {
+              "0%": { "opacity": 0, "transform": "translateY(20px)" },
+              "100%": { "opacity": 1, "transform": "translateY(0)" }
+            }
+          },
+          "animation": {
+            "marquee": "marquee var(--duration, 40s) linear infinite",
+            "fade-in-up": "fade-in-up 0.6s ease-out forwards"
+          }
+        }
+      }
+    }
+  }
+}
+
+

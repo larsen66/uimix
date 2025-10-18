@@ -18,7 +18,7 @@
     "hooks": "@/hooks"
   },
   "registries": {
-    "@uimix": "https://uimix.dev/r"
+    "@uimix": "https://uimix.dev/r/{name}.json"
   }
 }
 

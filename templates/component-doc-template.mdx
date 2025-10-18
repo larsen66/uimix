@@ -1,0 +1,55 @@
+---
+title: [Component Name]
+description: [Brief description of the component]
+---
+
+import { ComponentPreview } from '@/components/ComponentPreview';
+import { InstallationTabs } from '@/components/InstallationTabs';
+import { PropsTable } from '@/components/PropsTable';
+import { FeaturesList } from '@/components/FeaturesList';
+import [ComponentName] from '@/components/[path]/[ComponentName]';
+
+<ComponentPreview component={[ComponentName]} />
+
+## Installation
+
+<InstallationTabs 
+  componentName="[component-name]"
+  componentPath="components/[path]/[ComponentName].tsx"
+  tailwindConfig={`
+    // Add Tailwind config if needed
+    module.exports = {
+      theme: {
+        extend: {
+          // Custom keyframes, animations, etc.
+        }
+      }
+    }
+  `}
+/>
+
+## Props
+
+<PropsTable props={[
+  { name: 'prop1', type: 'string', default: 'defaultValue', description: 'Description of prop1' },
+  { name: 'prop2', type: 'boolean', default: 'false', description: 'Description of prop2' },
+  // Add more props as needed
+]} />
+
+## Features
+
+<FeaturesList features={[
+  { name: 'Feature 1', description: 'Description of feature 1' },
+  { name: 'Feature 2', description: 'Description of feature 2' },
+  // Add more features as needed
+]} />
+
+## Usage
+
+```tsx
+import [ComponentName] from '@/components/[path]/[component-name]'
+
+export default function Page() {
+  return <[ComponentName] />
+}
+```

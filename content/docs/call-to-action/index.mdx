@@ -3,8 +3,37 @@ title: Call to Action
 description: Call to Action components for engaging users and driving conversions
 ---
 
-## Vertical Marquee CTA
+Powerful CTA components designed to capture attention and drive user engagement.
 
-import CtaVerticalMarquee from '@/components/cta/CtaVerticalMarquee';
+## Available Components
 
-<CtaVerticalMarquee />
+import CtaVerticalMarquee from '@/registry/default/cta-vertical-marquee/cta-vertical-marquee';
+import CTAWithVerticalMarqueeLeft from '@/registry/default/cta-with-vertical-marquee-left/cta-with-vertical-marquee-left';
+import CTAWithHorizontalMarquee from '@/registry/default/cta-with-horizontal-marquee/cta-with-horizontal-marquee';
+import { ComponentPreview } from '@/components/ComponentPreview';
+import Link from 'next/link';
+
+<div className="flex flex-col gap-8">
+  <Link href="/docs/call-to-action/Marquee#vertical" className="block group">
+    <div className="border border-border rounded-lg p-4 bg-card transition-colors group-hover:bg-card/80">
+      <h3 className="text-base font-medium mb-3">Vertical Marquee CTA</h3>
+      <ComponentPreview component={CtaVerticalMarquee} scale={0.45} />
+    </div>
+  </Link>
+  <Link href="/docs/call-to-action/Marquee#left" className="block group">
+    <div className="border border-border rounded-lg p-4 bg-card transition-colors group-hover:bg-card/80">
+      <h3 className="text-base font-medium mb-3">Vertical Marquee (Left Layout)</h3>
+      <ComponentPreview component={CTAWithVerticalMarqueeLeft} scale={0.45} />
+    </div>
+  </Link>
+  <Link href="/docs/call-to-action/Marquee#horizontal" className="block group">
+    <div className="border border-border rounded-lg p-4 bg-card transition-colors group-hover:bg-card/80">
+      <h3 className="text-base font-medium mb-3">Horizontal Marquee</h3>
+      <ComponentPreview component={CTAWithHorizontalMarquee} scale={0.45} />
+    </div>
+  </Link>
+</div>
+
+### Links
+
+- [Vertical Marquee CTA](/docs/call-to-action/Marquee)
