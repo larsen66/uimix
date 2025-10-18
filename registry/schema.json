@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the component"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["registry:ui", "registry:component", "registry:example", "registry:block"],
+      "description": "Type of the registry item"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the component"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "NPM dependencies required by the component"
+    },
+    "registryDependencies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Other registry components this component depends on"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path where the file should be installed"
+          },
+          "content": {
+            "type": "string",
+            "description": "Content of the file"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the file"
+          },
+          "target": {
+            "type": "string",
+            "description": "Target directory for the file"
+          }
+        },
+        "required": ["path", "content", "type"]
+      },
+      "description": "Files included in the component"
+    },
+    "tailwind": {
+      "type": "object",
+      "properties": {
+        "config": {
+          "type": "object",
+          "description": "Tailwind CSS configuration to be merged"
+        }
+      },
+      "description": "Tailwind CSS configuration"
+    },
+    "cssVars": {
+      "type": "object",
+      "properties": {
+        "light": {
+          "type": "object",
+          "description": "CSS variables for light mode"
+        },
+        "dark": {
+          "type": "object",
+          "description": "CSS variables for dark mode"
+        }
+      },
+      "description": "CSS custom properties (variables)"
+    }
+  },
+  "required": ["name", "type", "files"]
+}
+

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "@uimix",
+  "homepage": "https://uimix.dev",
+  "items": [
+    {
+      "name": "cta-vertical-marquee",
+      "type": "registry:block",
+      "title": "CTA Vertical Marquee",
+      "description": "An engaging call-to-action section with a vertical marquee animation showcasing target audiences",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/cta-vertical-marquee/cta-vertical-marquee.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
+
