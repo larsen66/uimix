@@ -1,10 +1,9 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
-  "name": "uimix",
-  "description": "Beautiful and customizable UI components built with React and Tailwind CSS",
-  "url": "https://uimix.dev",
+  "name": "@uimix",
   "type": "registry:index",
-  "registries": {
-    "default": "https://uimix.dev/r"
-  }
+  "url": "https://uimix.dev/r",
+  "items": [
+    "cta-vertical-marquee"
+  ]
 }

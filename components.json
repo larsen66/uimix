@@ -16,6 +16,9 @@
     "ui": "@/components/ui",
     "lib": "@/lib",
     "hooks": "@/hooks"
+  },
+  "registries": {
+    "@uimix": "https://uimix.dev/r"
   }
 }
 
