@@ -6,16 +6,16 @@ description: Advanced monochrome bento grid with workflow blocks and animated ic
 import { ComponentWithInstallation } from '@/components/ComponentWithInstallation';
 import { PropsTable } from '@/components/PropsTable';
 import { FeaturesList } from '@/components/FeaturesList';
-import BentoMonochrome1 from '@/registry/default/bento-monochrome-1';
+import BentoWorkflowSection from '@/registry/default/bento-monochrome-1';
 
 ## Bento Workflow Section
 
 A sophisticated workflow visualization component featuring monochrome design, custom animated icons, metrics display, and comprehensive theme support. Perfect for showcasing development processes and system capabilities.
 
 <ComponentWithInstallation 
-  component={BentoMonochrome1}
+  component={BentoWorkflowSection}
   scale={0.4}
-  componentName="bento-workflow-section"
+  componentName="bento-monochrome-1"
   componentPath="registry/default/bento-monochrome-1.tsx"
   tailwindConfig={`module.exports = {
   theme: {
@@ -50,184 +50,5 @@ export default function Page() {
   { name: 'Responsive Layout', description: 'Fluid spacing with clamp() for all breakpoints' }
 ]} />
 
-## Icon Variants
 
-Each workflow card features a unique animated icon type:
-
-<PropsTable props={[
-  { name: 'orbit', type: 'icon', default: '-', description: 'Spinning line rotating 360° (Discovery phase)' },
-  { name: 'relay', type: 'icon', default: '-', description: 'Moving dashes along parallel lines (Design phase)' },
-  { name: 'wave', type: 'icon', default: '-', description: 'Horizontal gradient sweep (Build phase)' },
-  { name: 'spark', type: 'icon', default: '-', description: 'Pulsing concentric circles (Validation phase)' },
-  { name: 'loop', type: 'icon', default: '-', description: 'Crossed lines forming intersection (Evolution phase)' }
-]} />
-
-## Customization
-
-### Updating Workflow Content
-
-Modify the `flows` array to customize your workflow stages:
-
-```tsx
-const flows = [
-  {
-    id: "01",
-    variant: "orbit",       // Icon animation type
-    meta: "Discovery",      // Category tag
-    title: "Signal Mapping Sprints",
-    description: "Frame the opportunity space...",
-    statLabel: "Scope commit",
-    statValue: "48 hrs",
-  },
-  // Add more workflow stages...
-];
-```
-
-### Metrics Configuration
-
-Update the metrics displayed in the grid:
-
-```tsx
-const metrics = [
-  { label: "Mean delivery", value: "19 days" },
-  { label: "Release confidence", value: "99.5%" },
-  { label: "Audited rollouts", value: "120+" },
-];
-```
-
-### Animation Timings
-
-All animations are CSS-based and can be customized in the injected stylesheet:
-
-```css
-@keyframes bento3-card-in {
-  0% { opacity: 0; transform: translate3d(0, 28px, 0) scale(0.97); 
-       filter: blur(12px); }
-  60% { filter: blur(0); }
-  100% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); 
-         filter: blur(0); }
-}
-```
-
-## Theme System
-
-### Color Palettes
-
-The component includes two complete color palettes:
-
-**Dark Palette:**
-- Surface: `bg-neutral-950 text-neutral-100`
-- Cards: `bg-neutral-900/55 border-white/10`
-- Accents: White with various opacity levels
-
-**Light Palette:**
-- Surface: `bg-slate-100 text-neutral-900`
-- Cards: `bg-white/80 border-neutral-200`
-- Accents: Neutral tones with controlled contrast
-
-### Theme Detection Priority
-
-1. Document `classList` (dark/light)
-2. `data-theme` attribute
-3. localStorage (`bento-theme`)
-4. System preference (`prefers-color-scheme`)
-5. Cross-tab sync via Storage events
-
-## Background Grid
-
-The component features a sophisticated dashed grid pattern:
-
-```tsx
-backgroundImage: `
-  linear-gradient(to right, var(--bento3-grid-color) 1px, transparent 1px),
-  linear-gradient(to bottom, var(--bento3-grid-color) 1px, transparent 1px)
-`,
-backgroundSize: "22px 22px",
-maskImage: `
-  repeating-linear-gradient(to right, black 0px, black 3px, 
-    transparent 3px, transparent 8px),
-  repeating-linear-gradient(to bottom, black 0px, black 3px, 
-    transparent 3px, transparent 8px)
-`,
-maskComposite: "intersect"
-```
-
-## Hover Effects
-
-Cards feature dynamic radial glow effects that follow the cursor:
-
-```tsx
-const setGlow = (event: React.MouseEvent) => {
-  const rect = target.getBoundingClientRect();
-  target.style.setProperty("--bento3-x", `${event.clientX - rect.left}px`);
-  target.style.setProperty("--bento3-y", `${event.clientY - rect.top}px`);
-};
-```
-
-The glow is rendered as a radial gradient positioned at cursor coordinates.
-
-## Responsive Design
-
-Uses `clamp()` for fluid spacing across all breakpoints:
-
-```css
-.bento3-section {
-  gap: clamp(3rem, 6vw, 5rem);
-  padding-inline: clamp(1.25rem, 5vw, 3.75rem);
-}
-
-.bento3-card {
-  padding: clamp(1.2rem, 3vw, 2.4rem);
-  border-radius: clamp(1.5rem, 4vw, 28px);
-}
-```
-
-## Intersection Observer
-
-Cards animate in when scrolled into view:
-
-```tsx
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        setVisible(true);
-        observer.disconnect();
-      }
-    });
-  },
-  { threshold: 0.2 }
-);
-```
-
-## Intro Badge Animation
-
-The "New system route" badge features:
-- Pulse indicator dot with shadow
-- Smooth fade-in with translate
-- Upper tracking for emphasis
-- Responsive flex layout
-
-## Footer Actions
-
-Includes action buttons for:
-- Copy layout tokens (customizable action)
-- View live demo link
-- Responsive flex layout
-
-## Performance Notes
-
-- All animations are CSS-based (no JavaScript loops)
-- Intersection Observer prevents unnecessary renders
-- Styles injected once and cleaned up on unmount
-- Hardware-accelerated transforms (translate3d)
-- Staggered animations use CSS `animation-delay`
-
-## Accessibility
-
-- Semantic HTML with proper landmarks
-- Theme toggle has `aria-pressed` state
-- Focus states on interactive elements
-- Respects motion preferences (can be enhanced)
-- Clear hierarchy with heading levels
 
