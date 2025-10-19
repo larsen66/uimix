@@ -3,8 +3,7 @@ title: Marquee CTA
 description: A dynamic call-to-action component with vertical scrolling marquee effect
 ---
 
-import { ComponentPreview } from '@/components/ComponentPreview';
-import { InstallationTabs } from '@/components/InstallationTabs';
+import { ComponentWithInstallation } from '@/components/ComponentWithInstallation';
 import { PropsTable } from '@/components/PropsTable';
 import { FeaturesList } from '@/components/FeaturesList';
 import CtaVerticalMarquee from '@/registry/default/cta-vertical-marquee/cta-vertical-marquee';
@@ -15,24 +14,9 @@ import CTAWithHorizontalMarquee from '@/registry/default/cta-with-horizontal-mar
 
 ## Vertical Marquee CTA
 
-<ComponentPreview component={CtaVerticalMarquee} scale={0.6} />
-
-### Usage
-
-```tsx
-import CtaVerticalMarquee from '@/registry/default/cta-vertical-marquee/cta-vertical-marquee'
-
-export default function Page() {
-  return <CtaVerticalMarquee />
-}
-```
-
-<div className="mb-8" />
-
-## Installation
-
-
-<InstallationTabs 
+<ComponentWithInstallation 
+  component={CtaVerticalMarquee}
+  scale={0.6}
   componentName="cta-vertical-marquee"
   componentPath="registry/default/cta-vertical-marquee/cta-vertical-marquee.tsx"
   tailwindConfig={`module.exports = {
@@ -63,22 +47,24 @@ export default function Page() {
   css={`@keyframes marquee {\n  0% { transform: translateX(0); }\n  100% { transform: translateX(-100%); }\n}\n\n@keyframes marquee-vertical {\n  0% { transform: translateY(0); }\n  100% { transform: translateY(-100%); }\n}\n\n@keyframes fade-in-up {\n  0% { opacity: 0; transform: translateY(20px); }\n  100% { opacity: 1; transform: translateY(0); }\n}\n\n.animate-marquee {\n  animation: marquee var(--duration, 40s) linear infinite;\n}\n\n.animate-marquee-vertical {\n  animation: marquee-vertical var(--duration, 30s) linear infinite;\n}\n\n.animate-fade-in-up {\n  animation: fade-in-up 0.6s ease-out forwards;\n}\n\n.marquee-item { opacity: 0.25; }\n.marquee-item-horizontal { opacity: 0.25; }`}
 />
 
-## Props
+### Usage
 
-<PropsTable props={[
-  { name: 'pauseOnHover', type: 'boolean', default: 'false', description: 'Pause animation on hover' },
-  { name: 'reverse', type: 'boolean', default: 'false', description: 'Reverse scroll direction' },
-  { name: 'speed', type: 'number', default: '30', description: 'Animation speed in seconds' },
-  { name: 'className', type: 'string', default: '-', description: 'Additional CSS classes' }
-]} />
+```tsx
+import CtaVerticalMarquee from '@/registry/default/cta-vertical-marquee/cta-vertical-marquee'
+
+export default function Page() {
+  return <CtaVerticalMarquee />
+}
+```
+
+<div className="mb-8" />
 
 ## Features
 
 <FeaturesList features={[
   { name: 'Vertical scrolling', description: 'Smooth infinite scroll animation' },
   { name: 'Opacity fade', description: 'Items fade based on distance from center' },
-  { name: 'Responsive', description: 'Adapts to different screen sizes' },
-  { name: 'Customizable', description: 'Speed, direction, and hover behavior' }
+  { name: 'Responsive', description: 'Adapts to different screen sizes' }
 ]} />
 
 ## Variations
@@ -87,21 +73,9 @@ export default function Page() {
 
 ### Vertical Marquee (Left Layout)
 
-<ComponentPreview component={CTAWithVerticalMarqueeLeft} scale={0.6} />
-
-#### Usage
-
-```tsx
-import CTAWithVerticalMarqueeLeft from '@/registry/default/cta-with-vertical-marquee-left/cta-with-vertical-marquee-left'
-
-export default function Page() {
-  return <CTAWithVerticalMarqueeLeft />
-}
-```
-
-<div className="mb-8" />
-
-<InstallationTabs 
+<ComponentWithInstallation 
+  component={CTAWithVerticalMarqueeLeft}
+  scale={0.6}
   componentName="cta-with-vertical-marquee-left"
   componentPath="registry/default/cta-with-vertical-marquee-left/cta-with-vertical-marquee-left.tsx"
   tailwindConfig={`module.exports = {
@@ -127,26 +101,26 @@ export default function Page() {
   css={`@keyframes marquee-vertical {\n  0% { transform: translateY(0); }\n  100% { transform: translateY(-100%); }\n}\n\n@keyframes fade-in-up {\n  0% { opacity: 0; transform: translateY(20px); }\n  100% { opacity: 1; transform: translateY(0); }\n}\n\n.animate-marquee-vertical {\n  animation: marquee-vertical var(--duration, 30s) linear infinite;\n}\n\n.animate-fade-in-up {\n  animation: fade-in-up 0.6s ease-out forwards;\n}\n\n.marquee-item { opacity: 0.25; }`}
 />
 
-
-<div id="horizontal" />
-
-### Horizontal Marquee
-
-<ComponentPreview component={CTAWithHorizontalMarquee} scale={0.6} />
-
 #### Usage
 
 ```tsx
-import CTAWithHorizontalMarquee from '@/registry/default/cta-with-horizontal-marquee/cta-with-horizontal-marquee'
+import CTAWithVerticalMarqueeLeft from '@/registry/default/cta-with-vertical-marquee-left/cta-with-vertical-marquee-left'
 
 export default function Page() {
-  return <CTAWithHorizontalMarquee />
+  return <CTAWithVerticalMarqueeLeft />
 }
 ```
 
 <div className="mb-8" />
 
-<InstallationTabs 
+
+<div id="horizontal" />
+
+### Horizontal Marquee
+
+<ComponentWithInstallation 
+  component={CTAWithHorizontalMarquee}
+  scale={0.6}
   componentName="cta-with-horizontal-marquee"
   componentPath="registry/default/cta-with-horizontal-marquee/cta-with-horizontal-marquee.tsx"
   tailwindConfig={`module.exports = {
@@ -171,5 +145,17 @@ export default function Page() {
 }`}
   css={`@keyframes marquee {\n  0% { transform: translateX(0); }\n  100% { transform: translateX(-100%); }\n}\n\n@keyframes fade-in-up {\n  0% { opacity: 0; transform: translateY(20px); }\n  100% { opacity: 1; transform: translateY(0); }\n}\n\n.animate-marquee {\n  animation: marquee var(--duration, 40s) linear infinite;\n}\n\n.animate-fade-in-up {\n  animation: fade-in-up 0.6s ease-out forwards;\n}\n\n.marquee-item-horizontal { opacity: 0.25; }`}
 />
+
+#### Usage
+
+```tsx
+import CTAWithHorizontalMarquee from '@/registry/default/cta-with-horizontal-marquee/cta-with-horizontal-marquee'
+
+export default function Page() {
+  return <CTAWithHorizontalMarquee />
+}
+```
+
+<div className="mb-8" />
 
 

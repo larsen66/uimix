@@ -1,0 +1,52 @@
+---
+title: Bento Features
+description: Feature showcase section with golden spiral background and bento grid layout
+---
+
+import { ComponentWithInstallation } from '@/components/ComponentWithInstallation';
+import { PropsTable } from '@/components/PropsTable';
+import { FeaturesList } from '@/components/FeaturesList';
+import BentoFeatures from '@/registry/default/bento-features';
+
+## Bento Features
+
+A stunning feature showcase section combining a golden spiral SVG background with a responsive bento grid layout. Features customizable spiral animations, hover effects, and dynamic visual depth.
+
+<ComponentWithInstallation 
+  component={BentoFeatures}
+  scale={0.6}
+  componentName="bento-features"
+  componentPath="registry/default/bento-features.tsx"
+  tailwindConfig={`module.exports = {
+  theme: {
+    extend: {}
+  }
+}`}
+  css={`/* SVG animations are generated dynamically */`}
+/>
+
+### Usage
+
+```tsx
+import FeaturesSection from '@/registry/default/bento-features'
+
+export default function Page() {
+  return <FeaturesSection />
+}
+```
+
+<div className="mb-8" />
+
+## Features
+
+<FeaturesList features={[
+  { name: 'Golden Spiral Background', description: 'Animated Fibonacci spiral using golden angle mathematics' },
+  { name: 'Bento Grid Layout', description: 'Responsive grid with variable span configurations' },
+  { name: 'Hover Effects', description: 'Subtle hover interactions on card elements' },
+  { name: 'Keyboard Shortcut', description: 'Press R to randomize spiral configuration' },
+  { name: 'Azure Depths Theme', description: 'Deep blue gradient background with radial transitions' },
+  { name: 'Customizable Cards', description: 'Easy-to-modify feature cards with meta tags' }
+]} />
+
+
+

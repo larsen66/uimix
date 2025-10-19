@@ -1,0 +1,51 @@
+---
+title: FAQ Monochrome
+description: Elegant monochrome FAQ section with theme toggle and animated effects
+---
+
+import { ComponentWithInstallation } from '@/components/ComponentWithInstallation';
+import { PropsTable } from '@/components/PropsTable';
+import { FeaturesList } from '@/components/FeaturesList';
+import FAQMonochrome from '@/registry/default/faq-monochrome';
+
+## FAQ Monochrome
+
+An elegant monochrome FAQ section with smooth animations, theme toggle, and sophisticated visual effects. Features an animated intro badge with beam and pulse effects, card hover glows, and seamless dark/light mode switching.
+
+<ComponentWithInstallation 
+  component={FAQMonochrome}
+  scale={0.6}
+  componentName="faq-monochrome"
+  componentPath="registry/default/faq-monochrome.tsx"
+  tailwindConfig={`module.exports = {
+  theme: {
+    extend: {}
+  }
+}`}
+  css={`/* All animations are injected dynamically via JavaScript */`}
+/>
+### Usage
+
+```tsx
+import FAQMonochrome from '@/registry/default/faq-monochrome'
+
+export default function Page() {
+  return <FAQMonochrome />
+}
+```
+
+<div className="mb-8" />
+
+## Features
+
+<FeaturesList features={[
+  { name: 'Theme Toggle', description: 'Dynamic dark/light mode with smooth transitions' },
+  { name: 'Animated Intro Badge', description: 'Spinning beam and pulsing effects on the intro label' },
+  { name: 'Card Hover Effects', description: 'Interactive glow that follows cursor position' },
+  { name: 'Smooth Transitions', description: 'Hardware-accelerated animations with blur effects' },
+  { name: 'Accessible', description: 'Proper ARIA labels and keyboard navigation' },
+  { name: 'Customizable', description: 'Easy to modify FAQ content and styling' }
+]} />
+
+
+

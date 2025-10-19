@@ -1,0 +1,55 @@
+---
+title: "Login Card"
+description: "Modern login card with animated background, social auth options, and elegant design"
+---
+
+import { ComponentWithInstallation } from "@/components/ComponentWithInstallation"
+import { ComponentCode } from "@/components/ComponentCode"
+import { PropsTable } from "@/components/PropsTable"
+import LoginCardSection from "@/registry/default/login-card"
+
+<ComponentWithInstallation 
+  component={LoginCardSection}
+  scale={0.6}
+  componentName="login-card"
+  componentPath="registry/default/login-card.tsx"
+  tailwindConfig={`// No additional configuration needed
+// Animations are included inline in the component`}
+  css={`/* Animations are dynamically generated within the component */`}
+/>
+
+## Dependencies
+
+```bash
+npm install lucide-react
+```
+
+## Features
+
+- **Animated Background**: Particle effects and geometric lines create visual interest
+- **Social Authentication**: GitHub and Google login options
+- **Password Visibility Toggle**: Eye icon to show/hide password
+- **Remember Me**: Checkbox for persistent sessions
+- **Responsive Design**: Adapts perfectly to all screen sizes
+- **Dark Theme**: Modern monochrome design with zinc color palette
+- **Backdrop Blur**: Glass morphism effect on the card
+
+## Usage
+
+<ComponentCode>
+{`import { LoginCardSection } from "@/components/login-card"
+
+export default function Page() {
+  return <LoginCardSection />
+}`}
+</ComponentCode>
+
+## Props
+
+<PropsTable>
+  <PropsTable.Row>
+    <PropsTable.Prop name="className" type="string" optional>
+      Additional CSS classes to apply to the root element
+    </PropsTable.Prop>
+  </PropsTable.Row>
+</PropsTable>

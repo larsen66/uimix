@@ -1,0 +1,60 @@
+---
+title: Bento Monochrome
+description: Minimal monochrome bento grid with animated icons and theme toggle
+---
+
+import { ComponentWithInstallation } from '@/components/ComponentWithInstallation';
+import { PropsTable } from '@/components/PropsTable';
+import { FeaturesList } from '@/components/FeaturesList';
+import BentoMonochrome from '@/registry/default/bento-monochrome';
+
+## Bento Monochrome
+
+An elegant, minimal bento grid layout with animated Lucide icons, smooth theme transitions, and sophisticated monochrome styling. Features intersection observer for scroll-triggered animations.
+
+<ComponentWithInstallation 
+  component={BentoMonochrome}
+  scale={0.6}
+  componentName="bento-monochrome"
+  componentPath="registry/default/bento-monochrome.tsx"
+  tailwindConfig={`module.exports = {
+  theme: {
+    extend: {}
+  }
+}`}
+  css={`/* Animations are injected dynamically via JavaScript */`}
+/>
+
+### Usage
+
+```tsx
+import FeaturesSectionMinimal from '@/registry/default/bento-monochrome'
+
+export default function Page() {
+  return <FeaturesSectionMinimal />
+}
+```
+
+<div className="mb-8" />
+
+## Dependencies
+
+This component requires `lucide-react` for icons:
+
+```bash
+npm install lucide-react
+```
+
+## Features
+
+<FeaturesList features={[
+  { name: 'Dark/Light Theme', description: 'Seamless theme switching with localStorage sync' },
+  { name: 'Animated Icons', description: '5 unique icon animations: float, pulse, tilt, drift, glow' },
+  { name: 'Intersection Observer', description: 'Scroll-triggered entrance animations' },
+  { name: 'Dotted Grid Background', description: 'Sophisticated masked grid pattern' },
+  { name: 'Aurora Gradients', description: 'Subtle radial gradients for depth' },
+  { name: 'Responsive Bento Grid', description: '6-column grid that adapts to screen size' }
+]} />
+
+
+

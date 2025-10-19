@@ -1,0 +1,144 @@
+---
+title: "Fallback Card"
+description: "Elegant fallback cards with animated glitch effects for unavailable content"
+---
+
+import { ComponentWithInstallation } from "@/components/ComponentWithInstallation"
+import { ComponentCode } from "@/components/ComponentCode"
+import { PropsTable } from "@/components/PropsTable"
+import FallbackCardSection from "@/registry/default/fallback-card/fallback-card"
+
+<ComponentWithInstallation 
+  component={FallbackCardSection}
+  scale={0.6}
+  componentName="fallback-card"
+  componentPath="registry/default/fallback-card/fallback-card.tsx"
+/>
+## Features
+
+- **ASCII Glitch Effect**: Animated ASCII character background with customizable colors and speed
+- **Theme Support**: Dark and light theme variants with appropriate color schemes
+- **Customizable Icon**: Optional SVG icon display with shadow effects
+- **Flexible Sizing**: Adjustable card dimensions and glitch effect positioning
+- **Smooth Animations**: Canvas-based glitch animations with smooth color transitions
+- **Edge Vignette**: Built-in vignette effects for polished visual appearance
+- **Responsive Design**: Adapts to different container sizes
+
+## Usage
+
+<ComponentCode>
+{`import { FallbackCard } from "@/components/fallback-card"
+
+export default function Page() {
+  return <FallbackCard message="Preview not available" />
+}`}
+</ComponentCode>
+
+## Props
+
+<PropsTable>
+  <PropsTable.Row>
+    <PropsTable.Prop name="message" type="string" optional defaultValue="Preview not available">
+      Message to display in the card center
+    </PropsTable.Prop>
+  </PropsTable.Row>
+  <PropsTable.Row>
+    <PropsTable.Prop name="theme" type="'dark' | 'light'" optional defaultValue="dark">
+      Visual theme for the card
+    </PropsTable.Prop>
+  </PropsTable.Row>
+  <PropsTable.Row>
+    <PropsTable.Prop name="showIcon" type="boolean" optional defaultValue="true">
+      Whether to display the monitor icon
+    </PropsTable.Prop>
+  </PropsTable.Row>
+  <PropsTable.Row>
+    <PropsTable.Prop name="showGlitch" type="boolean" optional defaultValue="true">
+      Whether to display the glitch effect background
+    </PropsTable.Prop>
+  </PropsTable.Row>
+  <PropsTable.Row>
+    <PropsTable.Prop name="glitchOffsetX" type="number" optional defaultValue="0">
+      Horizontal offset for the glitch effect (in pixels)
+    </PropsTable.Prop>
+  </PropsTable.Row>
+  <PropsTable.Row>
+    <PropsTable.Prop name="glitchOffsetY" type="number" optional defaultValue="0">
+      Vertical offset for the glitch effect (in pixels)
+    </PropsTable.Prop>
+  </PropsTable.Row>
+  <PropsTable.Row>
+    <PropsTable.Prop name="glitchScale" type="number" optional defaultValue="1">
+      Scale factor for the glitch effect
+    </PropsTable.Prop>
+  </PropsTable.Row>
+  <PropsTable.Row>
+    <PropsTable.Prop name="cardWidth" type="number" optional>
+      Card width in pixels (max-width)
+    </PropsTable.Prop>
+  </PropsTable.Row>
+  <PropsTable.Row>
+    <PropsTable.Prop name="cardHeight" type="number" optional defaultValue="400">
+      Card height in pixels
+    </PropsTable.Prop>
+  </PropsTable.Row>
+  <PropsTable.Row>
+    <PropsTable.Prop name="className" type="string" optional>
+      Additional CSS classes to apply to the root element
+    </PropsTable.Prop>
+  </PropsTable.Row>
+</PropsTable>
+
+## Usage Examples
+
+### Basic Usage
+```tsx
+<FallbackCard 
+  message="Preview not available"
+  theme="dark"
+/>
+```
+
+### Custom Glitch Position
+```tsx
+<FallbackCard 
+  message="Content unavailable"
+  glitchOffsetX={150}
+  glitchOffsetY={170}
+  glitchScale={1.6}
+/>
+```
+
+### Custom Size
+```tsx
+<FallbackCard 
+  message="Loading failed"
+  cardWidth={600}
+  cardHeight={550}
+/>
+```
+
+### Light Theme
+```tsx
+<FallbackCard 
+  message="Content not found"
+  theme="light"
+/>
+```
+
+### Without Glitch Effect
+```tsx
+<FallbackCard 
+  message="Error loading content"
+  showGlitch={false}
+/>
+```
+
+### Minimal Design
+```tsx
+<FallbackCard 
+  message="Unavailable"
+  showIcon={false}
+  showGlitch={false}
+/>
+```

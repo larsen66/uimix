@@ -1,0 +1,29 @@
+---
+title: FAQ
+description: Frequently Asked Questions components with unique designs and interactive features
+---
+
+import FAQMonochrome from '@/registry/default/faq-monochrome';
+import FAQWithSpiral from '@/registry/default/faq-with-spiral';
+import { ComponentGrid } from '@/components/ComponentGrid';
+
+
+<ComponentGrid 
+  components={[
+    {
+      component: FAQMonochrome,
+      name: "FAQ Monochrome",
+      href: "/docs/faq/Monochrome",
+      scale: 0.25,
+      height: "h-80"
+    },
+    {
+      component: FAQWithSpiral,
+      name: "FAQ with Spiral",
+      href: "/docs/faq/Spiral",
+      scale: 0.4,
+      height: "h-80"
+    }
+  ]}
+/>
+

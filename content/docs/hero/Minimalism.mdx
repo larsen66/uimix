@@ -1,0 +1,27 @@
+---
+title: "Hero Minimalism"
+description: "Clean, minimal hero with animated particles and geometric lines"
+---
+
+import { ComponentWithInstallation } from "@/components/ComponentWithInstallation"
+import { ComponentCode } from "@/components/ComponentCode"
+import { PropsTable } from "@/components/PropsTable"
+import MinimalHero from "@/registry/default/hero-minimalism"
+
+<ComponentWithInstallation 
+  component={MinimalHero}
+  scale={0.6}
+  componentName="hero-minimalism"
+  componentPath="registry/default/hero-minimalism.tsx"
+/>
+
+## Usage
+
+<ComponentCode>
+{`import { MinimalHero } from "@/components/hero-minimalism"
+
+export default function Page() {
+  return <MinimalHero />
+}`}
+</ComponentCode>
+

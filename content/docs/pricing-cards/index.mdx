@@ -1,0 +1,28 @@
+---
+title: Pricing Cards
+description: Pricing card sections with animations and feature comparisons
+---
+
+import Pricing2 from '@/registry/default/pricing-cards';
+import PricingVar1 from '@/registry/default/pricing-cards-1';
+import { ComponentGrid } from '@/components/ComponentGrid';
+
+
+<ComponentGrid 
+  components={[
+    {
+      component: Pricing2,
+      name: "Pricing Cards",
+      href: "/docs/pricing-cards/Pricing-2",
+      height: "h-150",
+      scale: 0.5
+    },
+    {
+      component: PricingVar1,
+      name: "Pricing Cards (Variation)",
+      href: "/docs/pricing-cards/Pricing-2#variation",
+      height: "h-150",
+      scale: 0.5
+    }
+  ]}
+/>

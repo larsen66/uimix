@@ -1,0 +1,54 @@
+---
+title: Bento Workflow Section
+description: Advanced monochrome bento grid with workflow blocks and animated icons
+---
+
+import { ComponentWithInstallation } from '@/components/ComponentWithInstallation';
+import { PropsTable } from '@/components/PropsTable';
+import { FeaturesList } from '@/components/FeaturesList';
+import BentoMonochrome1 from '@/registry/default/bento-monochrome-1';
+
+## Bento Workflow Section
+
+A sophisticated workflow visualization component featuring monochrome design, custom animated icons, metrics display, and comprehensive theme support. Perfect for showcasing development processes and system capabilities.
+
+<ComponentWithInstallation 
+  component={BentoMonochrome1}
+  scale={0.4}
+  componentName="bento-monochrome-1"
+  componentPath="registry/default/bento-monochrome-1.tsx"
+  tailwindConfig={`module.exports = {
+  theme: {
+    extend: {}
+  }
+}`}
+  css={`/* All animations are injected dynamically via JavaScript */`}
+/>
+
+### Usage
+
+```tsx
+import BentoWorkflowSection from '@/registry/default/bento-monochrome-1'
+
+export default function Page() {
+  return <BentoWorkflowSection />
+}
+```
+
+<div className="mb-8" />
+
+## Features
+
+<FeaturesList features={[
+  { name: 'Workflow Blocks', description: '5 distinct process stages with custom animated icons' },
+  { name: 'Animated Icons', description: 'Orbit, relay, wave, spark, and loop icon effects' },
+  { name: 'Metrics Dashboard', description: 'Grid display for key performance indicators' },
+  { name: 'Theme System', description: 'Full dark/light mode with automatic sync' },
+  { name: 'Entrance Animations', description: 'Staggered card animations on scroll' },
+  { name: 'Hover Interactions', description: 'Radial glow effects following cursor' },
+  { name: 'Intro Badge', description: 'Animated status badge with pulse indicator' },
+  { name: 'Responsive Layout', description: 'Fluid spacing with clamp() for all breakpoints' }
+]} />
+
+
+

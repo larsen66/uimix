@@ -1,0 +1,218 @@
+---
+title: Marquee CTA Media
+description: Dynamic hero sections with marquee image galleries and video backgrounds
+---
+
+import { ComponentWithInstallation } from '@/components/ComponentWithInstallation';
+import { PropsTable } from '@/components/PropsTable';
+import { FeaturesList } from '@/components/FeaturesList';
+import CtaMarqueeBase from '@/registry/default/cta-marquee-base';
+import CtaMarqueeLarge from '@/registry/default/cta-marquee-large';
+import CtaMarqueeReverse from '@/registry/default/cta-marquee-reverse';
+import CtaWithVideo from '@/registry/default/cta-with-video';
+
+<div id="base" />
+
+## Marquee Base
+
+A hero section with dual horizontal marquee image galleries on the right side and content on the left, featuring a scramble button effect.
+
+<ComponentWithInstallation 
+  component={CtaMarqueeBase}
+  scale={0.6}
+  componentName="cta-marquee-base"
+  componentPath="registry/default/cta-marquee-base.tsx"
+  tailwindConfig={`module.exports = {
+  theme: {
+    extend: {
+      keyframes: {
+        "marquee": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" }
+        }
+      },
+      animation: {
+        "marquee": "marquee var(--duration, 40s) linear infinite"
+      }
+    }
+  }
+}`}
+  css={`@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration, 40s) linear infinite;
+}`}
+/>
+
+### Usage
+
+```tsx
+import HeroWithMarquee from '@/registry/default/cta-marquee-base'
+
+export default function Page() {
+  return <HeroWithMarquee />
+}
+```
+
+<div className="mb-8" />
+
+## Features
+
+<FeaturesList features={[
+  { name: 'Horizontal scrolling', description: 'Smooth infinite scroll animation' },
+  { name: 'Dual marquees', description: 'Two rows of marquee content' },
+  { name: 'Responsive', description: 'Adapts to different screen sizes' }
+]} />
+
+---
+
+<div id="large" />
+
+## Marquee Large
+
+Full-width hero section with large marquee images, designed for maximum visual impact.
+
+<ComponentWithInstallation 
+  component={CtaMarqueeLarge}
+  scale={0.6}
+  componentName="cta-marquee-large"
+  componentPath="registry/default/cta-marquee-large.tsx"
+  tailwindConfig={`module.exports = {
+  theme: {
+    extend: {
+      keyframes: {
+        "marquee": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" }
+        }
+      },
+      animation: {
+        "marquee": "marquee var(--duration, 40s) linear infinite"
+      }
+    }
+  }
+}`}
+  css={`@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration, 40s) linear infinite;
+}`}
+/>
+
+### Usage
+
+```tsx
+import HeroWithMarqueeLarge from '@/registry/default/cta-marquee-large'
+
+export default function Page() {
+  return <HeroWithMarqueeLarge />
+}
+```
+
+<div className="mb-8" />
+
+<FeaturesList features={[
+  { name: 'Large images', description: 'Full-size image gallery with no gaps' },
+  { name: 'Flexible layout', description: 'Content on left, marquee fills remaining space' },
+  { name: 'Seamless loop', description: 'No-gap marquee for continuous effect' }
+]} />
+
+---
+
+
+<div id="reverse" />
+
+## Marquee Reverse
+
+Hero section with marquee on the left and content on the right - a reversed layout variation.
+
+<ComponentWithInstallation 
+  component={CtaMarqueeReverse}
+  scale={0.6}
+  componentName="cta-marquee-reverse"
+  componentPath="registry/default/cta-marquee-reverse.tsx"
+  tailwindConfig={`module.exports = {
+  theme: {
+    extend: {
+      keyframes: {
+        "marquee": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" }
+        }
+      },
+      animation: {
+        "marquee": "marquee var(--duration, 40s) linear infinite"
+      }
+    }
+  }
+}`}
+  css={`@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration, 40s) linear infinite;
+}`}
+/>
+
+### Usage
+
+```tsx
+import HeroWithMarqueeReverse from '@/registry/default/cta-marquee-reverse'
+
+export default function Page() {
+  return <HeroWithMarqueeReverse />
+}
+```
+
+<div className="mb-8" />
+
+<FeaturesList features={[
+  { name: 'Reversed layout', description: 'Marquee gallery on left, content on right' }
+]} />
+
+---
+
+<div id="video" />
+
+## CTA with Video
+
+Hero section with autoplay video background, perfect for showcasing product demos or atmospheric content.
+
+<ComponentWithInstallation 
+  component={CtaWithVideo}
+  scale={0.6}
+  componentName="cta-with-video"
+  componentPath="registry/default/cta-with-video.tsx"
+  tailwindConfig={`module.exports = {
+  theme: {
+    extend: {}
+  }
+}`}
+  css={`/* No additional CSS required */`}
+/>
+
+### Usage
+
+```tsx
+import HeroWithVideo from '@/registry/default/cta-with-video'
+
+export default function Page() {
+  return <HeroWithVideo />
+}
+```
+
+<div className="mb-8" />
+
+<FeaturesList features={[
+  { name: 'Autoplay video', description: 'Video plays automatically on load' },
+  { name: 'Looping', description: 'Video loops continuously' }
+]} />
+

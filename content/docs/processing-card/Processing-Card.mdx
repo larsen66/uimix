@@ -1,0 +1,105 @@
+---
+title: "Processing Card"
+description: "Animated processing card with glitch effects, progress tracking, and status indicators"
+---
+
+import { ComponentWithInstallation } from "@/components/ComponentWithInstallation"
+import { ComponentCode } from "@/components/ComponentCode"
+import { PropsTable } from "@/components/PropsTable"
+import ProcessingCardSection from "@/registry/default/processing-card/processing-card"
+
+<ComponentWithInstallation 
+  component={ProcessingCardSection}
+  scale={0.6}
+  componentName="processing-card"
+  componentPath="registry/default/processing-card/processing-card.tsx"
+/>
+
+## Dependencies
+
+```bash
+npm install framer-motion lucide-react
+```
+
+## Features
+
+- **ASCII Glitch Effect**: Animated ASCII character background with customizable colors and speed
+- **Progress Tracking**: Visual progress bar with percentage display
+- **Stage Indicators**: Dynamic stage labels (Initializing, Analyzing, Generating, etc.)
+- **Status States**: Support for queued, running, succeeded, and failed states
+- **Custom Loader**: Animated orbital loader for running state
+- **Dark Theme**: Modern dark design with blue accent colors
+- **Smooth Animations**: Framer Motion powered transitions and effects
+
+## Usage
+
+<ComponentCode>
+{`import ProcessingCard from "@/components/processing-card"
+
+export default function Page() {
+  return <ProcessingCard status="running" progress={45} />
+}`}
+</ComponentCode>
+
+## Props
+
+<PropsTable>
+  <PropsTable.Row>
+    <PropsTable.Prop name="name" type="string" optional defaultValue="ComponentGeneration">
+      Name displayed in the card header
+    </PropsTable.Prop>
+  </PropsTable.Row>
+  <PropsTable.Row>
+    <PropsTable.Prop name="status" type="'queued' | 'running' | 'succeeded' | 'failed'" optional defaultValue="queued">
+      Current processing status
+    </PropsTable.Prop>
+  </PropsTable.Row>
+  <PropsTable.Row>
+    <PropsTable.Prop name="progress" type="number" optional defaultValue="0">
+      Progress percentage (0-100)
+    </PropsTable.Prop>
+  </PropsTable.Row>
+  <PropsTable.Row>
+    <PropsTable.Prop name="className" type="string" optional>
+      Additional CSS classes to apply to the root element
+    </PropsTable.Prop>
+  </PropsTable.Row>
+</PropsTable>
+
+## Usage Examples
+
+### Queued State
+```tsx
+<ProcessingCard 
+  name="UserAuthentication"
+  status="queued"
+  progress={0}
+/>
+```
+
+### Running State
+```tsx
+<ProcessingCard 
+  name="DataProcessing"
+  status="running"
+  progress={45}
+/>
+```
+
+### Succeeded State
+```tsx
+<ProcessingCard 
+  name="BuildComplete"
+  status="succeeded"
+  progress={100}
+/>
+```
+
+### Failed State
+```tsx
+<ProcessingCard 
+  name="ValidationFailed"
+  status="failed"
+  progress={0}
+/>
+```

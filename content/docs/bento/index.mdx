@@ -1,0 +1,37 @@
+---
+title: Bento Grid
+description: Modern bento grid layouts with animated backgrounds and interactive features
+---
+
+import BentoFeatures from '@/registry/default/bento-features';
+import BentoMonochrome from '@/registry/default/bento-monochrome';
+import BentoMonochrome1 from '@/registry/default/bento-monochrome-1';
+import { ComponentGrid } from '@/components/ComponentGrid';
+
+
+<ComponentGrid 
+  components={[
+    {
+      component: BentoFeatures,
+      name: "Bento Features",
+      href: "/docs/bento/Features",
+      scale: 0.25,
+      height: "h-80"
+    },
+    {
+      component: BentoMonochrome,
+      name: "Bento Monochrome",
+      href: "/docs/bento/Monochrome",
+      scale: 0.25,
+      height: "h-80"
+    },
+    {
+      component: BentoMonochrome1,
+      name: "Bento Workflow Section",
+      href: "/docs/bento/Workflow",
+      scale: 0.25,
+      height: "h-[600px]"
+    }
+  ]}
+/>
+

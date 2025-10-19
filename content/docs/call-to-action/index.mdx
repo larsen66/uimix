@@ -6,11 +6,12 @@ description: Call to Action components for engaging users and driving conversion
 import CtaVerticalMarquee from '@/registry/default/cta-vertical-marquee/cta-vertical-marquee';
 import CTAWithVerticalMarqueeLeft from '@/registry/default/cta-with-vertical-marquee-left/cta-with-vertical-marquee-left';
 import CTAWithHorizontalMarquee from '@/registry/default/cta-with-horizontal-marquee/cta-with-horizontal-marquee';
+import CtaMarqueeBase from '@/registry/default/cta-marquee-base';
+import CtaMarqueeLarge from '@/registry/default/cta-marquee-large';
+import CtaMarqueeReverse from '@/registry/default/cta-marquee-reverse';
+import CtaWithVideo from '@/registry/default/cta-with-video';
 import { ComponentGrid } from '@/components/ComponentGrid';
 
-
-
-## Components
 
 <ComponentGrid 
   components={[
@@ -32,6 +33,34 @@ import { ComponentGrid } from '@/components/ComponentGrid';
       component: CTAWithHorizontalMarquee,
       name: "Horizontal Marquee",
       href: "/docs/call-to-action/Marquee#horizontal",
+      scale: 0.3,
+      height: "h-64"
+    },
+    {
+      component: CtaMarqueeBase,
+      name: "Marquee Base",
+      href: "/docs/call-to-action/Marquee-Media#base",
+      scale: 0.3,
+      height: "h-64"
+    },
+    {
+      component: CtaMarqueeLarge,
+      name: "Marquee Large",
+      href: "/docs/call-to-action/Marquee-Media#large",
+      scale: 0.3,
+      height: "h-64"
+    },
+    {
+      component: CtaMarqueeReverse,
+      name: "Marquee Reverse",
+      href: "/docs/call-to-action/Marquee-Media#reverse",
+      scale: 0.3,
+      height: "h-64"
+    },
+    {
+      component: CtaWithVideo,
+      name: "CTA with Video",
+      href: "/docs/call-to-action/Marquee-Media#video",
       scale: 0.3,
       height: "h-64"
     }

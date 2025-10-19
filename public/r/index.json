@@ -6,6 +6,13 @@
   "items": [
     "cta-vertical-marquee",
     "cta-with-vertical-marquee-left",
-    "cta-with-horizontal-marquee"
+    "cta-with-horizontal-marquee",
+    "hero-minimalism",
+    "hero-monochrome-launch",
+    "hero-orbit-deck",
+    "processing-card",
+    "pricing-cards",
+    "pricing-cards-1",
+    "pricing-cards-2"
   ]
 }

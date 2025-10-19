@@ -1,33 +1,47 @@
+"use client";
+
 import { DynamicCodeBlock } from 'fumadocs-ui/components/dynamic-codeblock';
-import fs from 'node:fs';
-import path from 'node:path';
+import { ReactNode, useEffect, useState } from 'react';
 
 interface ComponentCodeProps {
-  componentPath: string;
+  componentPath?: string;
   title?: string;
+  children?: ReactNode;
 }
 
 export const ComponentCode = ({ 
   componentPath, 
-  title 
+  title,
+  children
 }: ComponentCodeProps) => {
-  const filePath = path.join(process.cwd(), componentPath);
-  let code = '';
-  try {
-    code = fs.readFileSync(filePath, 'utf8');
-  } catch (e) {
-    code = `/* Failed to load ${filePath}: ${String(e)} */`;
-  }
-  
-  if (!code || code.trim().length === 0) {
-    return <div>Could not load component source.</div>;
-  }
-  
+  const [code, setCode] = useState<string | null>(null);
+  const [err, setErr] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (children && typeof children === 'string') {
+      setCode(children);
+      return;
+    }
+    if (!componentPath) return;
+    let mounted = true;
+    fetch(`/api/code?path=${encodeURIComponent(componentPath)}`)
+      .then(async (r) => {
+        if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+        const data = await r.json();
+        if (mounted) setCode(data.code ?? '');
+      })
+      .catch((e) => mounted && setErr(String(e)));
+    return () => { mounted = false; };
+  }, [children, componentPath]);
+
+  if (err) return <div>Could not load component source: {err}</div>;
+  if (!code) return <div>Loading source…</div>;
+
   return (
     <DynamicCodeBlock
       lang="tsx"
       code={code}
-      codeblock={{ title: title || componentPath }}
+      codeblock={{ title: title || componentPath || 'Code' }}
     />
   );
 };

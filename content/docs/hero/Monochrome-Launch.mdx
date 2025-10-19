@@ -1,0 +1,26 @@
+---
+title: "Hero Monochrome Launch"
+description: "Sophisticated monochrome hero with theme toggle and animated glyphs"
+---
+
+import { ComponentWithInstallation } from "@/components/ComponentWithInstallation"
+import { ComponentCode } from "@/components/ComponentCode"
+import { PropsTable } from "@/components/PropsTable"
+import HeroMonochromeLaunch from "@/registry/default/hero-monochrome-launch"
+
+<ComponentWithInstallation 
+  component={HeroMonochromeLaunch}
+  scale={0.5}
+  componentName="hero-monochrome-launch"
+  componentPath="registry/default/hero-monochrome-launch.tsx"
+/>
+
+## Usage
+
+<ComponentCode>
+{`import { HeroMonochromeLaunch } from "@/components/hero-monochrome-launch"
+
+export default function Page() {
+  return <HeroMonochromeLaunch />
+}`}
+</ComponentCode>

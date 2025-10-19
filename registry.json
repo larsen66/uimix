@@ -22,6 +22,36 @@
       ]
     },
     {
+      "name": "backgrounds-interactive-grid",
+      "type": "registry:block",
+      "title": "Backgrounds Interactive Grid",
+      "description": "Interactive moving grid background with hover glow and noise",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/backgrounds-interactive-grid.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "hero-dock",
+      "type": "registry:block",
+      "title": "Hero Dock",
+      "description": "Elegant minimal dock-style hero with Lucide icons",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/hero-dock.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
       "name": "cta-with-vertical-marquee-left",
       "type": "registry:block",
       "title": "CTA with Vertical Marquee (Left Layout)",
@@ -53,6 +83,291 @@
       "files": [
         {
           "path": "registry/default/cta-with-horizontal-marquee/cta-with-horizontal-marquee.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "cta-marquee-base",
+      "type": "registry:block",
+      "title": "CTA Marquee Base",
+      "description": "Hero section with dual horizontal marquee image galleries and scramble button effect",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/cta-marquee-base.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "cta-marquee-large",
+      "type": "registry:block",
+      "title": "CTA Marquee Large",
+      "description": "Full-width hero with large marquee images and flexible layout",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/cta-marquee-large.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "cta-marquee-reverse",
+      "type": "registry:block",
+      "title": "CTA Marquee Reverse",
+      "description": "Hero section with marquee on the left and content on the right",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/cta-marquee-reverse.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "cta-with-video",
+      "type": "registry:block",
+      "title": "CTA with Video",
+      "description": "Hero section with autoplay video background and scramble button effect",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/cta-with-video.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "faq-monochrome",
+      "type": "registry:block",
+      "title": "FAQ Monochrome",
+      "description": "Elegant monochrome FAQ section with theme toggle, animated intro badge, and smooth hover effects",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/faq-monochrome.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "faq-with-spiral",
+      "type": "registry:block",
+      "title": "FAQ with Spiral",
+      "description": "Interactive FAQ with animated golden spiral background, search functionality, and customizable controls",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/faq-with-spiral.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "bento-features",
+      "type": "registry:block",
+      "title": "Bento Features",
+      "description": "Feature showcase with golden spiral background and bento grid layout",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/bento-features.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "bento-monochrome",
+      "type": "registry:block",
+      "title": "Bento Monochrome",
+      "description": "Minimal monochrome bento grid with animated icons and theme toggle",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/bento-monochrome.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "bento-workflow-section",
+      "type": "registry:block",
+      "title": "Bento Workflow Section",
+      "description": "Advanced monochrome bento grid with workflow blocks and animated icons",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/bento-monochrome-1.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "hero-minimalism",
+      "type": "registry:block",
+      "title": "Hero Minimalism",
+      "description": "Clean, minimal hero with animated particles and geometric lines",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/hero-minimalism.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "hero-monochrome-launch",
+      "type": "registry:block",
+      "title": "Hero Monochrome Launch",
+      "description": "Sophisticated monochrome hero with theme toggle and animated glyphs",
+      "dependencies": [
+        "next"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/hero-monochrome-launch.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "hero-orbit-deck",
+      "type": "registry:block",
+      "title": "Hero Orbit Deck",
+      "description": "Command deck hero with orbital animations and protocol management",
+      "dependencies": [
+        "next"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/hero-orbit-deck.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "login-card",
+      "type": "registry:block",
+      "title": "Login Card",
+      "description": "Modern login card with animated background, social auth options, and elegant design",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/login-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "pricing-cards",
+      "type": "registry:block",
+      "title": "Pricing Cards",
+      "description": "Elegant pricing section with animated particles, geometric lines, and monthly/yearly toggle",
+      "dependencies": [
+        "lucide-react",
+        "@radix-ui/react-switch"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/pricing-cards.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "processing-card",
+      "type": "registry:block",
+      "title": "Processing Card",
+      "description": "Animated processing card with glitch effects, progress tracking, and status indicators",
+      "dependencies": [
+        "framer-motion",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/processing-card/processing-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    },
+    {
+      "name": "fallback-card",
+      "type": "registry:block",
+      "title": "Fallback Card",
+      "description": "Elegant fallback cards with animated glitch effects for unavailable content",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/fallback-card/fallback-card.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+    ,
+    {
+      "name": "pricing-cards-1",
+      "type": "registry:block",
+      "title": "Pricing Cards (Variation)",
+      "description": "Alternate pricing section with animated particles and annual/monthly toggle",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/pricing-cards-1.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+    ,
+    {
+      "name": "pricing-cards-2",
+      "type": "registry:block",
+      "title": "Pricing Cards (Variation 2)",
+      "description": "Dark minimal pricing with particles, accent lines and Radix switch toggle",
+      "dependencies": [
+        "lucide-react",
+        "@radix-ui/react-switch"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/default/pricing-cards-2.tsx",
           "type": "registry:component"
         }
       ]

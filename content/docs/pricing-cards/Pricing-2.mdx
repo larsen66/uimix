@@ -1,0 +1,99 @@
+---
+title: "Pricing Cards"
+description: "Elegant pricing section with animated particles, geometric lines, and monthly/yearly toggle"
+---
+
+import { ComponentWithInstallation } from "@/components/ComponentWithInstallation"
+import { ComponentCode } from "@/components/ComponentCode"
+import { PropsTable } from "@/components/PropsTable"
+import Pricing2 from "@/registry/default/pricing-cards"
+import PricingVariation from "@/registry/default/pricing-cards-1"
+
+<ComponentWithInstallation 
+  component={Pricing2}
+  scale={0.5}
+  componentName="pricing-cards"
+  componentPath="registry/default/pricing-cards.tsx"
+  tailwindConfig={`// No additional configuration needed
+// Animations are included inline in the component`}
+  css={`/* Animations are dynamically generated within the component */`}
+/>
+
+## Dependencies
+
+```bash
+npm install lucide-react @radix-ui/react-switch
+```
+
+## Features
+
+- **Animated Particles**: Subtle particle animation that creates visual interest
+- **Geometric Lines**: Animated accent lines that draw attention
+- **Price Toggle**: Switch between monthly and yearly pricing
+- **Responsive Design**: Adapts beautifully to all screen sizes
+- **Dark Theme**: Modern dark color scheme with backdrop blur
+- **Performance Optimized**: Lightweight canvas-based animations
+
+## Usage
+
+<ComponentCode>
+{`import Pricing2 from "@/components/pricing-cards"
+
+export default function Page() {
+  return <Pricing2 />
+}`}
+</ComponentCode>
+
+## Props
+
+<PropsTable>
+  <PropsTable.Row>
+    <PropsTable.Prop name="heading" type="string" optional>
+      Section heading text (default: "Plans & Pricing")
+    </PropsTable.Prop>
+  </PropsTable.Row>
+  <PropsTable.Row>
+    <PropsTable.Prop name="description" type="string" optional>
+      Section description text
+    </PropsTable.Prop>
+  </PropsTable.Row>
+  <PropsTable.Row>
+    <PropsTable.Prop name="plans" type="PricingPlan[]" optional>
+      Array of pricing plans with features and pricing details
+    </PropsTable.Prop>
+  </PropsTable.Row>
+</PropsTable>
+
+## Variation
+
+<ComponentWithInstallation 
+  component={PricingVariation}
+  scale={0.5}
+  componentName="pricing-cards-1"
+  componentPath="registry/default/pricing-cards-1.tsx"
+  tailwindConfig={`// No additional configuration needed
+// Animations are included inline in the component`}
+  css={`/* Animations are dynamically generated within the component */`}
+/>
+
+
+## Types
+
+```typescript
+interface PricingFeature {
+  text: string;
+}
+
+interface PricingPlan {
+  id: string;
+  name: string;
+  description: string;
+  monthlyPrice: string;
+  yearlyPrice: string;
+  features: PricingFeature[];
+  button: {
+    text: string;
+    url: string;
+  };
+}
+```

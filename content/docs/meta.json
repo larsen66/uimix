@@ -4,7 +4,14 @@
     "index",
     "installation",
     "components",
-    "call-to-action"
+    "hero",
+    "call-to-action",
+    "faq",
+    "bento",
+    "login",
+    "pricing-cards",
+    "processing-card",
+    "fallback-card"
   ]
 }
 

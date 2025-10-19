@@ -1,0 +1,52 @@
+---
+title: FAQ with Spiral
+description: Interactive FAQ with animated golden spiral background and search
+---
+
+import { ComponentWithInstallation } from '@/components/ComponentWithInstallation';
+import { PropsTable } from '@/components/PropsTable';
+import { FeaturesList } from '@/components/FeaturesList';
+import FAQWithSpiral from '@/registry/default/faq-with-spiral';
+
+## FAQ with Spiral
+
+An interactive FAQ component featuring a mesmerizing golden spiral background animation. Includes search functionality, collapsible questions, and a customizable control panel for real-time spiral adjustments.
+
+<ComponentWithInstallation 
+  component={FAQWithSpiral}
+  scale={0.6}
+  componentName="faq-with-spiral"
+  componentPath="registry/default/faq-with-spiral.tsx"
+  tailwindConfig={`module.exports = {
+  theme: {
+    extend: {}
+  }
+}`}
+  css={`/* No additional CSS required - SVG animations are inline */`}
+/>
+
+### Usage
+
+```tsx
+import FAQWithSpiral from '@/registry/default/faq-with-spiral'
+
+export default function Page() {
+  return <FAQWithSpiral />
+}
+```
+
+<div className="mb-8" />
+
+## Features
+
+<FeaturesList features={[
+  { name: 'Golden Spiral', description: 'Beautiful Fibonacci spiral with configurable animation' },
+  { name: 'Search Functionality', description: 'Real-time filtering of FAQ items' },
+  { name: 'Interactive Controls', description: 'Live customization of spiral properties' },
+  { name: 'Gradient Options', description: '8 preset gradient styles including rainbow, ocean, neon' },
+  { name: 'Keyboard Shortcuts', description: 'H to toggle panel, R to randomize settings' },
+  { name: 'Responsive Grid', description: 'Two-column layout on desktop, single on mobile' }
+]} />
+
+
+

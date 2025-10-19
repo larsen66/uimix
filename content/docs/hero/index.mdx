@@ -1,0 +1,43 @@
+---
+title: Hero
+description: Hero sections for landing pages and product showcases
+---
+
+import MinimalHero from '@/registry/default/hero-minimalism';
+import HeroMonochromeLaunch from '@/registry/default/hero-monochrome-launch';
+import HeroOrbitDeck from '@/registry/default/hero-orbit-deck';
+import HeroDock from '@/registry/default/hero-dock';
+import { ComponentGrid } from '@/components/ComponentGrid';
+
+
+<ComponentGrid 
+  components={[
+    {
+      component: MinimalHero,
+      name: "Hero Minimalism",
+      href: "/docs/hero/Minimalism",
+      height: "h-96",
+      scale: 0.5
+    },
+    {
+      component: HeroMonochromeLaunch,
+      name: "Hero Monochrome Launch", 
+      href: "/docs/hero/Monochrome-Launch",
+      height: "h-96",
+      scale: 0.5
+    },
+    {
+      component: HeroOrbitDeck,
+      name: "Hero Orbit Deck",
+      href: "/docs/hero/Orbit-Deck", 
+      height: "h-96"
+    },
+    {
+      component: HeroDock,
+      name: "Hero Dock",
+      href: "/docs/hero/Dock",
+      height: "h-96"
+    }
+  ]}
+/>
+

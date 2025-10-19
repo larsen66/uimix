@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cta-with-video",
+  "type": "registry:block",
+  "title": "CTA with Video",
+  "description": "Hero section with autoplay video background and scramble button effect",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "registry/default/cta-with-video.tsx",
+      "content": "\"use client\";\n\nimport { useState } from \"react\";\n\nfunction ScrambleButton() {\n  const [displayText, setDisplayText] = useState(\"Read More\");\n  const [isScrambling, setIsScrambling] = useState(false);\n  const originalText = \"Read More\";\n  const chars = \"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*\";\n\n  const scramble = () => {\n    if (isScrambling) return;\n    setIsScrambling(true);\n    \n    let iteration = 0;\n    const maxIterations = originalText.length;\n\n    const interval = setInterval(() => {\n      setDisplayText(() =>\n        originalText\n          .split(\"\")\n          .map((letter, index) => {\n            if (index < iteration) {\n              return originalText[index];\n            }\n            return chars[Math.floor(Math.random() * chars.length)];\n          })\n          .join(\"\")\n      );\n\n      if (iteration >= maxIterations) {\n        clearInterval(interval);\n        setIsScrambling(false);\n      }\n\n      iteration += 1 / 3;\n    }, 30);\n  };\n\n  return (\n    <button\n      onMouseEnter={scramble}\n      className=\"px-8 py-3 bg-primary text-primary-foreground rounded-full font-semibold hover:bg-primary/90 transition-colors\"\n    >\n      {displayText}\n    </button>\n  );\n}\n\nexport default function HeroWithVideo() {\n  return (\n    <div className=\"min-h-screen bg-background text-foreground flex items-center overflow-hidden\">\n      <div className=\"w-full\">\n        <div className=\"flex flex-col lg:flex-row items-center lg:gap-8\">\n          {/* Left Content */}\n          <div className=\"flex-shrink-0 space-y-6 px-6 lg:px-12 py-12 lg:py-0 lg:max-w-2xl\">\n            <h1 className=\"text-4xl md:text-5xl lg:text-6xl font-bold leading-tight\">\n              Experience Next-Gen AI Video Generation\n            </h1>\n            <div className=\"space-y-1 text-muted-foreground\">\n              <p className=\"text-lg\">Powered by Ray2 API</p>\n              <p className=\"text-lg\">Advanced AI Technology</p>\n            </div>\n            <ScrambleButton />\n          </div>\n\n          {/* Right Video */}\n          <div className=\"flex-1 w-full lg:w-auto overflow-hidden rounded-2xl lg:rounded-none\">\n            <video\n              src=\"https://static.cdn-luma.com/files/site/api/ray2/RAY2%20API%20Launch%20Twitter_smaller.mp4\"\n              autoPlay\n              loop\n              muted\n              playsInline\n              className=\"w-full h-auto object-cover\"\n            />\n          </div>\n        </div>\n      </div>\n    </div>\n  );\n}\n\n",
+      "type": "registry:component"
+    }
+  ]
+}
