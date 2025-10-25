@@ -156,12 +156,6 @@ const Pricing2 = ({
       className="relative min-h-screen py-24 md:py-32 bg-zinc-950 text-zinc-50 overflow-hidden isolate"
     >
       <style>{`
-        :where(html, body, #__next){
-          margin:0; min-height:100%;
-          background:#0b0b0c; color:#f6f7f8; color-scheme:dark;
-          overflow-x:hidden; scrollbar-gutter:stable both-edges;
-        }
-        html{ background:#0b0b0c }
         section[data-locked]{ color:#f6f7f8; color-scheme:dark }
         .accent-lines{position:absolute;inset:0;pointer-events:none;opacity:.7}
         .hline,.vline{position:absolute;background:#27272a}

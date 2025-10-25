@@ -144,10 +144,6 @@ const Pricing = () => {
       className={`relative w-full min-h-screen overflow-hidden ${ready ? "is-ready" : ""}`}
     >
       <style>{`
-        :where(html, body, #__next){
-          margin:0; min-height:100%; background:var(--bg); color:var(--text);
-          overflow-x:hidden; scrollbar-gutter: stable both-edges;
-        }
         section[data-locked]{background:var(--bg);color:var(--text);color-scheme:dark}
         @media (prefers-color-scheme: light){section[data-locked]{background:var(--bg);color:var(--text);color-scheme:dark}}
         .accent-lines{position:absolute;inset:0;pointer-events:none;opacity:.7}
