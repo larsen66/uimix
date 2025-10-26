@@ -95,26 +95,26 @@ export default function CTAWithHorizontalMarquee() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex items-center justify-center px-6 py-12 overflow-hidden">
+    <div className="min-h-screen bg-black text-white flex items-center justify-center px-6 py-12 overflow-hidden">
       <div className="w-full animate-fade-in-up">
         <div className="flex flex-col gap-12 lg:gap-16">
           {/* Top Content */}
           <div className="space-y-8 max-w-3xl mx-auto text-center px-6">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium leading-tight tracking-tight text-foreground animate-fade-in-up [animation-delay:200ms]">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium leading-tight tracking-tight text-white animate-fade-in-up [animation-delay:200ms]">
               Get Started in Minutes
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed animate-fade-in-up [animation-delay:400ms]">
+            <p className="text-lg md:text-xl text-white/70 leading-relaxed animate-fade-in-up [animation-delay:400ms]">
               Start getting more distribution and ROI out of your content. Try
               Assembly for free for 14 days.
             </p>
             <div className="flex flex-wrap gap-4 justify-center animate-fade-in-up [animation-delay:600ms]">
-              <button className="group relative px-6 py-3 bg-foreground text-background rounded-md font-medium overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg">
+              <button className="group relative px-6 py-3 bg-white text-black rounded-md font-medium overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg">
                 <span className="relative z-10">START FREE TRIAL</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
               </button>
-              <button className="group relative px-6 py-3 bg-secondary text-secondary-foreground rounded-md font-medium overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg border border-border">
+              <button className="group relative px-6 py-3 bg-white/10 text-white rounded-md font-medium overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-lg border border-white/20">
                 <span className="relative z-10">BOOK A 15 MINUTE DEMO</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-foreground/10 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
               </button>
             </div>
           </div>
@@ -126,7 +126,7 @@ export default function CTAWithHorizontalMarquee() {
                 {marqueeItems.map((item, idx) => (
                   <div
                     key={idx}
-                    className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light tracking-tight px-12 marquee-item-horizontal whitespace-nowrap"
+                    className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light tracking-tight px-12 marquee-item-horizontal whitespace-nowrap text-white"
                   >
                     {item}
                   </div>
@@ -134,10 +134,10 @@ export default function CTAWithHorizontalMarquee() {
               </HorizontalMarquee>
               
               {/* Left vignette */}
-              <div className="pointer-events-none absolute top-0 left-0 bottom-0 w-64 bg-gradient-to-r from-background via-background/50 to-transparent z-10"></div>
+              <div className="pointer-events-none absolute top-0 left-0 bottom-0 w-64 bg-gradient-to-r from-black via-black/50 to-transparent z-10"></div>
               
               {/* Right vignette */}
-              <div className="pointer-events-none absolute top-0 right-0 bottom-0 w-64 bg-gradient-to-l from-background via-background/50 to-transparent z-10"></div>
+              <div className="pointer-events-none absolute top-0 right-0 bottom-0 w-64 bg-gradient-to-l from-black via-black/50 to-transparent z-10"></div>
             </div>
           </div>
         </div>
@@ -145,5 +145,4 @@ export default function CTAWithHorizontalMarquee() {
     </div>
   );
 }
-
 

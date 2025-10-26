@@ -1,5 +1,4 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
-import Image from 'next/image';
 
 /**
  * Shared layout configurations
@@ -10,19 +9,10 @@ import Image from 'next/image';
  */
 export function baseOptions(): BaseLayoutProps {
   return {
+    // Disable all navigation for fullscreen canvas
     nav: {
-      title: (
-        <>
-          <Image
-            src="/logo.png"
-            alt="UIMix Logo"
-            width={24}
-            height={24}
-            className="mr-2"
-          />
-          UIMix
-        </>
-      ),
+      enabled: false,
+      transparentMode: "none",
     },
     // see https://fumadocs.dev/docs/ui/navigation/links
     links: [],

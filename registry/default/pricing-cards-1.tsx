@@ -141,7 +141,7 @@ const Pricing = () => {
           ["--btn-ghost-hover" as any]: "rgba(255,255,255,0.04)",
         } as React.CSSProperties
       }
-      className={`relative w-full min-h-screen overflow-hidden ${ready ? "is-ready" : ""}`}
+      className={`relative w-full overflow-hidden ${ready ? "is-ready" : ""}`}
     >
       <style>{`
         section[data-locked]{background:var(--bg);color:var(--text);color-scheme:dark}

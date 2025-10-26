@@ -1,0 +1,40 @@
+---
+title: Video Masonry
+description: Автоматическая раскладка видео как Masonry/Bento
+---
+
+import Masonry from '@/components/ui/Masonry';
+
+{/*
+  Галерея видео в масонри-сетке. Видео разной высоты автоматически 
+  укладываются по колонкам без наложений.
+*/}
+
+export const dynamic = 'force-static';
+
+<div className="space-y-6">
+  <p className="text-muted-foreground">
+    Видео разных размеров размещаются автоматически как Masonry. 
+    Работает на CSS columns с предотвращением разрывов внутри элементов.
+  </p>
+
+  <Masonry className="w-full" columnsClassName="columns-1 sm:columns-2 lg:columns-3 xl:columns-4" gapClassName="gap-4">
+    {/* Локальные видео из /public/videos */}
+    <video src="/videos/bgblue.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <video src="/videos/faq-monochrome.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <video src="/videos/faq-with-spiral.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <video src="/videos/hero-minimalism.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <video src="/videos/hero-orbit.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <video src="/videos/processing_card.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <video src="/videos/fallback-card.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <video src="/videos/monochrome-bento.mp4" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <video src="/videos/dock.mp4" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <video src="/videos/ctamarquee.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <video src="/videos/ctatextmarque.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <video src="/videos/pricing2.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <video src="/videos/heroascii1.mp4" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <video src="/videos/heroascii2.mp4" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <video src="/videos/herobyd.mp4" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+  </Masonry>
+</div>
+

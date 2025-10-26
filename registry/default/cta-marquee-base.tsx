@@ -115,17 +115,17 @@ function ScrambleButton() {
 
 export default function HeroWithMarquee() {
   return (
-    <div className="min-h-screen bg-background text-foreground flex items-center overflow-hidden relative">
+    <div className="min-h-screen bg-black text-white flex items-center overflow-hidden relative">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Left Content */}
           <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
               The Future of Creative Design
             </h1>
-            <div className="space-y-1 text-muted-foreground">
-              <p className="text-lg">March 2025</p>
-              <p className="text-lg">Design Studio</p>
+            <div className="space-y-1 text-white/70">
+              <p className="text-lg text-white/70">March 2025</p>
+              <p className="text-lg text-white/70">Design Studio</p>
             </div>
             <ScrambleButton />
           </div>
@@ -163,12 +163,11 @@ export default function HeroWithMarquee() {
               ))}
             </Marquee>
             {/* Vignette edges */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent"></div>
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent"></div>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black to-transparent"></div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black to-transparent"></div>
           </div>
         </div>
       </div>
     </div>
   );
 }
-

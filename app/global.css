@@ -2,6 +2,40 @@
 @import 'fumadocs-ui/css/dusk.css';
 @import 'fumadocs-ui/css/preset.css';
 
+/* Fullscreen canvas styles (scoped) */
+html.canvas-fullscreen, html.canvas-fullscreen body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+/* Hide all navigation elements only in canvas view */
+html.canvas-fullscreen [data-fumadocs-nav],
+html.canvas-fullscreen nav,
+html.canvas-fullscreen header,
+html.canvas-fullscreen .navbar,
+html.canvas-fullscreen .navigation,
+html.canvas-fullscreen .sidebar,
+html.canvas-fullscreen .footer {
+  display: none !important;
+}
+
+/* Ensure no scrollbars appear in canvas view */
+html.canvas-fullscreen * {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html.canvas-fullscreen *::-webkit-scrollbar {
+  display: none;
+}
+
 
 @theme {
     --color-fd-background: hsl(0, 0%, 96%);

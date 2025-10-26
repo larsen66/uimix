@@ -112,7 +112,7 @@ export default function MinimalHero() {
 .minimal-root {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 900px;
   min-height: 600px;
   overflow: hidden;
 

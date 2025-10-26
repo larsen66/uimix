@@ -153,7 +153,7 @@ const Pricing2 = ({
   return (
     <section
       data-locked
-      className="relative min-h-screen py-24 md:py-32 bg-zinc-950 text-zinc-50 overflow-hidden isolate"
+      className="relative py-16 md:py-20 bg-zinc-950 text-zinc-50 overflow-hidden isolate"
     >
       <style>{`
         section[data-locked]{ color:#f6f7f8; color-scheme:dark }

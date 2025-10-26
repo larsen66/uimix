@@ -115,17 +115,17 @@ function ScrambleButton() {
 
 export default function HeroWithMarqueeLarge() {
   return (
-    <div className="min-h-screen bg-background text-foreground flex items-center overflow-hidden">
+    <div className="min-h-screen bg-black text-white flex items-center overflow-hidden">
       <div className="w-full">
         <div className="flex flex-col lg:flex-row items-center lg:gap-4">
           {/* Left Content */}
           <div className="flex-shrink-0 space-y-6 px-6 lg:px-12 py-12 lg:py-0 lg:max-w-2xl">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
               Discover Innovation Through Design
             </h1>
-            <div className="space-y-1 text-muted-foreground">
-              <p className="text-lg">Spring 2025</p>
-              <p className="text-lg">Creative Lab</p>
+            <div className="space-y-1 text-white/70">
+              <p className="text-lg text-white/70">Spring 2025</p>
+              <p className="text-lg text-white/70">Creative Lab</p>
             </div>
             <ScrambleButton />
           </div>
