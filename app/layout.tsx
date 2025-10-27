@@ -1,15 +1,16 @@
 import '@/app/global.css';
 import { RootProvider } from 'fumadocs-ui/provider/next';
-import { Inter, Space_Grotesk } from 'next/font/google';
 
-const inter = Inter({
-  subsets: ['latin'],
-});
+// Use system fonts instead of Google Fonts to avoid network issues
+const inter = {
+  className: 'font-sans',
+  variable: '',
+};
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
+const spaceGrotesk = {
+  className: '',
   variable: '--font-space-grotesk',
-});
+};
 
 export default function Layout({ children }: LayoutProps<'/'>) {
   return (

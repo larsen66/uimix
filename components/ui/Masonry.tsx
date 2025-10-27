@@ -37,9 +37,8 @@ export function Masonry({
           className="mb-4"
           style={{
             breakInside: "avoid",
-            WebkitColumnBreakInside: "avoid",
             pageBreakInside: "avoid",
-          }}
+          } as React.CSSProperties}
         >
           {child}
         </div>

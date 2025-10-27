@@ -15,6 +15,16 @@ html.canvas-fullscreen, html.canvas-fullscreen body {
   left: 0;
 }
 
+/* Home page canvas styles */
+html.home-canvas, html.home-canvas body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+}
+
 /* Hide all navigation elements only in canvas view */
 html.canvas-fullscreen [data-fumadocs-nav],
 html.canvas-fullscreen nav,

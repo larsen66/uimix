@@ -30,8 +30,8 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-frame-component": "^5.2.6",
-    "react-zoom-pan-pinch": "^3.7.0",
     "react-responsive-masonry": "^2.4.0",
+    "react-zoom-pan-pinch": "^3.7.0",
     "shadcn": "^2.9.3-canary.0",
     "tailwind-merge": "^3.3.1",
     "three": "^0.180.0"
