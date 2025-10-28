@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import type { ReactZoomPanPinchRef } from 'react-zoom-pan-pinch';
-import Masonry from "@/components/ui/Masonry";
+import { Masonry } from "@/components/ui/Masonry";
 import { CanvasComponentModal } from "@/components/CanvasComponentModal";
 import { Settings2Icon, X, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 
@@ -323,7 +323,7 @@ const CanvasContentWithContext: React.FC<CanvasContentProps> = ({
                 </Masonry>
               </motion.div>
             </div>
-          </TransformComponent>+
+          </TransformComponent>
         </>
       )}
 
@@ -605,9 +605,12 @@ export const InfiniteCanvasGrid: React.FC = () => {
             variant="outline"
             className="h-9 rounded-full border-white/20 cursor-pointer text-fd-muted-foreground hover:text-white bg-black/40 hover:bg-white/10"
             onClick={() => setShowControlPanel(!showControlPanel)}
+            aria-label={showControlPanel ? "Hide controls" : "Show controls"}
+            aria-expanded={showControlPanel}
+            aria-controls="canvas-controls-panel"
           >
             {showControlPanel ? (
-              <X/>
+              <X />
             ) : (<Settings2Icon />)}
           </Button>
           <div className="flex items-center gap-2">
@@ -636,66 +639,68 @@ export const InfiniteCanvasGrid: React.FC = () => {
           </div>
 
         </div>
-      )}
+      )
+      }
 
 
       {/* Control Panel */}
-      {!selectedComponent && showControlPanel && (
-        <div className="fixed top-16 right-4 z-[50] bg-black/80 backdrop-blur-sm border border-white/20 rounded-lg p-4 min-w-[300px]">
-          <h3 className="text-white text-sm font-medium mb-3">Camera Position Control</h3>
+      {
+        !selectedComponent && showControlPanel && (
+          <div id="canvas-controls-panel" className="fixed top-16 right-4 z-[50] bg-black/80 backdrop-blur-sm border border-white/20 rounded-lg p-4 min-w-[300px]">
 
-          <div className="space-y-4">
-            <div>
-              <label className="text-white text-xs block mb-1">X Position: {cameraPosition.x}</label>
-              <input
-                type="range"
-                min="0"
-                max={CANVAS_SIZE}
-                value={cameraPosition.x}
-                onChange={(e) => setCameraPosition(prev => ({ ...prev, x: Number(e.target.value) }))}
-                className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer"
-              />
-            </div>
+            <div className="space-y-4">
+              <div>
+                <label className="text-white text-xs block mb-1">X Position: {cameraPosition.x}</label>
+                <input
+                  type="range"
+                  min="0"
+                  max={CANVAS_SIZE}
+                  value={cameraPosition.x}
+                  onChange={(e) => setCameraPosition(prev => ({ ...prev, x: Number(e.target.value) }))}
+                  className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer"
+                />
+              </div>
 
-            <div>
-              <label className="text-white text-xs block mb-1">Y Position: {cameraPosition.y}</label>
-              <input
-                type="range"
-                min="0"
-                max={CANVAS_SIZE}
-                value={cameraPosition.y}
-                onChange={(e) => setCameraPosition(prev => ({ ...prev, y: Number(e.target.value) }))}
-                className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer"
-              />
-            </div>
+              <div>
+                <label className="text-white text-xs block mb-1">Y Position: {cameraPosition.y}</label>
+                <input
+                  type="range"
+                  min="0"
+                  max={CANVAS_SIZE}
+                  value={cameraPosition.y}
+                  onChange={(e) => setCameraPosition(prev => ({ ...prev, y: Number(e.target.value) }))}
+                  className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer"
+                />
+              </div>
 
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="flex-1 text-white border-white/20 bg-black/40 hover:bg-white/10"
-                onClick={() => {
-                  setCameraPosition({ x: 3500, y: 3380 });
-                  focalZoom(cameraPosition, getTZPState().scale ?? 1, 0);
-                }}
-              >
-                Reset to Center
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="flex-1 text-white border-white/20 bg-black/40 hover:bg-white/10"
-                onClick={() => {
-                  focalZoom(cameraPosition, getTZPState().scale ?? 1, 0);
-                }}
-              >
-                Apply Position
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 text-white border-white/20 bg-black/40 hover:bg-white/10"
+                  onClick={() => {
+                    setCameraPosition({ x: 3500, y: 3380 });
+                    focalZoom(cameraPosition, getTZPState().scale ?? 1, 0);
+                  }}
+                >
+                  Reset to Center
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 text-white border-white/20 bg-black/40 hover:bg-white/10"
+                  onClick={() => {
+                    focalZoom(cameraPosition, getTZPState().scale ?? 1, 0);
+                  }}
+                >
+                  Apply Position
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
-    </motion.div>
+    </motion.div >
   );
 };
