@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import type { ReactZoomPanPinchRef } from 'react-zoom-pan-pinch';
-import Masonry from "@/components/ui/Masonry";
+import { Masonry } from "@/components/ui/Masonry";
 import { CanvasComponentModal } from "@/components/CanvasComponentModal";
+import { Settings2Icon, X, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 
 // Extend Window interface to include ResizeObserver and MutationObserver
 declare global {
@@ -18,10 +19,10 @@ declare global {
 }
 
 const DEBUG = false;
-  // Debug all video components
-  const debugVideo = (...args: unknown[]) => {
-    if (DEBUG && typeof window !== 'undefined') console.log('[VideoDebug]', ...args);
-  };
+// Debug all video components
+const debugVideo = (...args: unknown[]) => {
+  if (DEBUG && typeof window !== 'undefined') console.log('[VideoDebug]', ...args);
+};
 
 // Video mapping for components that have video recordings
 const componentVideoMap: Record<string, string> = {
@@ -114,7 +115,7 @@ const MASONRY_HEIGHT = 800; // Approximate height
 
 // Center of masonry container (since it's positioned with transform: translate(-50%, -50%))
 // The masonry center is exactly at CANVAS_ORIGIN due to translate(-50%, -50%)
-const MASONRY_CENTER = { 
+const MASONRY_CENTER = {
   x: CANVAS_ORIGIN.x, // 3000 - absolute coordinates
   y: CANVAS_ORIGIN.y  // 3000 - absolute coordinates
 };
@@ -174,189 +175,188 @@ const CanvasContentWithContext: React.FC<CanvasContentProps> = ({
     []
   );
 
-  useEffect(() => {}, [showGrid, showOrigin]);
+  useEffect(() => { }, [showGrid, showOrigin]);
 
   return (
-      <div
-        className={`fixed inset-0 w-screen h-screen bg-black transition-all duration-300 ${
-          selectedComponent ? 'backdrop-blur-md' : ''
+    <div
+      className={`fixed inset-0 w-screen h-screen bg-black transition-all duration-300 ${selectedComponent ? 'backdrop-blur-md' : ''
         }`}
-        style={{ overflow: 'hidden', margin: 0, padding: 0 } as React.CSSProperties}
-      >
-        {/* Hide canvas content when modal is open */}
-        {selectedComponent === null && (
-          <>
-            {showGrid && (
-          <div
-            className="absolute inset-0 opacity-30 pointer-events-none"
-            style={{
-              backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-              backgroundSize: '40px 40px'
-            }}
-          />
-        )}
+      style={{ overflow: 'hidden', margin: 0, padding: 0 } as React.CSSProperties}
+    >
+      {/* Hide canvas content when modal is open */}
+      {selectedComponent === null && (
+        <>
+          {showGrid && (
+            <div
+              className="absolute inset-0 opacity-30 pointer-events-none"
+              style={{
+                backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+                backgroundSize: '40px 40px'
+              }}
+            />
+          )}
 
-        <TransformComponent
-          wrapperClass="absolute inset-0"
-          contentClass="relative"
-        >
-          <div className="relative" style={{ width: CANVAS_SIZE, height: CANVAS_SIZE }}>
-            {/* Canvas origin marker */}
-            {showOrigin && (
-              <div
+          <TransformComponent
+            wrapperClass="absolute inset-0"
+            contentClass="relative"
+          >
+            <div className="relative" style={{ width: CANVAS_SIZE, height: CANVAS_SIZE }}>
+              {/* Canvas origin marker */}
+              {showOrigin && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: CANVAS_ORIGIN.x - 6,
+                    top: CANVAS_ORIGIN.y - 6,
+                    width: 12,
+                    height: 12,
+                    borderRadius: 9999,
+                    background: 'rgba(255,0,0,0.8)',
+                    boxShadow: '0 0 0 2px rgba(255,255,255,0.4)'
+                  }}
+                />
+              )}
+              {/* Video Masonry inside the canvas */}
+              <motion.div
                 style={{
                   position: 'absolute',
-                  left: CANVAS_ORIGIN.x - 6,
-                  top: CANVAS_ORIGIN.y - 6,
-                  width: 12,
-                  height: 12,
-                  borderRadius: 9999,
-                  background: 'rgba(255,0,0,0.8)',
-                  boxShadow: '0 0 0 2px rgba(255,255,255,0.4)'
+                  left: CANVAS_ORIGIN.x,
+                  top: CANVAS_ORIGIN.y,
+                  transform: 'translate(-50%, -50%)',
+                  width: '1200px',
+                  zIndex: 100,
                 }}
-              />
-            )}
-            {/* Video Masonry inside the canvas */}
-            <motion.div
-              style={{
-                position: 'absolute',
-                left: CANVAS_ORIGIN.x,
-                top: CANVAS_ORIGIN.y,
-                transform: 'translate(-50%, -50%)',
-                width: '1200px',
-                zIndex: 100,
-              }}
-              initial={{ 
-                opacity: 0, 
-                scale: 0.8,
-                y: 100
-              }}
-              animate={{ 
-                opacity: 1, 
-                scale: 1,
-                y: 0
-              }}
-              transition={{ 
-                duration: 0.8,
-                delay: 0.3,
-                ease: [0.4, 0.0, 0.2, 1],
-                type: "spring",
-                stiffness: 80,
-                damping: 20
-              }}
-            >
-              <Masonry
-                className="w-full"
-                columnsClassName="columns-1 sm:columns-2 lg:columns-3 xl:columns-4"
-                gapClassName="gap-4"
+                initial={{
+                  opacity: 0,
+                  scale: 0.8,
+                  y: 100
+                }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                  y: 0
+                }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.3,
+                  ease: [0.4, 0.0, 0.2, 1],
+                  type: "spring",
+                  stiffness: 80,
+                  damping: 20
+                }}
               >
-                {masonryVideoOrder.map((name, i) => {
-                  const item = componentRegistry.find((c) => c.name === name);
-                  const videoSrc = componentVideoMap[name];
-                  if (!videoSrc) return null;
+                <Masonry
+                  className="w-full"
+                  columnsClassName="columns-1 sm:columns-2 lg:columns-3 xl:columns-4"
+                  gapClassName="gap-4"
+                >
+                  {masonryVideoOrder.map((name, i) => {
+                    const item = componentRegistry.find((c) => c.name === name);
+                    const videoSrc = componentVideoMap[name];
+                    if (!videoSrc) return null;
 
-                  const Preview = item?.component as React.ComponentType | undefined;
-                  debugVideo(`🎬 ${name} | Video: ${videoSrc} | Preview: ${Preview ? 'yes' : 'no'}`);
+                    const Preview = item?.component as React.ComponentType | undefined;
+                    debugVideo(`🎬 ${name} | Video: ${videoSrc} | Preview: ${Preview ? 'yes' : 'no'}`);
 
-                  return (
-                    <motion.div
-                      key={`${name}-${i}`}
-                      role={Preview ? 'button' : undefined}
-                      aria-label={Preview ? `Open preview of ${name}` : undefined}
-                      onClick={() => {
-                        if (Preview && item) {
-                          console.log(`Masonry item ${i} clicked: ${name}`);
-                          setSelectedComponent({ component: Preview, name, description: item.description });
-                        }
-                      }}
-                      style={{
-                        width: '100%',
-                        borderRadius: '12px',
-                        position: 'relative',
-                        overflow: 'hidden',
-                        border: '1px solid rgba(255,255,255,0.12)'
-                      }}
-                      initial={{ 
-                        opacity: 0, 
-                        scale: 0.3,
-                        y: 50
-                      }}
-                      animate={{ 
-                        opacity: 1, 
-                        scale: 1,
-                        y: 0
-                      }}
-                      transition={{ 
-                        duration: 0.6,
-                        delay: i * 0.1, // Staggered animation
-                        ease: [0.4, 0.0, 0.2, 1],
-                        type: "spring",
-                        stiffness: 100,
-                        damping: 15
-                      }}
-                      whileHover={{ 
-                        scale: 1.05,
-                        transition: { duration: 0.2 }
-                      }}
-                      whileTap={{ 
-                        scale: 0.95,
-                        transition: { duration: 0.1 }
-                      }}
-                    >
-                    {/* Title badge removed per request */}
-                      <video
-                        src={videoSrc}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        style={{ width: '100%', height: 'auto', display: 'block' }}
-                        onError={(e) => {
-                          console.log('Video error for:', name);
-                          (e.target as HTMLVideoElement).style.display = 'none';
+                    return (
+                      <motion.div
+                        key={`${name}-${i}`}
+                        role={Preview ? 'button' : undefined}
+                        aria-label={Preview ? `Open preview of ${name}` : undefined}
+                        onClick={() => {
+                          if (Preview && item) {
+                            console.log(`Masonry item ${i} clicked: ${name}`);
+                            setSelectedComponent({ component: Preview, name, description: item.description });
+                          }
                         }}
-                        onLoadedData={() => console.log(`Video loaded: ${name}`)}
-                      />
-                    </motion.div>
-                  );
-                })}
-              </Masonry>
-            </motion.div>
-          </div>
-        </TransformComponent>
-          </>
+                        style={{
+                          width: '100%',
+                          borderRadius: '12px',
+                          position: 'relative',
+                          overflow: 'hidden',
+                          border: '1px solid rgba(255,255,255,0.12)'
+                        }}
+                        initial={{
+                          opacity: 0,
+                          scale: 0.3,
+                          y: 50
+                        }}
+                        animate={{
+                          opacity: 1,
+                          scale: 1,
+                          y: 0
+                        }}
+                        transition={{
+                          duration: 0.6,
+                          delay: i * 0.1, // Staggered animation
+                          ease: [0.4, 0.0, 0.2, 1],
+                          type: "spring",
+                          stiffness: 100,
+                          damping: 15
+                        }}
+                        whileHover={{
+                          scale: 1.05,
+                          transition: { duration: 0.2 }
+                        }}
+                        whileTap={{
+                          scale: 0.95,
+                          transition: { duration: 0.1 }
+                        }}
+                      >
+                        {/* Title badge removed per request */}
+                        <video
+                          src={videoSrc}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          style={{ width: '100%', height: 'auto', display: 'block' }}
+                          onError={(e) => {
+                            console.log('Video error for:', name);
+                            (e.target as HTMLVideoElement).style.display = 'none';
+                          }}
+                          onLoadedData={() => console.log(`Video loaded: ${name}`)}
+                        />
+                      </motion.div>
+                    );
+                  })}
+                </Masonry>
+              </motion.div>
+            </div>
+          </TransformComponent>
+        </>
+      )}
+
+      <AnimatePresence mode="wait">
+        {selectedComponent && (
+          <motion.div
+            key="modal"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <CanvasComponentModal
+              component={selectedComponent.component}
+              componentName={selectedComponent.name}
+              description={selectedComponent.description}
+              scale={0.7}
+              onClose={() => {
+                // Закрываем компонент
+                setSelectedComponent(null);
+
+                // Вызываем функцию центрирования если она передана
+                if (onComponentClose) {
+                  setTimeout(() => {
+                    onComponentClose();
+                  }, 200);
+                }
+              }}
+            />
+          </motion.div>
         )}
-        
-        <AnimatePresence mode="wait">
-          {selectedComponent && (
-            <motion.div
-              key="modal"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <CanvasComponentModal
-                component={selectedComponent.component}
-                componentName={selectedComponent.name}
-                description={selectedComponent.description}
-                scale={0.7}
-                onClose={() => {
-                  // Закрываем компонент
-                  setSelectedComponent(null);
-                  
-                  // Вызываем функцию центрирования если она передана
-                  if (onComponentClose) {
-                    setTimeout(() => {
-                      onComponentClose();
-                    }, 200);
-                  }
-                }}
-              />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+      </AnimatePresence>
+    </div>
   );
 };
 
@@ -384,7 +384,7 @@ export const InfiniteCanvasGrid: React.FC = () => {
 
     // Use manual camera position if available, otherwise use target
     const focalPoint = target || cameraPosition;
-    
+
     // Position the world point target at screen center
     const newPosX = cx - focalPoint.x * nextScale;
     const newPosY = cy - focalPoint.y * nextScale;
@@ -411,11 +411,11 @@ export const InfiniteCanvasGrid: React.FC = () => {
     });
 
     try { ref.setTransform(newPosX, newPosY, nextScale, duration); }
-    catch { try { ref.setTransform(newPosX, newPosY, nextScale); } catch {} }
+    catch { try { ref.setTransform(newPosX, newPosY, nextScale); } catch { } }
   }, [cameraPosition]);
 
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   // Отслеживаем взаимодействие пользователя
   useEffect(() => {
@@ -463,7 +463,7 @@ export const InfiniteCanvasGrid: React.FC = () => {
     const scaleX = wx / MASONRY_WIDTH;
     const scaleY = wy / MASONRY_HEIGHT;
     const s = Math.min(scaleX, scaleY, 1.125);
-    
+
     // Центрируем с анимацией (вместо duration: 0 как в centerOnce)
     focalZoom(cameraPosition, s, 800);
   }, [cameraPosition, focalZoom]);
@@ -531,7 +531,7 @@ export const InfiniteCanvasGrid: React.FC = () => {
         const nextY = posY + dy;
 
         try { ref.setTransform(nextX, nextY, s, 0); }
-        catch { try { ref.setTransform(nextX, nextY, s); } catch {} }
+        catch { try { ref.setTransform(nextX, nextY, s); } catch { } }
       };
       el.addEventListener('wheel', onWheel as EventListener, { passive: false } as AddEventListenerOptions);
       return () => {
@@ -566,6 +566,7 @@ export const InfiniteCanvasGrid: React.FC = () => {
         overflow: 'hidden',
         width: '100vw',
         height: '100vh',
+        cursor: 'grab',
         overscrollBehavior: 'none',
         overscrollBehaviorX: 'none',
         overscrollBehaviorY: 'none'
@@ -583,9 +584,9 @@ export const InfiniteCanvasGrid: React.FC = () => {
         pinch={{ disabled: true }}   // <-- свой pinch на wheel+ctrlKey
         wheel={{ disabled: true }}   // <-- свой wheel-обработчик
         doubleClick={{ disabled: true }}
-        panning={{ 
+        panning={{
           disabled: !!selectedComponent,  // Отключаем panning когда открыт компонент
-          velocityDisabled: false 
+          velocityDisabled: false
         }}
       >
         <CanvasContentWithContext
@@ -596,104 +597,110 @@ export const InfiniteCanvasGrid: React.FC = () => {
           onComponentClose={centerCameraOnClose}
         />
       </TransformWrapper>
-      
+
       {/* Control Panel Toggle */}
       {!selectedComponent && (
-        <div className="fixed top-4 right-4 z-[50]">
+        <div className="fixed bg-white/10 backdrop-blur-md  top-4 right-4 z-[50] flex gap-4 border border-white/20 shadow-2xs py-2 px-2 rounded-full">
           <Button
             variant="outline"
-            className="h-9 px-3 rounded-full border-white/20 text-white bg-black/40 hover:bg-white/10"
+            className="h-9 rounded-full border-white/20 cursor-pointer text-fd-muted-foreground hover:text-white bg-black/40 hover:bg-white/10"
             onClick={() => setShowControlPanel(!showControlPanel)}
+            aria-label={showControlPanel ? "Hide controls" : "Show controls"}
+            aria-expanded={showControlPanel}
+            aria-controls="canvas-controls-panel"
           >
-            {showControlPanel ? 'Hide Controls' : 'Show Controls'}
+            {showControlPanel ? (
+              <X />
+            ) : (<Settings2Icon />)}
           </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              className="h-9 w-9 rounded-full border-white/20 cursor-pointer text-fd-muted-foreground hover:text-white bg-black/40 hover:bg-white/10"
+              aria-label="Zoom out"
+              onClick={() => {
+                const s = getTZPState().scale ?? 1;
+                focalZoom(cameraPosition, Math.max(MIN_SCALE, s * 0.9), 0);
+              }}
+            >
+              <ZoomOutIcon />
+            </Button>
+            <Button
+              variant="outline"
+              className="h-9 w-9 rounded-full border-white/20 cursor-pointer text-fd-muted-foreground hover:text-white bg-black/40 hover:bg-white/10"
+              aria-label="Zoom in"
+              onClick={() => {
+                const s = getTZPState().scale ?? 1;
+                focalZoom(cameraPosition, Math.min(MAX_SCALE, s * 1.1), 0);
+              }}
+            >
+              <ZoomInIcon />
+            </Button>
+          </div>
+
         </div>
-      )}
+      )
+      }
+
 
       {/* Control Panel */}
-      {!selectedComponent && showControlPanel && (
-        <div className="fixed top-16 right-4 z-[50] bg-black/80 backdrop-blur-sm border border-white/20 rounded-lg p-4 min-w-[300px]">
-          <h3 className="text-white text-sm font-medium mb-3">Camera Position Control</h3>
-          
-          <div className="space-y-4">
-            <div>
-              <label className="text-white text-xs block mb-1">X Position: {cameraPosition.x}</label>
-              <input
-                type="range"
-                min="0"
-                max={CANVAS_SIZE}
-                value={cameraPosition.x}
-                onChange={(e) => setCameraPosition(prev => ({ ...prev, x: Number(e.target.value) }))}
-                className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer"
-              />
-            </div>
-            
-            <div>
-              <label className="text-white text-xs block mb-1">Y Position: {cameraPosition.y}</label>
-              <input
-                type="range"
-                min="0"
-                max={CANVAS_SIZE}
-                value={cameraPosition.y}
-                onChange={(e) => setCameraPosition(prev => ({ ...prev, y: Number(e.target.value) }))}
-                className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer"
-              />
-            </div>
-            
-            <div className="flex gap-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="flex-1 text-white border-white/20 bg-black/40 hover:bg-white/10"
-                onClick={() => {
-                  setCameraPosition({ x: 3500, y: 3380 });
-                  focalZoom(cameraPosition, getTZPState().scale ?? 1, 0);
-                }}
-              >
-                Reset to Center
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="flex-1 text-white border-white/20 bg-black/40 hover:bg-white/10"
-                onClick={() => {
-                  focalZoom(cameraPosition, getTZPState().scale ?? 1, 0);
-                }}
-              >
-                Apply Position
-              </Button>
+      {
+        !selectedComponent && showControlPanel && (
+          <div id="canvas-controls-panel" className="fixed top-16 right-4 z-[50] bg-black/80 backdrop-blur-sm border border-white/20 rounded-lg p-4 min-w-[300px]">
+
+            <div className="space-y-4">
+              <div>
+                <label className="text-white text-xs block mb-1">X Position: {cameraPosition.x}</label>
+                <input
+                  type="range"
+                  min="0"
+                  max={CANVAS_SIZE}
+                  value={cameraPosition.x}
+                  onChange={(e) => setCameraPosition(prev => ({ ...prev, x: Number(e.target.value) }))}
+                  className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer"
+                />
+              </div>
+
+              <div>
+                <label className="text-white text-xs block mb-1">Y Position: {cameraPosition.y}</label>
+                <input
+                  type="range"
+                  min="0"
+                  max={CANVAS_SIZE}
+                  value={cameraPosition.y}
+                  onChange={(e) => setCameraPosition(prev => ({ ...prev, y: Number(e.target.value) }))}
+                  className="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer"
+                />
+              </div>
+
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 text-white border-white/20 bg-black/40 hover:bg-white/10"
+                  onClick={() => {
+                    setCameraPosition({ x: 3500, y: 3380 });
+                    focalZoom(cameraPosition, getTZPState().scale ?? 1, 0);
+                  }}
+                >
+                  Reset to Center
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 text-white border-white/20 bg-black/40 hover:bg-white/10"
+                  onClick={() => {
+                    focalZoom(cameraPosition, getTZPState().scale ?? 1, 0);
+                  }}
+                >
+                  Apply Position
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
-      {/* Zoom Controls */}
-      {!selectedComponent && (
-        <div className="fixed bottom-4 right-4 z-[50] flex items-center gap-2">
-        <Button
-          variant="outline"
-          className="h-9 w-9 rounded-full border-white/20 text-white bg-black/40 hover:bg-white/10"
-          aria-label="Zoom out"
-          onClick={() => {
-            const s = getTZPState().scale ?? 1;
-            focalZoom(cameraPosition, Math.max(MIN_SCALE, s * 0.9), 0);
-          }}
-        >
-          −
-        </Button>
-        <Button
-          variant="outline"
-          className="h-9 w-9 rounded-full border-white/20 text-white bg-black/40 hover:bg-white/10"
-          aria-label="Zoom in"
-          onClick={() => {
-            const s = getTZPState().scale ?? 1;
-            focalZoom(cameraPosition, Math.min(MAX_SCALE, s * 1.1), 0);
-          }}
-        >
-          +
-        </Button>
-      </div>
-      )}
-    </motion.div>
+    </motion.div >
   );
 };
