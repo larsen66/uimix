@@ -4,6 +4,7 @@ description: Автоматическая раскладка видео как M
 ---
 
 import Masonry from '@/components/ui/Masonry';
+import LazyVideo from '@/components/LazyVideo';
 
 {/*
   Галерея видео в масонри-сетке. Видео разной высоты автоматически 
@@ -19,22 +20,22 @@ export const dynamic = 'force-static';
   </p>
 
   <Masonry className="w-full" columnsClassName="columns-1 sm:columns-2 lg:columns-3 xl:columns-4" gapClassName="gap-4">
-    {/* Локальные видео из /public/videos */}
-    <video src="/videos/bgblue.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
-    <video src="/videos/faq-monochrome.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
-    <video src="/videos/faq-with-spiral.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
-    <video src="/videos/hero-minimalism.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
-    <video src="/videos/hero-orbit.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
-    <video src="/videos/processing_card.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
-    <video src="/videos/fallback-card.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
-    <video src="/videos/monochrome-bento.mp4" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
-    <video src="/videos/dock.mp4" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
-    <video src="/videos/ctamarquee.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
-    <video src="/videos/ctatextmarque.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
-    <video src="/videos/pricing2.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
-    <video src="/videos/heroascii1.mp4" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
-    <video src="/videos/heroascii2.mp4" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
-    <video src="/videos/herobyd.mp4" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    {/* Локальные видео из /public/videos с ленивой загрузкой */}
+    <LazyVideo src="/videos/bgblue.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <LazyVideo src="/videos/faq-monochrome.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <LazyVideo src="/videos/faq-with-spiral.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <LazyVideo src="/videos/hero-minimalism.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <LazyVideo src="/videos/hero-orbit.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <LazyVideo src="/videos/processing_card.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <LazyVideo src="/videos/fallback-card.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <LazyVideo src="/videos/monochrome-bento.mp4" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <LazyVideo src="/videos/dock.mp4" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <LazyVideo src="/videos/ctamarquee.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <LazyVideo src="/videos/ctatextmarque.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <LazyVideo src="/videos/pricing2.mov" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <LazyVideo src="/videos/heroascii1.mp4" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <LazyVideo src="/videos/heroascii2.mp4" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
+    <LazyVideo src="/videos/herobyd.mp4" autoPlay loop muted playsInline className="w-full h-auto rounded-xl" />
   </Masonry>
 </div>
 
