@@ -101,7 +101,6 @@ interface CanvasContentProps {
   } | null) => void;
   showGrid: boolean;
   showOrigin: boolean;
-  onComponentClose?: () => void;
 }
 // #endregion
 
@@ -148,7 +147,6 @@ const CanvasContentWithContext: React.FC<CanvasContentProps> = ({
   setSelectedComponent,
   showGrid,
   showOrigin,
-  onComponentClose,
 }) => {
 
   // Video components config
@@ -344,13 +342,7 @@ const CanvasContentWithContext: React.FC<CanvasContentProps> = ({
               onClose={() => {
                 // Закрываем компонент
                 setSelectedComponent(null);
-
-                // Вызываем функцию центрирования если она передана
-                if (onComponentClose) {
-                  setTimeout(() => {
-                    onComponentClose();
-                  }, 200);
-                }
+                // Состояние камеры будет восстановлено автоматически через useEffect
               }}
             />
           </motion.div>
@@ -373,6 +365,9 @@ export const InfiniteCanvasGrid: React.FC = () => {
     y: 3380
   });
   const [showControlPanel, setShowControlPanel] = useState(false);
+  
+  // Сохраняем состояние камеры при открытии компонента
+  const savedTransformState = useRef<{ positionX: number; positionY: number; scale: number } | null>(null);
 
   // Helper function for focal zoom to a specific world point
   const focalZoom = useCallback((target: { x: number; y: number }, nextScale: number, duration = 0) => {
@@ -454,19 +449,27 @@ export const InfiniteCanvasGrid: React.FC = () => {
     run();
   }, [hasUserInteracted, cameraPosition, focalZoom]);
 
-  // Функция для центрирования камеры при закрытии компонента
-  const centerCameraOnClose = useCallback(() => {
-    if (typeof window === 'undefined') return;
-    // Используем точно ту же логику что и в centerOnce, но с анимацией
-    const wx = window.innerWidth;
-    const wy = window.innerHeight;
-    const scaleX = wx / MASONRY_WIDTH;
-    const scaleY = wy / MASONRY_HEIGHT;
-    const s = Math.min(scaleX, scaleY, 1.125);
-
-    // Центрируем с анимацией (вместо duration: 0 как в centerOnce)
-    focalZoom(cameraPosition, s, 800);
-  }, [cameraPosition, focalZoom]);
+  // Восстанавливаем сохраненное состояние камеры при закрытии компонента
+  const restoreCameraState = useCallback(() => {
+    if (typeof window === 'undefined' || !savedTransformState.current) return;
+    
+    const ref = wrapperRef.current;
+    if (!ref || !ref.setTransform) return;
+    
+    const { positionX, positionY, scale } = savedTransformState.current;
+    
+    // Восстанавливаем сохраненное состояние без анимации
+    try { 
+      ref.setTransform(positionX, positionY, scale, 0); 
+    } catch { 
+      try { 
+        ref.setTransform(positionX, positionY, scale); 
+      } catch { } 
+    }
+    
+    // Очищаем сохраненное состояние
+    savedTransformState.current = null;
+  }, []);
 
   // Helper function to safely get transform state from different library versions
   const getTZPState = (): { scale?: number; positionX?: number; positionY?: number } => {
@@ -482,9 +485,10 @@ export const InfiniteCanvasGrid: React.FC = () => {
     return s1 ?? s2 ?? s3 ?? {};
   };
 
-  // Center camera to fill screen initially
+  // Center camera to fill screen initially (только при первой загрузке, не при открытии/закрытии компонента)
   useEffect(() => {
-    if (selectedComponent) return;
+    // Не центрируем камеру если компонент открыт или если есть сохраненное состояние
+    if (selectedComponent || savedTransformState.current) return;
 
     const centerOnce = () => {
       if (typeof window === 'undefined') return;
@@ -501,50 +505,96 @@ export const InfiniteCanvasGrid: React.FC = () => {
     // Wait for frame to render everything
     const id = window.requestAnimationFrame(centerOnce);
     window.addEventListener('resize', centerOnce);
-    // Trackpad two-finger scroll = панорамирование (wheel -> translate).
-    // Pinch-to-zoom (ctrlKey=true) игнорируем — масштаб только кнопками.
-    const el = outerRef.current;
-    if (el) {
-      const onWheel = (e: WheelEvent) => {
-        const ref = wrapperRef.current;
-        if (!ref || !ref.setTransform) return;
-
-        // pinch gesture — не панорамы
-        if (e.ctrlKey) return;
-
-        // Intercept default scroll
-        e.preventDefault();
-        e.stopPropagation();
-
-        const state = getTZPState();
-        const s = state.scale ?? 1.125;
-        const posX = state.positionX ?? 0;
-        const posY = state.positionY ?? 0;
-
-        const modeFactor = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 120 : 1; // line/page→px
-        const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v));
-        // «натуральный» скролл на маках уже инвертирован, используем -delta*
-        const dx = clamp(-e.deltaX * modeFactor, -80, 80);
-        const dy = clamp(-e.deltaY * modeFactor, -80, 80);
-
-        const nextX = posX + dx;
-        const nextY = posY + dy;
-
-        try { ref.setTransform(nextX, nextY, s, 0); }
-        catch { try { ref.setTransform(nextX, nextY, s); } catch { } }
-      };
-      el.addEventListener('wheel', onWheel as EventListener, { passive: false } as AddEventListenerOptions);
-      return () => {
-        window.cancelAnimationFrame(id);
-        window.removeEventListener('resize', centerOnce);
-        el.removeEventListener('wheel', onWheel as EventListener);
-      };
-    }
     return () => {
       window.cancelAnimationFrame(id);
       window.removeEventListener('resize', centerOnce);
     };
   }, [selectedComponent, cameraPosition, focalZoom]);
+
+  // Обработка wheel событий для трекпада (панорамирование)
+  useEffect(() => {
+    // Не обрабатываем wheel события когда компонент открыт
+    if (selectedComponent) return;
+
+    const el = outerRef.current;
+    if (!el) return;
+
+    const onWheel = (e: WheelEvent) => {
+      const ref = wrapperRef.current;
+      if (!ref || !ref.setTransform) return;
+
+      // Проверяем, что событие произошло внутри нашего элемента
+      const target = e.target as HTMLElement;
+      if (!el.contains(target) && target !== el) return;
+
+      // pinch gesture (zoom) — не панорамы
+      if (e.ctrlKey || e.metaKey) return;
+
+      // Intercept default scroll
+      e.preventDefault();
+      e.stopPropagation();
+
+      const state = getTZPState();
+      const s = state.scale ?? 1.125;
+      const posX = state.positionX ?? 0;
+      const posY = state.positionY ?? 0;
+
+      // Для трекпада на Mac deltaMode обычно 0 (пиксели), значения могут быть дробными
+      // Увеличиваем чувствительность для трекпада
+      const modeFactor = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 120 : 1;
+      const clamp = (v: number, min: number, max: number) => Math.max(min, Math.min(max, v));
+      
+      // Для трекпада используем более высокую чувствительность
+      // На Mac трекпад уже инвертирован, используем -delta*
+      // Увеличиваем чувствительность для лучшей отзывчивости
+      const sensitivity = 1.5; // Увеличена чувствительность для трекпада
+      const dx = clamp(-e.deltaX * modeFactor * sensitivity, -150, 150);
+      const dy = clamp(-e.deltaY * modeFactor * sensitivity, -150, 150);
+
+      // Пропускаем очень маленькие движения (шум)
+      if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) return;
+
+      const nextX = posX + dx;
+      const nextY = posY + dy;
+
+      try { 
+        ref.setTransform(nextX, nextY, s, 0); 
+      } catch { 
+        try { 
+          ref.setTransform(nextX, nextY, s); 
+        } catch { } 
+      }
+    };
+
+    // Используем capture phase для перехвата событий до того, как они обработаются TransformWrapper
+    el.addEventListener('wheel', onWheel as EventListener, { 
+      passive: false, 
+      capture: true 
+    } as AddEventListenerOptions);
+    
+    return () => {
+      el.removeEventListener('wheel', onWheel as EventListener, { capture: true } as AddEventListenerOptions);
+    };
+  }, [selectedComponent]);
+
+  // Сохраняем состояние камеры перед открытием компонента
+  useEffect(() => {
+    if (selectedComponent) {
+      // Сохраняем текущее состояние камеры
+      const state = getTZPState();
+      savedTransformState.current = {
+        positionX: state.positionX ?? 0,
+        positionY: state.positionY ?? 0,
+        scale: state.scale ?? 1
+      };
+    } else if (savedTransformState.current) {
+      // Восстанавливаем состояние при закрытии компонента
+      // Используем небольшой таймаут чтобы убедиться что модальное окно закрылось
+      setTimeout(() => {
+        restoreCameraState();
+      }, 100);
+    }
+  }, [selectedComponent, restoreCameraState]);
 
   // Masonry version does not use DnD; components are rendered in a responsive grid.
 
@@ -594,7 +644,6 @@ export const InfiniteCanvasGrid: React.FC = () => {
           setSelectedComponent={setSelectedComponent}
           showGrid={false}
           showOrigin={false}
-          onComponentClose={centerCameraOnClose}
         />
       </TransformWrapper>
 
