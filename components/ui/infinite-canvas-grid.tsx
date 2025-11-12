@@ -8,6 +8,7 @@ import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import type { ReactZoomPanPinchRef } from 'react-zoom-pan-pinch';
 import { Masonry } from "@/components/ui/Masonry";
 import { CanvasComponentModal } from "@/components/CanvasComponentModal";
+import { LazyVideo } from "@/components/LazyVideo";
 import { Settings2Icon, X, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 
 // Extend Window interface to include ResizeObserver and MutationObserver
@@ -226,8 +227,8 @@ const CanvasContentWithContext: React.FC<CanvasContentProps> = ({
                 }}
                 initial={{
                   opacity: 0,
-                  scale: 0.8,
-                  y: 100
+                  scale: 0.7,
+                  y: 80
                 }}
                 animate={{
                   opacity: 1,
@@ -235,12 +236,12 @@ const CanvasContentWithContext: React.FC<CanvasContentProps> = ({
                   y: 0
                 }}
                 transition={{
-                  duration: 0.8,
-                  delay: 0.3,
-                  ease: [0.4, 0.0, 0.2, 1],
+                  duration: 1.0,
+                  delay: 0.2,
+                  ease: [0.34, 1.56, 0.64, 1], // Плавная ease-out с легким отскоком для zoom эффекта
                   type: "spring",
-                  stiffness: 80,
-                  damping: 20
+                  stiffness: 70,
+                  damping: 25
                 }}
               >
                 <Masonry
@@ -276,8 +277,8 @@ const CanvasContentWithContext: React.FC<CanvasContentProps> = ({
                         }}
                         initial={{
                           opacity: 0,
-                          scale: 0.3,
-                          y: 50
+                          scale: 0.5,
+                          y: 30
                         }}
                         animate={{
                           opacity: 1,
@@ -285,12 +286,12 @@ const CanvasContentWithContext: React.FC<CanvasContentProps> = ({
                           y: 0
                         }}
                         transition={{
-                          duration: 0.6,
-                          delay: i * 0.1, // Staggered animation
-                          ease: [0.4, 0.0, 0.2, 1],
+                          duration: 0.8,
+                          delay: i * 0.08, // Staggered animation
+                          ease: [0.34, 1.56, 0.64, 1], // Плавная ease-out с легким отскоком для zoom эффекта
                           type: "spring",
-                          stiffness: 100,
-                          damping: 15
+                          stiffness: 80,
+                          damping: 20
                         }}
                         whileHover={{
                           scale: 1.05,
@@ -302,7 +303,7 @@ const CanvasContentWithContext: React.FC<CanvasContentProps> = ({
                         }}
                       >
                         {/* Title badge removed per request */}
-                        <video
+                        <LazyVideo
                           src={videoSrc}
                           autoPlay
                           loop
